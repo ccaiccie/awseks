@@ -1,29 +1,19 @@
-# Validation notes — v5.1 (builder, not independent PASS)
+# Validation notes — v5.1 companion packaging refresh
 
-## Bounded follow-up
+## Pinned (must not change)
 
-- `engine/graphics.js`: MODULES includes `control`; map `control→control` (was `control→iam`)
-- Chip label: **Control plane**
-- session/transport/command: no active IAM/DNAT chip
-- iam/rbac/identity → IAM / RBAC; service → Service DNAT
+- HTML sha256 `a23d6854e93cd4fbb22acded84766b9ae67c6ec159417791f21901ec5d3b7058`
+- Drawio sha256 `6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23` (canonical editable; mxStylesheet 258/258)
+- Four volume ZIPs unchanged
 
-## Chip audit (all 215 demos)
+## Packaging fixes (FINAL-CLASS-COMPANION-ACCEPTANCE-v5.1.md)
 
-- failCount: **0**
-- s0263: ['Control plane']
-- s0146: ['IAM / RBAC']
-- s0129: ['Service DNAT']
-- Screens: `validation/v5.1/s0263__F19_readiness__*.png`, `s0146__F14_trust__*.png`, `s0129__F07_DNAT__*.png`
+- **P1** `build/SCENE-CHAPTER-MAP.md` regenerated: 335 exact IDs / 26 chapters / 7795.372 s
+- **P2** docs ZIP includes `licenses/` (drawio, Apache-2.0, IBM Plex, Kokoro, Misaki, kokoro-onnx)
+- **P3** `diagrams/README.md` selects canonical v5.1; older names labeled historical
 
-## Non-claims
+## Counts
 
-Builder evidence only — **not** an independent audit PASS.
+335 scenes · 215 demos · 120 lectures · 26 chapters · 276 clips · 2:09:55
 
-
-## v5.1 companion drawio (HTML still pinned)
-
-- File: `diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio` sha256 `6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23`
-- mxStylesheet parser: 258/258 image URLs decode with full SVG payload
-- Pixel compare (10 unique stencils): identical
-- Waypoint arrays 138 / entry+exit 138 / pages 65 / parityFailCount 0
-- HTML/audio/4 volumes **not** rebuilt
+Independent companion re-audit still required.

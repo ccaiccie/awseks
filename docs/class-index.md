@@ -1,8 +1,8 @@
 # Class index
 
-The practice curriculum and the `eksclass-cli-` labs start at [class/README.md](../class/README.md), then [class/CURRICULUM.md](../class/CURRICULUM.md), [class/TECHNICAL-SPEC.md](../class/TECHNICAL-SPEC.md), and [class/labs/README.md](../class/labs/README.md). Audit notes are [class/AUDIT-RESOLUTION.md](../class/AUDIT-RESOLUTION.md) and [class/NARRATION-CORRECTIONS-v2.md](../class/NARRATION-CORRECTIONS-v2.md).
+The `eksclass-cli-` labs and the written curriculum are [class/labs/README.md](../class/labs/README.md), [class/CURRICULUM.md](../class/CURRICULUM.md), and [class/TECHNICAL-SPEC.md](../class/TECHNICAL-SPEC.md). [class/README.md](../class/README.md) is the v5.1 delivery page: 335 scene IDs, 26 chapters, 2:09:55. Audit notes are [class/AUDIT-RESOLUTION.md](../class/AUDIT-RESOLUTION.md) and [class/NARRATION-CORRECTIONS-v2.md](../class/NARRATION-CORRECTIONS-v2.md).
 
-The delivered class is v5.1: 26 chapters, 335 scenes, 2:09:55. Open [class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio](../class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio) and [class/build/SCENE-CHAPTER-MAP.md](../class/build/SCENE-CHAPTER-MAP.md). The practice-lab table is [chapter-map.md](chapter-map.md). Version wording that is easy to over-read is in [versions.md](versions.md). The HTML file is not in this repository.
+Open [class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio](../class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio) for the lecture diagram and [class/build/SCENE-CHAPTER-MAP.md](../class/build/SCENE-CHAPTER-MAP.md) for IDs `s0000`–`s0334`. Older lecture draw.io files are historical. The practice-lab table is [chapter-map.md](chapter-map.md). Version wording that is easy to over-read is in [versions.md](versions.md). The HTML file and the four audio volumes are not in this repository.
 
 ## What is a preview
 
@@ -13,9 +13,9 @@ The delivered class is v5.1: 26 chapters, 335 scenes, 2:09:55. Open [class/diagr
 | `class/FLOW-SCENARIOS.json` | The same scenes as data: hops, route-table owners, and stop reasons. |
 | `docs/diagrams/*` | Short repo sketches for the Terraform and AWS CLI write-up. They are not the class diagrams. |
 
-## What is not here
+## What is not in git
 
-No narrated HTML, no audio, and no MP4. The curriculum's opening and closing lines and the Kokoro voice note are instructions for a later build. A PNG preview is not that lesson. `docs/class-incoming/` stays empty until that build adds files.
+The HTML master and the four audio volumes were delivered privately and are not committed. Transcripts are in `class/docs/`. A PNG preview or an F-scene SVG is not that HTML file. `docs/class-incoming/` does not hold the master.
 
 Addresses in the technical spec (`10.42.0.0/16`, `203.0.113.10`, `198.51.100.10`) are illustrative. Do not type the documentation ranges into a public API allow list. The repo's real CIDRs are `10.0.0.0/16` and `172.20.0.0/16`.
 

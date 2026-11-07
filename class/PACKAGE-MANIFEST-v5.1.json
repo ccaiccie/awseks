@@ -43,7 +43,7 @@
   "volumeCount": 4,
   "reassembleHelper": "volumes/reassemble_eks_masterclass_v5_1.py",
   "docsLabsZip": "EKS-Masterclass-v5.1-docs-diagrams-labs.zip",
-  "docsLabsZipBytes": 547901,
+  "docsLabsZipBytes": 600856,
   "reassembleTest": "PASS",
   "sentinelRefuseTest": "PASS",
   "corruptPartTest": "PASS",
@@ -60,10 +60,12 @@
   "v3Preserved": true,
   "v4Preserved": true,
   "v5Preserved": true,
-  "docsLabsZipSha256": "f5f461784e5a1febe001dec42e6c71a1a7185cb9ddc585b6611e39b4c1eac7d8",
+  "docsLabsZipSha256": "4e7d98b3b4f951532975c088609fa89a23a2a77b4da39e5562805e13bc7aaf1a",
   "canonicalDrawio": "diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio",
   "canonicalDrawioSha256": "6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23",
   "canonicalDrawioBytes": 1175080,
   "companionNote": "drawio image URIs percent-encoded for mxGraph; HTML/audio/volumes unchanged",
-  "htmlPinned": true
+  "htmlPinned": true,
+  "sceneChapterMapSha256": "42d289e840dccb45753ad7eb6358da34530234ca6247cafe3b94f6d41ae0d737",
+  "companionPackagingRefresh": "P1 map + P2 licenses + P3 diagrams README"
 }

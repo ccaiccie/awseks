@@ -1,0 +1,13 @@
+Icon and diagram attribution (v5.1)
+
+AWS resource icons used in editable diagrams and HTML scene stencils are derived from
+diagrams.net / draw.io AWS4 library shapes. License: licenses/drawio-Apache-2.0.txt
+(also licenses/Apache-2.0.txt). Provenance: build/icon-vector-provenance.json.
+
+Kubernetes Pod / Service / Deployment glyphs are from the Kubernetes community icon set
+(https://github.com/kubernetes/community/tree/master/icons), Apache-2.0.
+Native sources: build/k8s-icons/{pod,svc,deploy}.svg
+Embedded copies: build/k8s-icons-embedded/
+
+Fonts: IBM Plex — licenses/IBM-Plex-OFL-1.1.txt
+TTS (class audio, not in docs-only ZIP): Kokoro / Misaki / kokoro-onnx — see sibling license files.

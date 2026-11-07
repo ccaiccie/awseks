@@ -1,0 +1,1553 @@
+{
+  "title": "AUTHORITATIVE RELEASE \u2014 EKS v5.1 companion packaging refresh",
+  "pinnedHtml": {
+    "path": "class/AWS-EKS-Masterclass-Novice-to-Expert-v5.1-YouTube-Edition.html",
+    "sha256": "a23d6854e93cd4fbb22acded84766b9ae67c6ec159417791f21901ec5d3b7058",
+    "action": "DO_NOT_TOUCH"
+  },
+  "pinnedVolumes": {
+    "action": "DO_NOT_TOUCH",
+    "parts": [
+      "class/package/v5.1/volumes/AWS-EKS-Masterclass-v5.1.part01.zip",
+      "class/package/v5.1/volumes/AWS-EKS-Masterclass-v5.1.part02.zip",
+      "class/package/v5.1/volumes/AWS-EKS-Masterclass-v5.1.part03.zip",
+      "class/package/v5.1/volumes/AWS-EKS-Masterclass-v5.1.part04.zip"
+    ]
+  },
+  "canonicalDrawio": {
+    "path": "class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio",
+    "sha256": "6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23",
+    "action": "ENSURE_PRESENT_UNCHANGED"
+  },
+  "counts": {
+    "scenes": 335,
+    "demos": 215,
+    "lectures": 120,
+    "chapters": 26,
+    "clips": 276,
+    "scheduledSeconds": 7795.372,
+    "scheduledDuration": "2:09:55"
+  },
+  "packagingFixes": [
+    "P1 SCENE-CHAPTER-MAP 335",
+    "P2 licenses in docs ZIP",
+    "P3 diagrams README \u2192 v5.1"
+  ],
+  "filesToUpdateInRepo": [
+    "class/README.md",
+    "class/VALIDATION.md",
+    "class/DIAGRAM-INDEX.md",
+    "class/BUILD-STATUS.json",
+    "class/PACKAGE-MANIFEST-v5.1.json",
+    "class/diagrams/README.md",
+    "class/licenses/drawio-Apache-2.0.txt",
+    "class/licenses/Kokoro-Apache-2.0.txt",
+    "class/licenses/IBM-Plex-OFL-1.1.txt",
+    "class/licenses/Misaki-Apache-2.0.txt",
+    "class/licenses/ICON-AND-DIAGRAM-ATTRIBUTION.txt",
+    "class/licenses/Kokoro-model-card.md",
+    "class/licenses/kokoro-onnx-LICENSE.txt",
+    "class/licenses/Apache-2.0.txt",
+    "class/build/SCENE-CHAPTER-MAP.md",
+    "class/build/SCENE-CHAPTER-MAP.json",
+    "source/FINAL-CLASS-COMPANION-ACCEPTANCE-v5.1.md"
+  ],
+  "docsZip": {
+    "path": "class/package/v5.1/EKS-Masterclass-v5.1-docs-diagrams-labs.zip",
+    "sha256": "4e7d98b3b4f951532975c088609fa89a23a2a77b4da39e5562805e13bc7aaf1a",
+    "bytes": 600856,
+    "action": "REPLACE"
+  },
+  "neverTouchGlobs": [
+    "**/terraform/**",
+    "**/awseks-tf-*/**",
+    "**/awseks-cli-*/**",
+    "**/eksclass-cli*/**",
+    "**/.terraform/**",
+    "**/tfstate*",
+    "**/*secret*",
+    "**/*.pem",
+    "**/.env*",
+    "**/audio-delivery/**",
+    "**/audio-raw/**",
+    "**/AWS-EKS-Masterclass-*-YouTube-Edition.html",
+    "**/package/**/AWS-EKS-Masterclass-*.part*.zip",
+    "**/package/**/AWS-EKS-Masterclass-*-full.html.zip"
+  ],
+  "relativeLinkCheckFails": [],
+  "fileCount": 184,
+  "files": [
+    {
+      "archivePath": "class/README.md",
+      "repoTargetPath": "class/README.md",
+      "bytes": 2559,
+      "sha256": "3f60a91795fe7fe51df12380ae2dfb79c7e1ee3f492e7d70093454bc62cdea25",
+      "note": "class root metadata",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/VALIDATION.md",
+      "repoTargetPath": "class/VALIDATION.md",
+      "bytes": 801,
+      "sha256": "0cc4b9a2b06b2a0506566a35a90461925e69085f24d51d06fdcebde12288761f",
+      "note": "class root metadata",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/DIAGRAM-INDEX.md",
+      "repoTargetPath": "class/DIAGRAM-INDEX.md",
+      "bytes": 953,
+      "sha256": "71cd49219af6c00579c5c17a600225bfa1065aa428691cd70c859a218bdd690b",
+      "note": "class root metadata",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/BUILD-STATUS.json",
+      "repoTargetPath": "class/BUILD-STATUS.json",
+      "bytes": 1508,
+      "sha256": "ca4deed4676be1c6aae91d2ff073730ad1d83c9349457496b44d8ecc56dd233b",
+      "note": "class root metadata",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/PACKAGE-MANIFEST-v5.1.json",
+      "repoTargetPath": "class/PACKAGE-MANIFEST-v5.1.json",
+      "bytes": 2847,
+      "sha256": "7d8261c84de9b1d984772e6c965262713e57b5dc0ebcfaf220b984919b61aa12",
+      "note": "class root metadata",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/docs/AUDIT-ALIGNMENT.md",
+      "repoTargetPath": "class/docs/AUDIT-ALIGNMENT.md",
+      "bytes": 2552,
+      "sha256": "439ebccdce70dbbaf068c066dd11544690f17efa1fcea12702b33099e2051c54",
+      "note": "transcripts/docs",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/docs/NARRATION-CORRECTIONS-v2.md",
+      "repoTargetPath": "class/docs/NARRATION-CORRECTIONS-v2.md",
+      "bytes": 3658,
+      "sha256": "9249417d6e5132cef86fc2f59da147a9fe3bed606d1c6feb14013048333770d0",
+      "note": "transcripts/docs",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/docs/SPOKEN-TRANSCRIPT.txt",
+      "repoTargetPath": "class/docs/SPOKEN-TRANSCRIPT.txt",
+      "bytes": 123863,
+      "sha256": "4e1ce01bfcc53fe111d03a8416161f0cab224383b78008b8ac3ad2e3a1491691",
+      "note": "transcripts/docs",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/docs/TRANSCRIPT.md",
+      "repoTargetPath": "class/docs/TRANSCRIPT.md",
+      "bytes": 105329,
+      "sha256": "218ff6db895bba817f77db97245af93c57aed287c4ef8fda843b41970d89afc1",
+      "note": "transcripts/docs",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/docs/AUDIT-RESOLUTION.md",
+      "repoTargetPath": "class/docs/AUDIT-RESOLUTION.md",
+      "bytes": 8527,
+      "sha256": "ca5afa3ec12a7c630e23cb5cf8cc178a37675000af483f8a4656ece3eafe6f14",
+      "note": "transcripts/docs",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/docs/voice-provenance.json",
+      "repoTargetPath": "class/docs/voice-provenance.json",
+      "bytes": 200,
+      "sha256": "3ef39af02dfcfad3bac12c85916c7ecd6f14d7a175bbe832bf85255c4512b226",
+      "note": "transcripts/docs",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/docs/TRANSCRIPT-HASHES.json",
+      "repoTargetPath": "class/docs/TRANSCRIPT-HASHES.json",
+      "bytes": 395,
+      "sha256": "c445a16193fcd4fa3f48a0dcf110fe3a63793d134145be02e12ad2413b1d4f20",
+      "note": "transcripts/docs",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/diagrams/F09.svg",
+      "repoTargetPath": "class/diagrams/F09.svg",
+      "bytes": 2330,
+      "sha256": "caf32f7e2d5d532bb27ad5a6154222016526dcbf08cda5b1f5b731efeb5301ab",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F21.svg",
+      "repoTargetPath": "class/diagrams/F21.svg",
+      "bytes": 2581,
+      "sha256": "35a2701ee259ddc2b7ca93035eff8ddfabf10dc16494be0af4f6f133fc9ac98c",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F05.svg",
+      "repoTargetPath": "class/diagrams/F05.svg",
+      "bytes": 1962,
+      "sha256": "20b42a5e53411319e248fff3d7b3565418a2d2470f07305ebc7488b49fa6100d",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F03-3.svg",
+      "repoTargetPath": "class/diagrams/F03-3.svg",
+      "bytes": 1684,
+      "sha256": "bcb97919e4663d268445adbf838ff340cbcb5c9e4af8d6153296664f35cd99be",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F29.svg",
+      "repoTargetPath": "class/diagrams/F29.svg",
+      "bytes": 2405,
+      "sha256": "2a8a08e77e0e1618097964159df1e747e9b6acda62e3ad8a3291d12ea9f13714",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F19.svg",
+      "repoTargetPath": "class/diagrams/F19.svg",
+      "bytes": 2584,
+      "sha256": "a6bb885e0260071fab6bd9a4f448b190f2214729877624c86f576df873ad329e",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F03-1.svg",
+      "repoTargetPath": "class/diagrams/F03-1.svg",
+      "bytes": 1714,
+      "sha256": "4a0b14541a66be8193d04f46686fa02b6d67774b61d1dcbba18486ff7fe7ba17",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/EKS-Masterclass-v3-Lecture-and-Flow.drawio",
+      "repoTargetPath": "class/diagrams/EKS-Masterclass-v3-Lecture-and-Flow.drawio",
+      "bytes": 145496,
+      "sha256": "8b18f222b026e54875e15c532235fef8bbbc380e55b507146281f0f370953077",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F22.svg",
+      "repoTargetPath": "class/diagrams/F22.svg",
+      "bytes": 1952,
+      "sha256": "b07f1b762177edde67ffd45dec157f1a2d739d8b9eab4ecf3a581ffc2839a523",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/ARCHITECTURE.svg",
+      "repoTargetPath": "class/diagrams/ARCHITECTURE.svg",
+      "bytes": 3633,
+      "sha256": "fb6959f8ed03c87076a280f898b3be89c443b8f67d196b761d79acf9973ec522",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/README.md",
+      "repoTargetPath": "class/diagrams/README.md",
+      "bytes": 1259,
+      "sha256": "e3fae0415bae47fd7a316216868f4521a42ec63885f5bbc1c4b50461ae9b8dbf",
+      "note": "diagrams",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/diagrams/F17.svg",
+      "repoTargetPath": "class/diagrams/F17.svg",
+      "bytes": 1925,
+      "sha256": "03a9bb61e0bb1293bb3a9ac86bb9831ffee0f9892cebf886b70c19dbdeb4bc40",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F15.svg",
+      "repoTargetPath": "class/diagrams/F15.svg",
+      "bytes": 1776,
+      "sha256": "57a76429d9ec73d4287a3f8a3bb6cf7b17a42b6598dfd1478a18c41130a30d65",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F20.svg",
+      "repoTargetPath": "class/diagrams/F20.svg",
+      "bytes": 2280,
+      "sha256": "bba23549f425d923ac6bbbddee4d5140f78b44a2038fe8dc2272609e66818c50",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F01.svg",
+      "repoTargetPath": "class/diagrams/F01.svg",
+      "bytes": 1633,
+      "sha256": "70314454d7bf3660e317ec6e46aa65b982b11757ee877d13a7b069b5ab421205",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F08.svg",
+      "repoTargetPath": "class/diagrams/F08.svg",
+      "bytes": 1901,
+      "sha256": "fe900072e62ce95d7494a9adebeb8ccc56506843f5e4ff651a45057ae116aa3d",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F27.svg",
+      "repoTargetPath": "class/diagrams/F27.svg",
+      "bytes": 2191,
+      "sha256": "64de4a752f21c81ab4637f84ab9c615d8b2d34e43db17aa8517e5893eeb9c02c",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio",
+      "repoTargetPath": "class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio",
+      "bytes": 1175080,
+      "sha256": "6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23",
+      "note": "diagrams",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/diagrams/F25.svg",
+      "repoTargetPath": "class/diagrams/F25.svg",
+      "bytes": 2274,
+      "sha256": "e09c1977762d798b8c771c64e9f7ef62f06f578c79c1ae86135f26a65bbf164c",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F14-1.svg",
+      "repoTargetPath": "class/diagrams/F14-1.svg",
+      "bytes": 1696,
+      "sha256": "63463c41a82a7dddb8624ef97d5ae8dd40eb7f97e5799900840754893eda8ba3",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F06.svg",
+      "repoTargetPath": "class/diagrams/F06.svg",
+      "bytes": 1908,
+      "sha256": "64cccb670a0fa5d4be283b898ed2063e39eda69cf782477b0d75f09508392d09",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F24.svg",
+      "repoTargetPath": "class/diagrams/F24.svg",
+      "bytes": 2309,
+      "sha256": "316f19e1ea6d8a6356ca5f336b4470e672a6340d48fea24dc62350a6fc563f70",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F14.svg",
+      "repoTargetPath": "class/diagrams/F14.svg",
+      "bytes": 2213,
+      "sha256": "adb484cee35ad8516b5a89d8a117b4a6824e05f591a3f710c426e2f16e781e97",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F07.svg",
+      "repoTargetPath": "class/diagrams/F07.svg",
+      "bytes": 2179,
+      "sha256": "8b7a1fb6b25f48a104fe41113c4678d35cdee3c77968a573961091e9bc80daff",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F13.svg",
+      "repoTargetPath": "class/diagrams/F13.svg",
+      "bytes": 2368,
+      "sha256": "351e5c36a9a9bf86efdade4c13edfd2d2ff3d0730915ea49cf4b1fefcb57e3d3",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F03.svg",
+      "repoTargetPath": "class/diagrams/F03.svg",
+      "bytes": 2232,
+      "sha256": "a966cb3832cb340f713186e1e090697cba88869051ff335730ff7581fff1385e",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F04.svg",
+      "repoTargetPath": "class/diagrams/F04.svg",
+      "bytes": 1909,
+      "sha256": "050abfb83ba0e00d71cb809ce2b08a8ae037783c4aa635c4b6f995713c564504",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/EKS-Masterclass-v5-Lecture-and-Flow.drawio",
+      "repoTargetPath": "class/diagrams/EKS-Masterclass-v5-Lecture-and-Flow.drawio",
+      "bytes": 1129057,
+      "sha256": "239619beb3eafede8eb3d3153aea0724294ab9b69c48f35976feb63112f90e85",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/eks-scenarios.drawio",
+      "repoTargetPath": "class/diagrams/eks-scenarios.drawio",
+      "bytes": 100888,
+      "sha256": "3297d88b7b652aea6909228458b1cab78567ddedfd4cd09809dd1aa259007d47",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F18-1.svg",
+      "repoTargetPath": "class/diagrams/F18-1.svg",
+      "bytes": 1668,
+      "sha256": "9e33e98a15e23e759ddbce96b3fee2a0c78c829a062fd06e541e182006d6a508",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F10.svg",
+      "repoTargetPath": "class/diagrams/F10.svg",
+      "bytes": 2666,
+      "sha256": "82a1b67a753f78bb0db8798258deabfbb1ff519330d869f7f533614b484111f7",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/EKS-Masterclass-v4-Lecture-and-Flow.drawio",
+      "repoTargetPath": "class/diagrams/EKS-Masterclass-v4-Lecture-and-Flow.drawio",
+      "bytes": 284556,
+      "sha256": "57dd8d212a448199c15793f73075ba63af66a40c47a6125ee05cb5e7dc5b5662",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F15-1.svg",
+      "repoTargetPath": "class/diagrams/F15-1.svg",
+      "bytes": 1665,
+      "sha256": "f057d57e94a2b1243fee1a6ab7c892b98533f2d8375ed15d52962e6eb6316074",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F11.svg",
+      "repoTargetPath": "class/diagrams/F11.svg",
+      "bytes": 2352,
+      "sha256": "f00f7fd00d9dcfc1e61d5e3fdeb1e7cad5f58c8d8c7ca328802f0586939e4ba3",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F12.svg",
+      "repoTargetPath": "class/diagrams/F12.svg",
+      "bytes": 2661,
+      "sha256": "1bf765731fe4be469935b661da73964d66c6d62b497b9acb6107882c77787429",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F28.svg",
+      "repoTargetPath": "class/diagrams/F28.svg",
+      "bytes": 2632,
+      "sha256": "c1a02452689d72b8d9bd2e76b6883ff166f1d1f82bf35ba1dc10e33bce6af2c0",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F03-2.svg",
+      "repoTargetPath": "class/diagrams/F03-2.svg",
+      "bytes": 1671,
+      "sha256": "a16769923b3ca6f4bfb53d02eaeb251b5e39ad1d9077450416e4c7462e1c0156",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F18.svg",
+      "repoTargetPath": "class/diagrams/F18.svg",
+      "bytes": 2295,
+      "sha256": "e933eed6c63855e5fa477188d1d1be07a0e3811fbb1b391dcfed86ce0475b1a5",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/EKS-Masterclass-v2-Lecture-and-Flow.drawio",
+      "repoTargetPath": "class/diagrams/EKS-Masterclass-v2-Lecture-and-Flow.drawio",
+      "bytes": 100888,
+      "sha256": "3297d88b7b652aea6909228458b1cab78567ddedfd4cd09809dd1aa259007d47",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F26.svg",
+      "repoTargetPath": "class/diagrams/F26.svg",
+      "bytes": 2013,
+      "sha256": "38ffb005f0ec34707620641e4cb4187e6b94e726075d833e6712bcbcb252e77d",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F02.svg",
+      "repoTargetPath": "class/diagrams/F02.svg",
+      "bytes": 2037,
+      "sha256": "53c3b745acd0f02249839e92ee9b57a8eb5b06eae7ec48b0b27feadbb03fef80",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F23.svg",
+      "repoTargetPath": "class/diagrams/F23.svg",
+      "bytes": 2022,
+      "sha256": "c3a465825db9ba670d309c2649addb29c43b85b857231bb42a82ca2dcad7a578",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F18-2.svg",
+      "repoTargetPath": "class/diagrams/F18-2.svg",
+      "bytes": 1582,
+      "sha256": "de56fca0b04241be96f606a16f5a7092f9c19a23f852925de76ee5ddbfde2eed",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F16.svg",
+      "repoTargetPath": "class/diagrams/F16.svg",
+      "bytes": 2050,
+      "sha256": "c4415fbdc5fab05ab4849e39f1a2b0b8f86afee9d2c0d4058782073f5756f4d8",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/diagrams/F13-1.svg",
+      "repoTargetPath": "class/diagrams/F13-1.svg",
+      "bytes": 2310,
+      "sha256": "4b00090d19f92d9d7d3eff08e01cdbe530e34e471c261f6823215fa17a7ed5d2",
+      "note": "diagrams",
+      "changeAction": "preserve-historical"
+    },
+    {
+      "archivePath": "class/licenses/drawio-Apache-2.0.txt",
+      "repoTargetPath": "class/licenses/drawio-Apache-2.0.txt",
+      "bytes": 11356,
+      "sha256": "43070e2d4e532684de521b885f385d0841030efa2b1a20bafb76133a5e1379c1",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/licenses/Kokoro-Apache-2.0.txt",
+      "repoTargetPath": "class/licenses/Kokoro-Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/licenses/IBM-Plex-OFL-1.1.txt",
+      "repoTargetPath": "class/licenses/IBM-Plex-OFL-1.1.txt",
+      "bytes": 4456,
+      "sha256": "7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/licenses/Misaki-Apache-2.0.txt",
+      "repoTargetPath": "class/licenses/Misaki-Apache-2.0.txt",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/licenses/ICON-AND-DIAGRAM-ATTRIBUTION.txt",
+      "repoTargetPath": "class/licenses/ICON-AND-DIAGRAM-ATTRIBUTION.txt",
+      "bytes": 697,
+      "sha256": "aa2087df00115a8185a324759204b01bfdf62c67c27baf1beff2af44e98aded4",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/licenses/Kokoro-model-card.md",
+      "repoTargetPath": "class/licenses/Kokoro-model-card.md",
+      "bytes": 6348,
+      "sha256": "91dcabced89db6f109b8786642f50402d3ee87450e8189589b6f85520e7f4d78",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/licenses/kokoro-onnx-LICENSE.txt",
+      "repoTargetPath": "class/licenses/kokoro-onnx-LICENSE.txt",
+      "bytes": 1080,
+      "sha256": "f61fdd0217de9ece8fa699912848d91187d84879fc2e689f0906d0c1299e955e",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/licenses/Apache-2.0.txt",
+      "repoTargetPath": "class/licenses/Apache-2.0.txt",
+      "bytes": 11358,
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "note": "licenses/attributions",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/SCENE-CHAPTER-MAP.md",
+      "repoTargetPath": "class/build/SCENE-CHAPTER-MAP.md",
+      "bytes": 43137,
+      "sha256": "42d289e840dccb45753ad7eb6358da34530234ca6247cafe3b94f6d41ae0d737",
+      "note": "build metadata / chapter map",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/SCENE-CHAPTER-MAP.json",
+      "repoTargetPath": "class/build/SCENE-CHAPTER-MAP.json",
+      "bytes": 147972,
+      "sha256": "d17ae15e270b6f297a736a41fe37ba6fd7bd90201340e5c21463b0bee55e84f1",
+      "note": "build metadata / chapter map",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scene-index.json",
+      "repoTargetPath": "class/build/scene-index.json",
+      "bytes": 2693,
+      "sha256": "d2a19d93659f241f91874d6c8ff4586085bc0d28d387a5900d3415a5ea6a2062",
+      "note": "build metadata / chapter map",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/drawio-parity-v5.1.json",
+      "repoTargetPath": "class/build/drawio-parity-v5.1.json",
+      "bytes": 555,
+      "sha256": "3e6f24459664753d7cef92dd88ed7e41eecb8ba9b985bd20a78c71a34c93db6f",
+      "note": "build metadata / chapter map",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/curriculum-measured.json",
+      "repoTargetPath": "class/build/curriculum-measured.json",
+      "bytes": 5914,
+      "sha256": "5369cb410fd863ece7380e57c1f30e2debee8aa53867d694f8c7d62a8a862fbc",
+      "note": "build metadata / chapter map",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/icon-vector-provenance.json",
+      "repoTargetPath": "class/build/icon-vector-provenance.json",
+      "bytes": 993,
+      "sha256": "9a2be560581d9af452c01e75dec4b42016ad8f5bf733da36cff7afa84ef5b03b",
+      "note": "build metadata / chapter map",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/tuple-consistency-v5.json",
+      "repoTargetPath": "class/build/tuple-consistency-v5.json",
+      "bytes": 37,
+      "sha256": "af60d355330a1889cc0da3598028db71fba9cd465a317e173e1fb9718cacde64",
+      "note": "build metadata / chapter map",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons/cm.svg",
+      "repoTargetPath": "class/build/k8s-icons/cm.svg",
+      "bytes": 7818,
+      "sha256": "79cd881b717aed580d90a83f4c67c7f2c2b5672a26669ef61d0ddd2da6aac2af",
+      "note": "k8s-icons artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons/deploy.svg",
+      "repoTargetPath": "class/build/k8s-icons/deploy.svg",
+      "bytes": 5694,
+      "sha256": "d96f6e93a0f57ca9583b2120e3ddb4453afb5a29aa6d8c1360e8eb8e458489f7",
+      "note": "k8s-icons artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons/ing.svg",
+      "repoTargetPath": "class/build/k8s-icons/ing.svg",
+      "bytes": 5309,
+      "sha256": "66ac75442eff83ef51a8d1ef01edd858cc621b0f43ff60e2170f1d10c4d49813",
+      "note": "k8s-icons artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons/pod.svg",
+      "repoTargetPath": "class/build/k8s-icons/pod.svg",
+      "bytes": 5917,
+      "sha256": "3356f7ca970f811da2b1aa34a0f13e846255378727809ab6629837a842db0a2d",
+      "note": "k8s-icons artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons/svc.svg",
+      "repoTargetPath": "class/build/k8s-icons/svc.svg",
+      "bytes": 6860,
+      "sha256": "a86fad881253c4d7abbe7413c0efbca2e7dde7e54a55774f79349494bd823990",
+      "note": "k8s-icons artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons-embedded/k8s_deploy.svg",
+      "repoTargetPath": "class/build/k8s-icons-embedded/k8s_deploy.svg",
+      "bytes": 3888,
+      "sha256": "650eef09644fb088e73a5eeca1e79717ea17cf9d81c428b9ee95bb6b03dc7739",
+      "note": "k8s-icons-embedded artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons-embedded/k8s_pod.svg",
+      "repoTargetPath": "class/build/k8s-icons-embedded/k8s_pod.svg",
+      "bytes": 3818,
+      "sha256": "421170e68140efdb7a255f6399b409e29180efa2638e4e82c4009e260fb67a85",
+      "note": "k8s-icons-embedded artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/k8s-icons-embedded/k8s_service.svg",
+      "repoTargetPath": "class/build/k8s-icons-embedded/k8s_service.svg",
+      "bytes": 4849,
+      "sha256": "cf3494b1f9437cd97b760ff1d4c310d5c35628b5c6e19aeafbbc693939e0b8bd",
+      "note": "k8s-icons-embedded artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F01_forward.svg",
+      "repoTargetPath": "class/build/scenes/F01_forward.svg",
+      "bytes": 5341,
+      "sha256": "8bf673b3bd7abacdef469d919d44c0ff29d01151fdbe5ed96890af43a67e56ca",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F01_return.svg",
+      "repoTargetPath": "class/build/scenes/F01_return.svg",
+      "bytes": 5340,
+      "sha256": "117d49861bcada7bceb9b0860aafba1b1533627038e82bb8bb3e61e6d3ad4cdd",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F02_forward.svg",
+      "repoTargetPath": "class/build/scenes/F02_forward.svg",
+      "bytes": 10012,
+      "sha256": "094fa99453cbd32a947321abb9c0c9b0ed516ad83d3f0fc7bb765629979a1a2a",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F02_return.svg",
+      "repoTargetPath": "class/build/scenes/F02_return.svg",
+      "bytes": 10011,
+      "sha256": "3834a6285dc8ec1134be84847a27de15b5ed8b43c85ee6af20538c52b5293962",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F03_forward.svg",
+      "repoTargetPath": "class/build/scenes/F03_forward.svg",
+      "bytes": 10865,
+      "sha256": "d7ef81b0c6d2afdbb4d98cefb7d8cab43d64ebbd8c96d6c673d8cd152fe6d068",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F03_return.svg",
+      "repoTargetPath": "class/build/scenes/F03_return.svg",
+      "bytes": 10864,
+      "sha256": "89e0ea8316b5f175f201a78db379c9d3a4240e9b0f93df7d599c7766764618f6",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F03_sub1.svg",
+      "repoTargetPath": "class/build/scenes/F03_sub1.svg",
+      "bytes": 11011,
+      "sha256": "466d61c3fa555d6fd3adad700f4a767dc7651497ee0e62ead17b22220e91b269",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F03_sub2.svg",
+      "repoTargetPath": "class/build/scenes/F03_sub2.svg",
+      "bytes": 11005,
+      "sha256": "2e369ca2c727dbf369931eed32f0d5eaf34e050acba55799e567ebf4213cdbed",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F03_sub3.svg",
+      "repoTargetPath": "class/build/scenes/F03_sub3.svg",
+      "bytes": 11005,
+      "sha256": "628814faef83e4a60d6ff986fa2d4538ffbaecaeb5ceb55bf10e8c928ae1e9e0",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F04_forward.svg",
+      "repoTargetPath": "class/build/scenes/F04_forward.svg",
+      "bytes": 13324,
+      "sha256": "7791ed0414648171ccc19b579e985732348b940144a0daaf76ca0de003d3d8d0",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F04_return.svg",
+      "repoTargetPath": "class/build/scenes/F04_return.svg",
+      "bytes": 13323,
+      "sha256": "3900aae8d564fc50125cb621541bceab22400095aa8ab8356c659447eedf9a2c",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F05_forward.svg",
+      "repoTargetPath": "class/build/scenes/F05_forward.svg",
+      "bytes": 14584,
+      "sha256": "4ac2b5e666919e55ed1a61c110fc337e5c9528d1fe36b4d8b3f1bc683efe45bd",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F05_return.svg",
+      "repoTargetPath": "class/build/scenes/F05_return.svg",
+      "bytes": 14583,
+      "sha256": "e7bc83b575c212c42947b96907573abb931c1ab40d7a34f1c8f623b426572567",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F06_forward.svg",
+      "repoTargetPath": "class/build/scenes/F06_forward.svg",
+      "bytes": 16895,
+      "sha256": "70131c1d19640d2b7b3e9be24efcfb04e7563127037eb00f849bec7768f5bdeb",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F06_return.svg",
+      "repoTargetPath": "class/build/scenes/F06_return.svg",
+      "bytes": 16894,
+      "sha256": "846eb2a134c9d0e4b3c6abaff73ade34f6f33b91e86a9605e1550d7bb4ac4023",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F07_forward.svg",
+      "repoTargetPath": "class/build/scenes/F07_forward.svg",
+      "bytes": 20178,
+      "sha256": "c579b88f9d51a9bfb2c43218a23328299836864b08275aa3a414b85287d85887",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F07_return.svg",
+      "repoTargetPath": "class/build/scenes/F07_return.svg",
+      "bytes": 20177,
+      "sha256": "66a3d33000b75fe01e6a7561528f3ce25c5f630d4ada791a7bacb21ca099d60b",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F08_forward.svg",
+      "repoTargetPath": "class/build/scenes/F08_forward.svg",
+      "bytes": 13508,
+      "sha256": "17706870c4f1e2bf413deb4e7a4aef61a0ccf29ef84876980f49a479ccc56041",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F08_return.svg",
+      "repoTargetPath": "class/build/scenes/F08_return.svg",
+      "bytes": 13507,
+      "sha256": "463482c8aa40335da14897fdbac85f04e192d7821acbf08d381a7430fcbb3f79",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F09_forward.svg",
+      "repoTargetPath": "class/build/scenes/F09_forward.svg",
+      "bytes": 14701,
+      "sha256": "6eaa52311b4943f84e464d40eb522db60722f23972d9c7082d887532167e80b1",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F09_return.svg",
+      "repoTargetPath": "class/build/scenes/F09_return.svg",
+      "bytes": 14700,
+      "sha256": "312e49d67bad2369c7e8d40c1910e8b919a840ef647e17679b17b9639473f9ba",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F10_forward.svg",
+      "repoTargetPath": "class/build/scenes/F10_forward.svg",
+      "bytes": 18753,
+      "sha256": "392819fd715d4da82a999a4e44f1f876ae3a274556c10156435a3cea94423049",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F10_return.svg",
+      "repoTargetPath": "class/build/scenes/F10_return.svg",
+      "bytes": 18752,
+      "sha256": "fd105a8a888e52b921e4c0388ef4234a6eff9df9a572604ae5706372d395f3e8",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F11_forward.svg",
+      "repoTargetPath": "class/build/scenes/F11_forward.svg",
+      "bytes": 14387,
+      "sha256": "dbcf9556f5cf5dbb6a61bcd4328e58a94a2a3d23144c510b24ed847b3dc15983",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F11_return.svg",
+      "repoTargetPath": "class/build/scenes/F11_return.svg",
+      "bytes": 14386,
+      "sha256": "dd934fdc4b0b5c1bf31aa1ca750f436bd15997d6f03fdf6bff71eef86f17b743",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F12_forward.svg",
+      "repoTargetPath": "class/build/scenes/F12_forward.svg",
+      "bytes": 15957,
+      "sha256": "9390b688bf005d05da3828e1bf1b0a4d6fdb9a9414a6a54dbc585a97e54690e0",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F12_return.svg",
+      "repoTargetPath": "class/build/scenes/F12_return.svg",
+      "bytes": 15956,
+      "sha256": "0ccc75f24cb7d9e9027863cc4728f96fd5ca86b5ec67b52fdf94785963c746f4",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F13_forward.svg",
+      "repoTargetPath": "class/build/scenes/F13_forward.svg",
+      "bytes": 12357,
+      "sha256": "fc52d5177314ba12dc0517bfea21549879b7cd94eae8997891fe2c23e1dc2b61",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F13_return.svg",
+      "repoTargetPath": "class/build/scenes/F13_return.svg",
+      "bytes": 12356,
+      "sha256": "ee88b64495dae12a91710ad343fd22fd6a6ca844c3998137776257d14b2ed1cd",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F13_sub1.svg",
+      "repoTargetPath": "class/build/scenes/F13_sub1.svg",
+      "bytes": 12530,
+      "sha256": "bc9591063e3fd934947ec885dafc0a3d1f651da20d6ca74a7ff7e99e35f929e3",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F14_forward.svg",
+      "repoTargetPath": "class/build/scenes/F14_forward.svg",
+      "bytes": 14847,
+      "sha256": "7bf8d92f7650dc614f7a0bcac3403149bc7c6d4b357df52cbb598f4c3b7d821c",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F14_return.svg",
+      "repoTargetPath": "class/build/scenes/F14_return.svg",
+      "bytes": 14846,
+      "sha256": "cae90df808f59eff7de8ea1b2084b852d70819db744bb6e4b708a4f524bc6b17",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F14_sub1.svg",
+      "repoTargetPath": "class/build/scenes/F14_sub1.svg",
+      "bytes": 14828,
+      "sha256": "5ad5041c6fa167ad7a5e01ce0b323208e3398a73d9277dee22fd8bba72ce22d1",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F15_forward.svg",
+      "repoTargetPath": "class/build/scenes/F15_forward.svg",
+      "bytes": 8644,
+      "sha256": "b9420c9c8eef20aa4d9d699a47549a8a82e2cd2b55f250795267cdd28e1d306a",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F15_return.svg",
+      "repoTargetPath": "class/build/scenes/F15_return.svg",
+      "bytes": 8643,
+      "sha256": "a7697a8d8ae749cd004a67b64007570d0dbb77c04b64f4f23d8af3cab95979b7",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F15_sub1.svg",
+      "repoTargetPath": "class/build/scenes/F15_sub1.svg",
+      "bytes": 8811,
+      "sha256": "38c7fcd5a3c477ae7bf0ddf6a29e7ad9cc40f352a27fa9ec599468b558cf3c21",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F16_forward.svg",
+      "repoTargetPath": "class/build/scenes/F16_forward.svg",
+      "bytes": 19333,
+      "sha256": "2bd6ce3840961cabfb15f0fb8c12823c8bb3360fe982a690853e8e280ace3fd8",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F17_forward.svg",
+      "repoTargetPath": "class/build/scenes/F17_forward.svg",
+      "bytes": 14594,
+      "sha256": "31d0df325af540af5928b68fde51633dcaa760e092839d16729301de936be374",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F17_return.svg",
+      "repoTargetPath": "class/build/scenes/F17_return.svg",
+      "bytes": 14593,
+      "sha256": "930386965a9bed69af6ec7fe97babbf1c3da321836a52a087bdc148a37b4132f",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F18_forward.svg",
+      "repoTargetPath": "class/build/scenes/F18_forward.svg",
+      "bytes": 12138,
+      "sha256": "0f3fc400191e35e0d926d98c3041ddfae89e950e081b57a2c588a8f7887b59ad",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F18_return.svg",
+      "repoTargetPath": "class/build/scenes/F18_return.svg",
+      "bytes": 12137,
+      "sha256": "27c0f9190fe2e25d22f37cfad67872c4998382513e12c71b85c4be6fc06e27af",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F18_sub1.svg",
+      "repoTargetPath": "class/build/scenes/F18_sub1.svg",
+      "bytes": 12284,
+      "sha256": "0ee35de10e7216d7e3608a338362fe7d5f8e2cbfb94cecf856f37a8681b5bd44",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F18_sub2.svg",
+      "repoTargetPath": "class/build/scenes/F18_sub2.svg",
+      "bytes": 12100,
+      "sha256": "dd9fcdb67a514e9470ef779cb556e51109cd942e8bd06b215ac759406c65336d",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F19_forward.svg",
+      "repoTargetPath": "class/build/scenes/F19_forward.svg",
+      "bytes": 13766,
+      "sha256": "6a623d8f74f297978e11a4ba0ded7cf9a60cc6b525671b16d584e8c17ed84d22",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F19_return.svg",
+      "repoTargetPath": "class/build/scenes/F19_return.svg",
+      "bytes": 13073,
+      "sha256": "8a1fcdd940cfc64fb96d481259b2bb297b7f0cb52631158f238ee15c50e096b5",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F20_forward.svg",
+      "repoTargetPath": "class/build/scenes/F20_forward.svg",
+      "bytes": 17248,
+      "sha256": "d8ed0187a24b293873da0e81a6319cd83473ef3dbafabd352418d126d77f2de1",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F20_return.svg",
+      "repoTargetPath": "class/build/scenes/F20_return.svg",
+      "bytes": 16901,
+      "sha256": "94089aad710108ec5cad9dde57390d09152ec284931062334f026f6b2262a2cc",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F21_forward.svg",
+      "repoTargetPath": "class/build/scenes/F21_forward.svg",
+      "bytes": 10600,
+      "sha256": "74f88a87dde66a731538d4ce8bf911e35afdaa9ad3536a91a06b235b76e2da25",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F21_return.svg",
+      "repoTargetPath": "class/build/scenes/F21_return.svg",
+      "bytes": 10082,
+      "sha256": "572cc01a2c45c2a0554b547746b7d1471154b1e507ed5d86cdee0289ef572360",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F22_forward.svg",
+      "repoTargetPath": "class/build/scenes/F22_forward.svg",
+      "bytes": 6966,
+      "sha256": "c5144b2d48434f4116ee1b394d21c69ca7a8ff8100cb081f05d597aac90052d2",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F22_return.svg",
+      "repoTargetPath": "class/build/scenes/F22_return.svg",
+      "bytes": 6965,
+      "sha256": "8d29aa9a6262ae154000edd6b3096aaad66c0a521e721b8617e961e8009358c5",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F23_forward.svg",
+      "repoTargetPath": "class/build/scenes/F23_forward.svg",
+      "bytes": 10118,
+      "sha256": "0255f3420d0344f33db446b9f548e5fa1a0eceb210c12a450b5ce9c9ff6692a7",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F23_return.svg",
+      "repoTargetPath": "class/build/scenes/F23_return.svg",
+      "bytes": 9946,
+      "sha256": "e1a173841216b5328548e0a733dd5a765bbe551698c27ba5a8a6e2c9dfaf4b7b",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F24_forward.svg",
+      "repoTargetPath": "class/build/scenes/F24_forward.svg",
+      "bytes": 13480,
+      "sha256": "adfef8e0363275611f16bec189521db334c784a9d7125caec9cacdb0525e453b",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F24_return.svg",
+      "repoTargetPath": "class/build/scenes/F24_return.svg",
+      "bytes": 13479,
+      "sha256": "065160bdcde0078ec995a50c6522c1e7f8b0dc00fc9f9a66e944d6be9021fb00",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F25_forward.svg",
+      "repoTargetPath": "class/build/scenes/F25_forward.svg",
+      "bytes": 9083,
+      "sha256": "cf4f4c8db705e5bc48d84586d04e8c7f90b67fb9821efc80e138b82154371b24",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F25_return.svg",
+      "repoTargetPath": "class/build/scenes/F25_return.svg",
+      "bytes": 8734,
+      "sha256": "2ff3206cdfce2e4dcf31a9fe86fda1d0bf86460a873e343955f4f23ab4642aaa",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F26_forward.svg",
+      "repoTargetPath": "class/build/scenes/F26_forward.svg",
+      "bytes": 17616,
+      "sha256": "3863d4cfe397798e3dee8e6f7128f97067c0e41ebac721bd962a2b4eb1818368",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F26_return.svg",
+      "repoTargetPath": "class/build/scenes/F26_return.svg",
+      "bytes": 17271,
+      "sha256": "0957a86d916afb2c834e290b9ec1735917183fa6c897102a903ce522b653d68f",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F27_forward.svg",
+      "repoTargetPath": "class/build/scenes/F27_forward.svg",
+      "bytes": 11836,
+      "sha256": "7b7d7040b4765fe7513b000e09affe996e273efe1879cc39a5ca70dca7428640",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F27_return.svg",
+      "repoTargetPath": "class/build/scenes/F27_return.svg",
+      "bytes": 11835,
+      "sha256": "60cb60ab6b1339b9ddbaae0c8a83f9501b3e981fcee3d2c950a7f120f1e9528e",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F28_forward.svg",
+      "repoTargetPath": "class/build/scenes/F28_forward.svg",
+      "bytes": 9675,
+      "sha256": "c461323b36c4656bd99461408e2ef79d3b4b1d85af1583b9a0838bf8046a4a5b",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F28_return.svg",
+      "repoTargetPath": "class/build/scenes/F28_return.svg",
+      "bytes": 9328,
+      "sha256": "1092e1a227f120107130c7d2ac0b33a1e7f1813b84207717110c6fdda5e043e5",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F29_forward.svg",
+      "repoTargetPath": "class/build/scenes/F29_forward.svg",
+      "bytes": 8332,
+      "sha256": "ec558f0e85763210914a085f04bef772c0e9f4781d5d19eb62f2a5b4951a76a1",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/build/scenes/F29_return.svg",
+      "repoTargetPath": "class/build/scenes/F29_return.svg",
+      "bytes": 8332,
+      "sha256": "ec558f0e85763210914a085f04bef772c0e9f4781d5d19eb62f2a5b4951a76a1",
+      "note": "scenes artwork",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/mxStylesheet-parser-result.json",
+      "repoTargetPath": "class/validation/v5.1-companion/mxStylesheet-parser-result.json",
+      "bytes": 118,
+      "sha256": "5d32bf11980714d388f1a73353f118eeb9a4535f1ba4372b8377080815817830",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/admin_laptop__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/admin_laptop__orig.png",
+      "bytes": 1830,
+      "sha256": "37400986982747473397d020664fafa80b1840ade0c20aedb647751563ee65b3",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/admin_laptop__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/admin_laptop__roundtrip.png",
+      "bytes": 1830,
+      "sha256": "37400986982747473397d020664fafa80b1840ade0c20aedb647751563ee65b3",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/ec2__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/ec2__orig.png",
+      "bytes": 1891,
+      "sha256": "4463b86813a67d13c3e7d35f1d96fb9435b1befaeb2f7f591128620ebcbe8d54",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/ec2__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/ec2__roundtrip.png",
+      "bytes": 1891,
+      "sha256": "4463b86813a67d13c3e7d35f1d96fb9435b1befaeb2f7f591128620ebcbe8d54",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/ecr__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/ecr__orig.png",
+      "bytes": 4361,
+      "sha256": "2ff957bb764cb121f2136ce05eb638699741f8e906980c7df786b51b1c141841",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/ecr__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/ecr__roundtrip.png",
+      "bytes": 4361,
+      "sha256": "2ff957bb764cb121f2136ce05eb638699741f8e906980c7df786b51b1c141841",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/eks__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/eks__orig.png",
+      "bytes": 5409,
+      "sha256": "eff4c9c4c5cd9e67a13db8200889f35fedaa7d912b039d3d38af3a37664f9ce7",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/eks__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/eks__roundtrip.png",
+      "bytes": 5409,
+      "sha256": "eff4c9c4c5cd9e67a13db8200889f35fedaa7d912b039d3d38af3a37664f9ce7",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/generic_aws_api__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/generic_aws_api__orig.png",
+      "bytes": 1903,
+      "sha256": "7e7213b99be6a1c5d65299c05ea4e3bc0918c6a6d304b9a5ef57be2597879afb",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/generic_aws_api__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/generic_aws_api__roundtrip.png",
+      "bytes": 1903,
+      "sha256": "7e7213b99be6a1c5d65299c05ea4e3bc0918c6a6d304b9a5ef57be2597879afb",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/generic_process__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/generic_process__orig.png",
+      "bytes": 2609,
+      "sha256": "568830a305e881f928e1fd9a81fc141a18f29c980f0229d08f111e904428af78",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/generic_process__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/generic_process__roundtrip.png",
+      "bytes": 2609,
+      "sha256": "568830a305e881f928e1fd9a81fc141a18f29c980f0229d08f111e904428af78",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/k8s_deploy__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/k8s_deploy__orig.png",
+      "bytes": 4046,
+      "sha256": "fd49de0acb71130be0199330bcf53035ba337ce0702ebd9866735ed5c2cae6c0",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/k8s_deploy__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/k8s_deploy__roundtrip.png",
+      "bytes": 4046,
+      "sha256": "fd49de0acb71130be0199330bcf53035ba337ce0702ebd9866735ed5c2cae6c0",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/k8s_pod__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/k8s_pod__orig.png",
+      "bytes": 3402,
+      "sha256": "30a765c9e37da35745b0abf241d5e2e6d584d367373d609b0795c972113cc5a6",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/k8s_pod__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/k8s_pod__roundtrip.png",
+      "bytes": 3402,
+      "sha256": "30a765c9e37da35745b0abf241d5e2e6d584d367373d609b0795c972113cc5a6",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/k8s_service__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/k8s_service__orig.png",
+      "bytes": 2713,
+      "sha256": "b8f974044f03df0becf72a4ff0c5e5e492b0a50ef6766a312ad4238d0700a201",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/k8s_service__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/k8s_service__roundtrip.png",
+      "bytes": 2713,
+      "sha256": "b8f974044f03df0becf72a4ff0c5e5e492b0a50ef6766a312ad4238d0700a201",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/vpc__orig.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/vpc__orig.png",
+      "bytes": 4869,
+      "sha256": "788d2973983c5f9acb5f7e31591ee3808a94d450a9a1470a22a2abbbc3607080",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel/vpc__roundtrip.png",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel/vpc__roundtrip.png",
+      "bytes": 4869,
+      "sha256": "788d2973983c5f9acb5f7e31591ee3808a94d450a9a1470a22a2abbbc3607080",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1-companion/pixel-compare.json",
+      "repoTargetPath": "class/validation/v5.1-companion/pixel-compare.json",
+      "bytes": 944,
+      "sha256": "487d92380a98b45ef0fefd08a26ca873d4aff9d5d9cbf57d5a096299721ac04d",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/chip-audit.json",
+      "repoTargetPath": "class/validation/v5.1/chip-audit.json",
+      "bytes": 1944,
+      "sha256": "a2e03af0ee0db2791fa1df753f116c44f61881e3473af0c8a9c95bde032985f5",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0125__F06_DNAT__1080.png",
+      "repoTargetPath": "class/validation/v5.1/s0125__F06_DNAT__1080.png",
+      "bytes": 104299,
+      "sha256": "5403d97f98f484e7ab4652cc92412a771558378919285e6a0fd9c1b231693379",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0125__F06_DNAT__930.png",
+      "repoTargetPath": "class/validation/v5.1/s0125__F06_DNAT__930.png",
+      "bytes": 100560,
+      "sha256": "fea121fc395cb858b7d8864393d5c1cbc47ce3fc3420e0e98ea44f994296d8fd",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0129__F07_DNAT__1080.png",
+      "repoTargetPath": "class/validation/v5.1/s0129__F07_DNAT__1080.png",
+      "bytes": 122519,
+      "sha256": "cb964b36552375716a04697200740cb4c80d7f043243f203a3648deb6df931d1",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0129__F07_DNAT__930.png",
+      "repoTargetPath": "class/validation/v5.1/s0129__F07_DNAT__930.png",
+      "bytes": 117643,
+      "sha256": "c305716892d16ffa4388e3f35432b1eefbda16761753ff594e4ce059efc9b0bf",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0146__F14_trust__1080.png",
+      "repoTargetPath": "class/validation/v5.1/s0146__F14_trust__1080.png",
+      "bytes": 92270,
+      "sha256": "2c642708ce8db34326a158a91ef64fda1d5126d93d3941b0cfcbb88bfe08851f",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0146__F14_trust__930.png",
+      "repoTargetPath": "class/validation/v5.1/s0146__F14_trust__930.png",
+      "bytes": 87440,
+      "sha256": "4f10cb640c5d8a6480021f7bedbcca770aa5a7ebea8d0d6de1a8e9ac082f23d1",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0263__F19_readiness__1080.png",
+      "repoTargetPath": "class/validation/v5.1/s0263__F19_readiness__1080.png",
+      "bytes": 90424,
+      "sha256": "b507a4c903189d66a3555714f848abceb0194cef6e479fe0b8c678cd4710ca1a",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/validation/v5.1/s0263__F19_readiness__930.png",
+      "repoTargetPath": "class/validation/v5.1/s0263__F19_readiness__930.png",
+      "bytes": 86123,
+      "sha256": "0705a4f8c71b47485325621f3a7acab1b8cc7b84d86fa183a9ba3e39216ed703",
+      "note": "validation evidence",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/engine/graphics.js",
+      "repoTargetPath": "class/engine/graphics.js",
+      "bytes": 12861,
+      "sha256": "39a01610f78f41724b326569e7a5eea2c7e5195bf26a8b8ecd612d9b03d4e964",
+      "note": "engine chips",
+      "changeAction": "preserve"
+    },
+    {
+      "archivePath": "class/engine/base.css",
+      "repoTargetPath": "class/engine/base.css",
+      "bytes": 5123,
+      "sha256": "456fd690f7782089f6dc816eb5922622768828e01108508d81924a73ad753e7c",
+      "note": "engine CSS",
+      "changeAction": "preserve"
+    },
+    {
+      "archivePath": "source/FINAL-CLASS-COMPANION-ACCEPTANCE-v5.1.md",
+      "repoTargetPath": "source/FINAL-CLASS-COMPANION-ACCEPTANCE-v5.1.md",
+      "bytes": 8184,
+      "sha256": "1977636f74488224fae8f13a52b45d4abab2e1ab4309deee61a0b5cfe7e8c43d",
+      "note": "source audits/flows",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "source/FINAL-CLASS-INDEPENDENT-AUDIT-v5.1.md",
+      "repoTargetPath": "source/FINAL-CLASS-INDEPENDENT-AUDIT-v5.1.md",
+      "bytes": 11632,
+      "sha256": "4fd6ac8307f522f35c6724ba2d7f4cfeccd2f04d8f4c4814f113bafcf8a31f1f",
+      "note": "source audits/flows",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "source/FINAL-CLASS-INDEPENDENT-AUDIT-v4.md",
+      "repoTargetPath": "source/FINAL-CLASS-INDEPENDENT-AUDIT-v4.md",
+      "bytes": 13105,
+      "sha256": "fcb2fc66ad865a251c81c3831d3cae4689b746f8668d4882d656027048f09c90",
+      "note": "source audits/flows",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "source/FINAL-CLASS-INDEPENDENT-AUDIT-v3.md",
+      "repoTargetPath": "source/FINAL-CLASS-INDEPENDENT-AUDIT-v3.md",
+      "bytes": 13776,
+      "sha256": "c6f8b7a61c18f32c92c4987940f3ef7bd4e88f7f0be2a970082181c39289a310",
+      "note": "source audits/flows",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "source/FLOW-SCENARIOS.json",
+      "repoTargetPath": "source/FLOW-SCENARIOS.json",
+      "bytes": 289078,
+      "sha256": "fa2fce2153af8c5fff8bcdfd58af03b04aaed18f8a338fdb5038cfa4a757512b",
+      "note": "source audits/flows",
+      "changeAction": "update"
+    },
+    {
+      "archivePath": "class/AUTHORITATIVE-RELEASE-MANIFEST-v5.1.json",
+      "repoTargetPath": "class/AUTHORITATIVE-RELEASE-MANIFEST-v5.1.json",
+      "bytes": 59176,
+      "sha256": "056b7953d17d25b2a3423dbbafea22a89cd38e11a384803812765e2f5d8f9e1f",
+      "note": "authoritative cloud-agent merge manifest",
+      "changeAction": "update"
+    }
+  ]
+}
