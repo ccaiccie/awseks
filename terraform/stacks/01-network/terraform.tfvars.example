@@ -1,0 +1,19 @@
+# Copy to terraform.tfvars. That file is gitignored.
+# Replace region. Do not commit account ids, keys, or state.
+
+region = "us-west-2"
+name   = "eks-lab"
+
+# Dedicated VPC. Change it if 10.0.0.0/16 is already used in this account.
+vpc_cidr = "10.0.0.0/16"
+az_count = 2
+
+# Default: one NAT gateway. Cheaper, and one AZ failure breaks egress for every node.
+# nat_gateway_per_az = true
+
+# Flow logs ingest CloudWatch data. Leave false until lab 16.
+# enable_flow_logs = true
+
+# Interface endpoints are billed per AZ per hour. Leave false until lab 11.
+# enable_interface_endpoints        = true
+# interface_endpoint_confirmation   = "enable-interface-endpoints"

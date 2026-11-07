@@ -1,0 +1,45 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyAccountAndPurchases",
+      "Effect": "Deny",
+      "Action": [
+        "account:*",
+        "organizations:*",
+        "ec2:PurchaseReservedInstancesOffering",
+        "ec2:PurchaseScheduledInstances",
+        "ec2:PurchaseCapacityBlock",
+        "ec2:AcceptReservedInstancesExchangeQuote",
+        "savingsplans:*",
+        "aws-portal:*",
+        "billing:*",
+        "cur:*",
+        "ce:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyAdminPolicyAttach",
+      "Effect": "Deny",
+      "Action": [
+        "iam:AttachRolePolicy",
+        "iam:AttachUserPolicy",
+        "iam:AttachGroupPolicy",
+        "iam:PutUserPolicy",
+        "iam:PutGroupPolicy"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnEquals": {
+          "iam:PolicyARN": [
+            "arn:aws:iam::aws:policy/AdministratorAccess",
+            "arn:aws:iam::aws:policy/IAMFullAccess",
+            "arn:aws:iam::aws:policy/PowerUserAccess",
+            "arn:aws:iam::aws:policy/job-function/NetworkAdministrator"
+          ]
+        }
+      }
+    }
+  ]
+}

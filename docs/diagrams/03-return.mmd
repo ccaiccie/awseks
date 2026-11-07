@@ -1,0 +1,13 @@
+flowchart LR
+  pod[Pod IP]
+  node[Node ENI]
+  vpcRoute{VPC route lookup}
+  lb[Load balancer ENI]
+  nat[NAT gateway]
+  igw[IGW]
+
+  pod --> node
+  node --> vpcRoute
+  vpcRoute --> lb
+  vpcRoute --> nat
+  nat --> igw

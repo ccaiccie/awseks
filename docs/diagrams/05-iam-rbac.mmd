@@ -1,0 +1,11 @@
+flowchart TB
+  human[IAM principal]
+  entry[EKS access entry]
+  api[Kubernetes API]
+  binding[RoleBinding]
+  verb[Allowed verb]
+
+  human --> entry
+  entry --> api
+  api --> binding
+  binding --> verb

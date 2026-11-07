@@ -1,0 +1,11 @@
+flowchart TB
+  svc[Service ClusterIP]
+  proxy[kube-proxy rules]
+  slice[EndpointSlice]
+  podA[Pod on node A]
+  podB[Pod on node B]
+
+  svc --> proxy
+  proxy --> slice
+  slice --> podA
+  slice --> podB

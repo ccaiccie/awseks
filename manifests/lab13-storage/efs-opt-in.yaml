@@ -1,0 +1,30 @@
+# OPT-IN. Apply only after stack 03 created the EFS file system.
+# Replace EFS_FILE_SYSTEM_ID with the efs_file_system_id output.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: lab-efs
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: lab-efs
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: EFS_FILE_SYSTEM_ID
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: lab-efs
+  namespace: lab-storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: lab-efs
+  resources:
+    requests:
+      storage: 5Gi

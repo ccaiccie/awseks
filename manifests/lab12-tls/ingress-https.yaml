@@ -1,0 +1,28 @@
+# Optional. Replace the host with a domain you own in a Route 53 hosted zone
+# in this account. Do not invent a domain. ACM and the DNS record are created
+# by you with the AWS CLI, not by Terraform, so they are not in the stacks.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-tls
+  namespace: lab-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:REPLACE_REGION:REPLACE_ACCOUNT:certificate/REPLACE_CERT_ID
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS13-1-2-2021-06
+    alb.ingress.kubernetes.io/tags: Project=awseks-practice,ManagedBy=aws-load-balancer-controller
+spec:
+  ingressClassName: alb
+  rules:
+    - host: app.REPLACE_WITH_OWNED_DOMAIN
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  name: http

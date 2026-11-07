@@ -1,0 +1,15 @@
+# Optional remote backend. Do not commit a filled copy with a real bucket
+# that you consider secret, and do not commit state.
+#
+# Create the bucket and lock table yourself, outside this stack, in a
+# separate bootstrap you review. Then:
+#
+#   terraform init -migrate-state -backend-config=backend.s3.hcl
+#
+# This repository's CI runs terraform init -backend=false and never migrates.
+
+bucket       = "REPLACE-with-your-state-bucket"
+key          = "awseks-practice/01-network/terraform.tfstate"
+region       = "us-west-2"
+encrypt      = true
+use_lockfile = true

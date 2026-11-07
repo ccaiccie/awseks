@@ -1,0 +1,8 @@
+# Optional. See ../01-network/backend.s3.hcl.example.
+# Use a different state key from the network stack.
+
+bucket       = "REPLACE-with-your-state-bucket"
+key          = "awseks-practice/02-cluster/terraform.tfstate"
+region       = "us-west-2"
+encrypt      = true
+use_lockfile = true
