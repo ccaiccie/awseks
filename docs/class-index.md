@@ -1,6 +1,8 @@
 # Class index
 
-The canonical class source is the `class/` tree, reconciled to source bundle v2 (2026-11-07). `class/AUDIT-RESOLUTION.md` and `class/NARRATION-CORRECTIONS-v2.md` record the audit fixes. The animated lesson is still being built. Start at [class/README.md](../class/README.md), then [class/CURRICULUM.md](../class/CURRICULUM.md), [class/TECHNICAL-SPEC.md](../class/TECHNICAL-SPEC.md), and [class/labs/README.md](../class/labs/README.md). The chapter-to-lab-to-diagram table is [chapter-map.md](chapter-map.md). Version conditions that are easy to over-read are in [versions.md](versions.md).
+The practice curriculum and the `eksclass-cli-` labs start at [class/README.md](../class/README.md), then [class/CURRICULUM.md](../class/CURRICULUM.md), [class/TECHNICAL-SPEC.md](../class/TECHNICAL-SPEC.md), and [class/labs/README.md](../class/labs/README.md). Audit notes are [class/AUDIT-RESOLUTION.md](../class/AUDIT-RESOLUTION.md) and [class/NARRATION-CORRECTIONS-v2.md](../class/NARRATION-CORRECTIONS-v2.md).
+
+The delivered class is v5.1: 26 chapters, 335 scenes, 2:09:55. Open [class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio](../class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio) and [class/build/SCENE-CHAPTER-MAP.md](../class/build/SCENE-CHAPTER-MAP.md). The practice-lab table is [chapter-map.md](chapter-map.md). Version wording that is easy to over-read is in [versions.md](versions.md). The HTML file is not in this repository.
 
 ## What is a preview
 

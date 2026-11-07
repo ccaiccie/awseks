@@ -27,5 +27,6 @@ shellcheck -x cli/lib/common.sh cli/bin/*.sh stages/aws-load-balancer-controller
 shellcheck --exclude=SC1091 class/labs/scripts/*.sh
 
 python3 tests/static/check_alignment.py
+python3 tests/static/check_links.py
 python3 class/tools/test_audit_regressions.py
 echo "static checks passed"

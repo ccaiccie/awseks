@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640" width="1920" height="640" data-scenario="F08" data-dir="forward">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b5cad"/></marker>
+<marker id="arrow-ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b65b0a"/></marker>
+<marker id="arrow-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bd3047"/></marker>
+<marker id="arrow-svc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7954b3"/></marker>
+<marker id="arrow-post" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#18794e"/></marker>
+</defs>
+<rect width="1920" height="640" fill="#ffffff"/>
+<rect data-header-strip="1" x="40" y="70" width="1840" height="44" rx="8" fill="#f0f5fa" stroke="#7898b5"/>
+<text data-header-strip="1" x="56" y="98" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="18" font-weight="700" fill="#0b5cad">F08 · ClusterIP to same-node endpoint</text>
+<rect data-header-strip="1" x="40" y="122" width="1840" height="28" rx="6" fill="#f0f5fa" opacity=".85"/>
+<text data-header-strip="1" x="56" y="141" font-size="13" font-family="IBM Plex Sans,system-ui,sans-serif" fill="#526578">Topology follows this scenario's actors — illustrative addresses only</text>
+<polyline points="160.0,270 160.0,210 960.0,210 960.0,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="960.0,270 960.0,200 1760.0,200 1760.0,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<g id="a" data-actor="a" data-node-highlight="1" data-icon="k8s_pod">
+<rect data-node-highlight="1" x="60.0" y="265.0" width="200" height="100" rx="14" fill="#eaf6ef" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="160.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="260.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="160.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="60.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(72.0,277.0)" data-stencil="k8s_pod"><svg width="36" height="36" viewBox="0 0 18.035334 17.500378" width="48" height="48" data-stencil="k8s_pod" data-native="k8s-community"><g
+     id="layer1"
+     transform="translate(-0.99262638,-1.174181)">
+    <g
+       id="g70"
+       transform="matrix(1.0148887,0,0,1.0148887,16.902146,-2.698726)">
+      <path
+         id="path3055"
+         d="m -6.8492015,4.2724668 a 1.1191255,1.1099671 0 0 0 -0.4288818,0.1085303 l -5.8524037,2.7963394 a 1.1191255,1.1099671 0 0 0 -0.605524,0.7529759 l -1.443828,6.2812846 a 1.1191255,1.1099671 0 0 0 0.151943,0.851028 1.1191255,1.1099671 0 0 0 0.06362,0.08832 l 4.0508,5.036555 a 1.1191255,1.1099671 0 0 0 0.874979,0.417654 l 6.4961011,-0.0015 a 1.1191255,1.1099671 0 0 0 0.8749788,-0.416906 L 1.3818872,15.149453 A 1.1191255,1.1099671 0 0 0 1.5981986,14.210104 L 0.15212657,7.9288154 A 1.1191255,1.1099671 0 0 0 -0.45339794,7.1758396 L -6.3065496,4.3809971 A 1.1191255,1.1099671 0 0 0 -6.8492015,4.2724668 Z"
+         style="fill:#326ce5;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path3054-2-9"
+         d="M -6.8523435,3.8176372 A 1.1814304,1.171762 0 0 0 -7.3044284,3.932904 l -6.1787426,2.9512758 a 1.1814304,1.171762 0 0 0 -0.639206,0.794891 l -1.523915,6.6308282 a 1.1814304,1.171762 0 0 0 0.160175,0.89893 1.1814304,1.171762 0 0 0 0.06736,0.09281 l 4.276094,5.317236 a 1.1814304,1.171762 0 0 0 0.92363,0.440858 l 6.8576188,-0.0015 a 1.1814304,1.171762 0 0 0 0.9236308,-0.44011 l 4.2745966,-5.317985 a 1.1814304,1.171762 0 0 0 0.228288,-0.990993 L 0.53894439,7.6775738 A 1.1814304,1.171762 0 0 0 -0.10026101,6.8834313 L -6.2790037,3.9321555 A 1.1814304,1.171762 0 0 0 -6.8523435,3.8176372 Z m 0.00299,0.4550789 a 1.1191255,1.1099671 0 0 1 0.5426517,0.1085303 l 5.85315169,2.7948425 A 1.1191255,1.1099671 0 0 1 0.15197811,7.9290648 L 1.598051,14.21035 a 1.1191255,1.1099671 0 0 1 -0.2163123,0.939348 l -4.0493032,5.037304 a 1.1191255,1.1099671 0 0 1 -0.8749789,0.416906 l -6.4961006,0.0015 a 1.1191255,1.1099671 0 0 1 -0.874979,-0.417652 l -4.0508,-5.036554 a 1.1191255,1.1099671 0 0 1 -0.06362,-0.08832 1.1191255,1.1099671 0 0 1 -0.151942,-0.851028 l 1.443827,-6.2812853 a 1.1191255,1.1099671 0 0 1 0.605524,-0.7529758 l 5.8524036,-2.7963395 a 1.1191255,1.1099671 0 0 1 0.4288819,-0.1085303 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;marker:none;enable-background:accumulate" />
+    </g>
+    <g
+       id="g3341"
+       transform="translate(0.12766661,0.35147801)">
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="M 6.2617914,7.036086 9.8826317,5.986087 13.503462,7.036086 9.8826317,8.086087 Z"
+         id="path910" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="m 6.2617914,7.43817 0,3.852778 3.3736103,1.868749 0.0167,-4.713193 z"
+         id="path912" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="m 13.503462,7.43817 0,3.852778 -3.37361,1.868749 -0.0167,-4.713193 z"
+         id="path914" />
+    </g>
+  </g></svg></g>
+<text data-caption="1" x="170.0" y="315.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Client Pod A</text>
+</g>
+<g id="host" data-actor="host" data-node-highlight="1" data-icon="ec2">
+<rect data-node-highlight="1" x="860.0" y="265.0" width="200" height="100" rx="14" fill="#e8f1fb" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="960.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1060.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="960.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="860.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(872.0,277.0)" data-stencil="ec2"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="ec2"><g transform="translate(3.60,3.60) scale(0.7286)"><path d="M15,41 L40,41 L40,16 L15,16 M42,16 L46,16 L46,18 L42,18 L42,22 L46,22 L46,24 L42,24 L42,27 L46,27 L46,29 L42,29 L42,33 L46,33 L46,35 L42,35 L42,39 L46,39 L46,41 L42,41 L42,41.136 C42,42.164 41.164,43 40.136,43 L40,43 L40,47 L38,47 L38,43 L34,43 L34,47 L32,47 L32,43 L29,43 L29,47 L27,47 L27,43 L23,43 L23,47 L21,47 L21,43 L17,43 L17,47 L15,47 L15,43 L14.864,43 C13.836,43 13,42.164 13,41.136 L13,41 L10,41 L10,39 L13,39 L13,35 L10,35 L10,33 L13,33 L13,29 L10,29 L10,27 L13,27 L13,24 L10,24 L10,22 L13,22 L13,18 L10,18 L10,16 L13,16 L13,15.864 C13,14.836 13.836,14 14.864,14 L15,14 L15,10 L17,10 L17,14 L21,14 L21,10 L23,10 L23,14 L27,14 L27,10 L29,10 L29,14 L32,14 L32,10 L34,10 L34,14 L38,14 L38,10 L40,10 L40,14 L40.136,14 C41.164,14 42,14.836 42,15.864 M29,53.876 C29,53.944 28.944,54 28.876,54 L2.124,54 C2.056,54 2,53.944 2,53.876 L2,27.124 C2,27.056 2.056,27 2.124,27 L8,27 L8,25 L2.124,25 C0.953,25 0,25.953 0,27.124 L0,53.876 C0,55.047 0.953,56 2.124,56 L28.876,56 C30.047,56 31,55.047 31,53.876 L31,49 L29,49 M56,2.124 L56,28.876 C56,30.047 55.047,31 53.876,31 L48,31 L48,29 L53.876,29 C53.944,29 54,28.944 54,28.876 L54,2.124 C54,2.056 53.944,2 53.876,2 L27.124,2 C27.056,2 27,2.056 27,2.124 L27,8 L25,8 L25,2.124 C25,0.953 25.953,0 27.124,0 L53.876,0 C55.047,0 56,0.953 56,2.124 Z" fill="#232F3E"/></g></svg></g>
+<text data-caption="1" x="970.0" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Node A Service +</text>
+<text data-caption="1" x="970.0" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">FIB</text>
+</g>
+<g id="c" data-actor="c" data-node-highlight="1" data-icon="k8s_pod">
+<rect data-node-highlight="1" x="1660.0" y="265.0" width="200" height="100" rx="14" fill="#eaf6ef" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="1760.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1860.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="1760.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="1660.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(1672.0,277.0)" data-stencil="k8s_pod"><svg width="36" height="36" viewBox="0 0 18.035334 17.500378" width="48" height="48" data-stencil="k8s_pod" data-native="k8s-community"><g
+     id="layer1"
+     transform="translate(-0.99262638,-1.174181)">
+    <g
+       id="g70"
+       transform="matrix(1.0148887,0,0,1.0148887,16.902146,-2.698726)">
+      <path
+         id="path3055"
+         d="m -6.8492015,4.2724668 a 1.1191255,1.1099671 0 0 0 -0.4288818,0.1085303 l -5.8524037,2.7963394 a 1.1191255,1.1099671 0 0 0 -0.605524,0.7529759 l -1.443828,6.2812846 a 1.1191255,1.1099671 0 0 0 0.151943,0.851028 1.1191255,1.1099671 0 0 0 0.06362,0.08832 l 4.0508,5.036555 a 1.1191255,1.1099671 0 0 0 0.874979,0.417654 l 6.4961011,-0.0015 a 1.1191255,1.1099671 0 0 0 0.8749788,-0.416906 L 1.3818872,15.149453 A 1.1191255,1.1099671 0 0 0 1.5981986,14.210104 L 0.15212657,7.9288154 A 1.1191255,1.1099671 0 0 0 -0.45339794,7.1758396 L -6.3065496,4.3809971 A 1.1191255,1.1099671 0 0 0 -6.8492015,4.2724668 Z"
+         style="fill:#326ce5;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path3054-2-9"
+         d="M -6.8523435,3.8176372 A 1.1814304,1.171762 0 0 0 -7.3044284,3.932904 l -6.1787426,2.9512758 a 1.1814304,1.171762 0 0 0 -0.639206,0.794891 l -1.523915,6.6308282 a 1.1814304,1.171762 0 0 0 0.160175,0.89893 1.1814304,1.171762 0 0 0 0.06736,0.09281 l 4.276094,5.317236 a 1.1814304,1.171762 0 0 0 0.92363,0.440858 l 6.8576188,-0.0015 a 1.1814304,1.171762 0 0 0 0.9236308,-0.44011 l 4.2745966,-5.317985 a 1.1814304,1.171762 0 0 0 0.228288,-0.990993 L 0.53894439,7.6775738 A 1.1814304,1.171762 0 0 0 -0.10026101,6.8834313 L -6.2790037,3.9321555 A 1.1814304,1.171762 0 0 0 -6.8523435,3.8176372 Z m 0.00299,0.4550789 a 1.1191255,1.1099671 0 0 1 0.5426517,0.1085303 l 5.85315169,2.7948425 A 1.1191255,1.1099671 0 0 1 0.15197811,7.9290648 L 1.598051,14.21035 a 1.1191255,1.1099671 0 0 1 -0.2163123,0.939348 l -4.0493032,5.037304 a 1.1191255,1.1099671 0 0 1 -0.8749789,0.416906 l -6.4961006,0.0015 a 1.1191255,1.1099671 0 0 1 -0.874979,-0.417652 l -4.0508,-5.036554 a 1.1191255,1.1099671 0 0 1 -0.06362,-0.08832 1.1191255,1.1099671 0 0 1 -0.151942,-0.851028 l 1.443827,-6.2812853 a 1.1191255,1.1099671 0 0 1 0.605524,-0.7529758 l 5.8524036,-2.7963395 a 1.1191255,1.1099671 0 0 1 0.4288819,-0.1085303 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;marker:none;enable-background:accumulate" />
+    </g>
+    <g
+       id="g3341"
+       transform="translate(0.12766661,0.35147801)">
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="M 6.2617914,7.036086 9.8826317,5.986087 13.503462,7.036086 9.8826317,8.086087 Z"
+         id="path910" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="m 6.2617914,7.43817 0,3.852778 3.3736103,1.868749 0.0167,-4.713193 z"
+         id="path912" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="m 13.503462,7.43817 0,3.852778 -3.37361,1.868749 -0.0167,-4.713193 z"
+         id="path914" />
+    </g>
+  </g></svg></g>
+<text data-caption="1" x="1770.0" y="315.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Backend Pod C</text>
+</g>
+<g id="dynamic-layer"></g></svg>

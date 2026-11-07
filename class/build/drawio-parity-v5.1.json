@@ -1,0 +1,23 @@
+{
+  "sha256": "6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23",
+  "pages": 65,
+  "edges": 138,
+  "waypointArrays": 138,
+  "entryConstraints": 138,
+  "exitConstraints": 138,
+  "parityFails": [],
+  "parityFailCount": 0,
+  "art": {
+    "nativeK8sDataUri": true,
+    "k8s_pod": true,
+    "k8s_svc": true,
+    "compoundCards": true,
+    "pages": 65
+  },
+  "paths": 65,
+  "edgeCountExpected": 138,
+  "companion": true,
+  "imageUriFormat": "data:image/svg+xml,percent-encoded",
+  "mxStylesheetParserOk": 258,
+  "pixelCompareIdenticalKeys": 10
+}

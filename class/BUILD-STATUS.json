@@ -1,0 +1,81 @@
+{
+  "version": "v5.1",
+  "status": "BUILT_PENDING_PARENT_INDEPENDENT_REVIEW",
+  "masterHtml": "AWS-EKS-Masterclass-Novice-to-Expert-v5.1-YouTube-Edition.html",
+  "masterBytes": 66655838,
+  "masterSha256": "a23d6854e93cd4fbb22acded84766b9ae67c6ec159417791f21901ec5d3b7058",
+  "scheduledSeconds": 7795.372,
+  "scheduledDuration": "2:09:55",
+  "sceneCount": 335,
+  "demoScenes": 215,
+  "uniqueAudioClips": 276,
+  "boundedFollowup": "control\u2192Control plane chip (not IAM); IAM/DNAT unchanged",
+  "retained": "M1 M2 M3 M4; native icons; drawio geometry; curriculum/timing",
+  "chipAudit": {
+    "demoCount": 215,
+    "failCount": 0,
+    "key": {
+      "s0263": {
+        "kind": "control",
+        "mechanism": "Control / readiness / EndpointSlice membership (not Service DNAT)",
+        "on": [
+          "Control plane"
+        ],
+        "title": "F19: Readiness and EndpointSlice inclusion"
+      },
+      "s0146": {
+        "kind": "iam",
+        "mechanism": "IAM / identity / trust validation (not Service DNAT)",
+        "on": [
+          "IAM / RBAC"
+        ],
+        "title": "F14: Association + service role trust + tags"
+      },
+      "s0129": {
+        "kind": "service",
+        "mechanism": "Service VIP / kube-proxy DNAT",
+        "on": [
+          "Service DNAT"
+        ],
+        "title": "F07: Service/EndpointSlice backend selection + DNAT"
+      },
+      "s0125": {
+        "kind": "service",
+        "mechanism": "Service VIP / kube-proxy DNAT",
+        "on": [
+          "Service DNAT"
+        ],
+        "title": "F06: Kubernetes Service DNAT"
+      }
+    }
+  },
+  "packaging": {
+    "reassembleTest": "PASS",
+    "sentinelRefuseTest": "PASS",
+    "corruptPartTest": "PASS",
+    "identicalSkipTest": "PASS",
+    "fullZipBytes": 48608083,
+    "volumeCount": 4,
+    "docsLabsZipBytes": 368004
+  },
+  "transcripts": {
+    "version": "v5.1",
+    "scenes": 335,
+    "transcriptSha256": "218ff6db895bba817f77db97245af93c57aed287c4ef8fda843b41970d89afc1",
+    "spokenSha256": "4e1ce01bfcc53fe111d03a8416161f0cab224383b78008b8ac3ad2e3a1491691",
+    "narrationPlanSha256": "4cfdbf76069a9501ca5c01250209913171e1a570529a5b18f332360a12536da3",
+    "masterSha256": "a23d6854e93cd4fbb22acded84766b9ae67c6ec159417791f21901ec5d3b7058"
+  },
+  "claimFinalPass": false,
+  "independentReviewRequired": true,
+  "noAwsApply": true,
+  "noYoutubePublish": true,
+  "noRepoEdits": true,
+  "canonicalDrawio": "diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio",
+  "canonicalDrawioSha256": "6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23",
+  "docsLabsZipSha256": "f5f461784e5a1febe001dec42e6c71a1a7185cb9ddc585b6611e39b4c1eac7d8",
+  "docsLabsZipBytes": 547901,
+  "htmlPinnedSha256": "a23d6854e93cd4fbb22acded84766b9ae67c6ec159417791f21901ec5d3b7058",
+  "companionDrawioFix": "percent-encoded SVG data URIs; mxStylesheet 258/258",
+  "independentCompanionReauditRequired": true
+}

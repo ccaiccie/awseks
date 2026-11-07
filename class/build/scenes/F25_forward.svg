@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640" width="1920" height="640" data-scenario="F25" data-dir="forward">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b5cad"/></marker>
+<marker id="arrow-ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b65b0a"/></marker>
+<marker id="arrow-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bd3047"/></marker>
+<marker id="arrow-svc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7954b3"/></marker>
+<marker id="arrow-post" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#18794e"/></marker>
+</defs>
+<rect width="1920" height="640" fill="#ffffff"/>
+<rect data-header-strip="1" x="40" y="70" width="1840" height="44" rx="8" fill="#f0f5fa" stroke="#7898b5"/>
+<text data-header-strip="1" x="56" y="98" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="18" font-weight="700" fill="#0b5cad">F25 · Gateway API reconciliation then ALB datapath</text>
+<rect data-header-strip="1" x="40" y="122" width="1840" height="28" rx="6" fill="#f0f5fa" opacity=".85"/>
+<text data-header-strip="1" x="56" y="141" font-size="13" font-family="IBM Plex Sans,system-ui,sans-serif" fill="#526578">Topology follows this scenario's actors — illustrative addresses only</text>
+<polyline points="160.0,270 160.0,210 693.3,210 693.3,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="693.3,270 693.3,200 1226.7,200 1226.7,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="1226.7,270 1226.7,190 1760.0,190 1760.0,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<g id="route" data-actor="route" data-node-highlight="1" data-icon="generic_process">
+<rect data-node-highlight="1" x="60.0" y="265.0" width="200" height="100" rx="14" fill="#fff6e8" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="160.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="260.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="160.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="60.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(72.0,277.0)" data-stencil="generic_process"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="generic_process"><rect x="6" y="6" width="36" height="36" rx="8" fill="#526578" opacity=".35"/><rect x="14" y="14" width="20" height="20" rx="4" fill="#526578"/><text x="24" y="28" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">proc</text></svg></g>
+<text data-caption="1" x="170.0" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">GatewayClass/Gatew</text>
+<text data-caption="1" x="170.0" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">ay/Route</text>
+</g>
+<g id="ctrl" data-actor="ctrl" data-node-highlight="1" data-icon="generic_process">
+<rect data-node-highlight="1" x="593.3" y="265.0" width="200" height="100" rx="14" fill="#fff6e8" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="693.3" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="793.3" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="693.3" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="593.3" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(605.3,277.0)" data-stencil="generic_process"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="generic_process"><rect x="6" y="6" width="36" height="36" rx="8" fill="#526578" opacity=".35"/><rect x="14" y="14" width="20" height="20" rx="4" fill="#526578"/><text x="24" y="28" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">proc</text></svg></g>
+<text data-caption="1" x="703.3" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Owning Gateway</text>
+<text data-caption="1" x="703.3" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">controller</text>
+</g>
+<g id="elb" data-actor="elb" data-node-highlight="1" data-icon="application_load_balancer">
+<rect data-node-highlight="1" x="1126.7" y="265.0" width="200" height="100" rx="14" fill="#e8f1fb" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="1226.7" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1326.7" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="1226.7" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="1126.7" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(1138.7,277.0)" data-stencil="application_load_balancer"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="application load balancer"><g transform="translate(3.60,3.60) scale(0.9273)"><path d="M22.001,0 C9.869,0 0,9.869 0,22 C0,34.131 9.869,44 22.001,44 C34.131,44 44.001,34.131 44.001,22 C44.001,9.869 34.131,0 22.001,0 M22.001,42 C10.972,42 2,33.028 2,22 C2,10.972 10.972,2 22.001,2 C33.029,2 42.001,10.972 42.001,22 C42.001,33.028 33.029,42 22.001,42 M35.035,28 L33.501,28 L33.501,24.625 C33.501,24.072 33.053,23.625 32.501,23.625 L30.001,23.625 L30.001,20.25 C30.001,19.697 29.553,19.25 29.001,19.25 L23.001,19.25 L23.001,16.875 L29.001,16.875 C29.553,16.875 30.001,16.428 30.001,15.875 L30.001,8 C30.001,7.447 29.553,7 29.001,7 L15.001,7 C14.448,7 14.001,7.447 14.001,8 L14.001,15.875 C14.001,16.428 14.448,16.875 15.001,16.875 L21.001,16.875 L21.001,19.25 L15.001,19.25 C14.448,19.25 14.001,19.697 14.001,20.25 L14.001,23.625 L11.501,23.625 C10.948,23.625 10.501,24.072 10.501,24.625 L10.501,28 L8.965,28 C8.413,28 7.965,28.447 7.965,29 L7.965,33.375 C7.965,33.928 8.413,34.375 8.965,34.375 L13.251,34.375 C13.803,34.375 14.251,33.928 14.251,33.375 L14.251,29 C14.251,28.447 13.803,28 13.251,28 L12.501,28 L12.501,25.625 L16.626,25.625 L16.626,28 L15.876,28 C15.323,28 14.876,28.447 14.876,29 L14.876,33.375 C14.876,33.928 15.323,34.375 15.876,34.375 L20.251,34.375 C20.803,34.375 21.251,33.928 21.251,33.375 L21.251,29 C21.251,28.447 20.803,28 20.251,28 L18.626,28 L18.626,24.625 C18.626,24.072 18.178,23.625 17.626,23.625 L16.001,23.625 L16.001,21.25 L28.001,21.25 L28.001,23.625 L26.376,23.625 C25.823,23.625 25.376,24.072 25.376,24.625 L25.376,28 L23.751,28 C23.198,28 22.751,28.447 22.751,29 L22.751,33.375 C22.751,33.928 23.198,34.375 23.751,34.375 L28.126,34.375 C28.678,34.375 29.126,33.928 29.126,33.375 L29.126,29 C29.126,28.447 28.678,28 28.126,28 L27.376,28 L27.376,25.625 L31.501,25.625 L31.501,28 L30.69,28 C30.137,28 29.69,28.447 29.69,29 L29.69,33.375 C29.69,33.928 30.137,34.375 30.69,34.375 L35.035,34.375 C35.587,34.375 36.035,33.928 36.035,33.375 L36.035,29 C36.035,28.447 35.587,28 35.035,28 M16.001,14.875 L16.001,9 L28.001,9 L28.001,14.875 M9.966,32.375 L9.966,30 L12.251,30 L12.251,32.375 M16.876,32.375 L16.876,30 L19.251,30 L19.251,32.375 M24.751,32.375 L24.751,30 L27.126,30 L27.126,32.375 M31.69,32.375 L31.69,30 L34.035,30 L34.035,32.375 Z" fill="#232F3E"/></g></svg></g>
+<text data-caption="1" x="1236.7" y="315.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">AWS ALB/NLB API</text>
+</g>
+<g id="target" data-actor="target" data-node-highlight="1" data-icon="generic_process">
+<rect data-node-highlight="1" x="1660.0" y="265.0" width="200" height="100" rx="14" fill="#fff6e8" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="1760.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1860.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="1760.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="1660.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(1672.0,277.0)" data-stencil="generic_process"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="generic_process"><rect x="6" y="6" width="36" height="36" rx="8" fill="#526578" opacity=".35"/><rect x="14" y="14" width="20" height="20" rx="4" fill="#526578"/><text x="24" y="28" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">proc</text></svg></g>
+<text data-caption="1" x="1770.0" y="315.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Ready targets</text>
+</g>
+<g id="dynamic-layer"></g></svg>

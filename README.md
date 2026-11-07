@@ -1,10 +1,28 @@
-# Amazon EKS practice lab
+# Amazon EKS practice lab and masterclass
 
-This repository is a novice-to-expert practice lab for **standard Amazon EKS on managed EC2 nodes, IPv4**. It is not an EKS Auto Mode lab. You can build the same shape of cluster two ways, and those ways do not share a cluster, a Terraform state file, or a resource name.
+This repository holds two things that stay separate.
 
-The class source is in [class/](class/README.md). Its SVG, draw.io, and PNG files are the static class diagrams. They are not the animated narrated lesson. That lesson is still a later build. Read [docs/class-index.md](docs/class-index.md) before treating a preview as the finished class. Simplified repo sketches in `docs/diagrams/` are not those class diagrams.
+**Practice.** A standard Amazon EKS lab on managed EC2, Amazon Linux 2023, IPv4. It is not an Auto Mode lab. You can build the same shape of cluster two ways. Those ways do not share a name, a state file, or a resource.
 
-No cluster was created from this repository. `terraform validate` and the shell checks do not call AWS.
+**Class.** A 26-chapter novice-to-expert masterclass: **335 scenes**, measured at **2:09:55** (7795.372 seconds). The editable lecture diagram is [class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio](class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio), SHA256 `6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23`. The chapter timing is [class/build/SCENE-CHAPTER-MAP.md](class/build/SCENE-CHAPTER-MAP.md). Transcripts are [class/docs/TRANSCRIPT.md](class/docs/TRANSCRIPT.md) and [class/docs/SPOKEN-TRANSCRIPT.txt](class/docs/SPOKEN-TRANSCRIPT.txt).
+
+The HTML master is not in git. The pinned file `AWS-EKS-Masterclass-Novice-to-Expert-v5.1-YouTube-Edition.html` is 66,655,838 bytes, SHA256 `a23d6854e93cd4fbb22acded84766b9ae67c6ec159417791f21901ec5d3b7058`. It was delivered privately as four volumes plus a reassembly helper. This README does not offer a download URL.
+
+No cluster was created from this repository. `terraform validate` and the shell checks do not call AWS. Snapshot version pins in [docs/versions.md](docs/versions.md) are what the public docs said on 2026-11-07. They are not proof that an API deploy succeeded.
+
+## Which diagram to open
+
+| You want | Open |
+| --- | --- |
+| The lecture and flow diagram with native AWS and Kubernetes art | [class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio](class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio) |
+| Where each of the 335 scenes sits in the 26 chapters | [class/build/SCENE-CHAPTER-MAP.md](class/build/SCENE-CHAPTER-MAP.md) |
+| The earlier static reference geometry (conceptual boxes, F01–F29, PNG previews) | [class/diagrams/README.md](class/diagrams/README.md) and `class/diagrams/eks-scenarios.drawio` |
+| The practice-lab route and identity sketches | [docs/diagrams/README.md](docs/diagrams/README.md) |
+| Which practice lab matches which chapter | [docs/chapter-map.md](docs/chapter-map.md) |
+
+v2 through v5 lecture draw.io files are kept and superseded. v5 uses base64 image URIs. v5.1 uses percent-encoded SVG data URIs. Use v5.1.
+
+Builder checks on the pinned HTML reported 17,630 control states, 276 audio decodes, syntax checks, and a successful four-volume reassembly. Those checks are not a full listen of the 2:09:55 timeline, not an AWS apply, and not a diagrams.net GUI import. A follow-up review of the percent-encoded image URIs is still in flight, so this README does not call the companion an independent final pass. The builder's own native style parser reported 258/258 image payloads intact. See [class/VALIDATION.md](class/VALIDATION.md) and [class/BUILD-STATUS.json](class/BUILD-STATUS.json).
 
 ## Who it is for
 
@@ -56,9 +74,10 @@ Quick start:
 | `stages/` | Helm and optional add-ons that are not part of cluster bootstrap |
 | `manifests/` | Kubernetes YAML. Applying it needs a kubeconfig |
 | `labs/` | Objectives, commands, expected observations, and failure tests |
-| `class/` | Canonical curriculum, flow scenarios, class diagrams, guarded CLI labs, source snapshots |
-| `docs/diagrams/` | Smaller repo sketches. Not the class diagrams |
-| `docs/class-incoming/` | Still empty. Reserved for the animated lesson when it is built |
+| `class/` | Curriculum, `eksclass-cli-` labs, static reference diagrams, and the v5.1 lecture diagram |
+| `class/build/SCENE-CHAPTER-MAP.md` | Measured 26-chapter, 335-scene timing |
+| `docs/diagrams/` | Smaller sketches for the practice write-up. Not the lecture diagram |
+| `docs/chapter-map.md` | Practice labs lined up with chapters. Not the 335-scene timing map |
 | `policies/` | Vendored controller IAM policy and an operator baseline |
 | `.github/workflows/static.yml` | Static checks only. No AWS credentials and no deploy |
 
@@ -154,9 +173,7 @@ The chapter map that the finished class should follow is [docs/chapter-map.md](d
 
 ## Diagrams
 
-The class diagrams now in the repo are the v2 static sources: SVG, draw.io, and PNG previews under [class/diagrams/](class/diagrams/README.md). The animated lesson is still being built. Later rendered assets, if they arrive, belong beside those sources rather than replacing this tree. The index is [docs/class-index.md](docs/class-index.md). The chapter map is [docs/chapter-map.md](docs/chapter-map.md).
-
-`docs/diagrams/` holds smaller repo sketches for the Terraform and AWS CLI write-up. Do not cite them as the class pictures.
+The lecture diagram and the measured chapter map are linked above. Static F01–F29 SVG and PNG files stay in [class/diagrams/](class/diagrams/README.md) as the reference geometry. Practice sketches stay in [docs/diagrams/](docs/diagrams/README.md). The practice chapter table is [docs/chapter-map.md](docs/chapter-map.md). The index of what each class file is for is [docs/class-index.md](docs/class-index.md).
 
 ## Troubleshooting and cleanup
 

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640" width="1920" height="640" data-scenario="F09" data-dir="return">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b5cad"/></marker>
+<marker id="arrow-ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b65b0a"/></marker>
+<marker id="arrow-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bd3047"/></marker>
+<marker id="arrow-svc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7954b3"/></marker>
+<marker id="arrow-post" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#18794e"/></marker>
+</defs>
+<rect width="1920" height="640" fill="#ffffff"/>
+<rect data-header-strip="1" x="40" y="70" width="1840" height="44" rx="8" fill="#f0f5fa" stroke="#7898b5"/>
+<text data-header-strip="1" x="56" y="98" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="18" font-weight="700" fill="#0b5cad">F09 · ALB IP targets — two connections and TLS</text>
+<rect data-header-strip="1" x="40" y="122" width="900" height="28" rx="6" fill="#eaf6ef" opacity=".85"/>
+<text data-header-strip="1" x="56" y="141" font-size="13" font-family="IBM Plex Sans,system-ui,sans-serif" fill="#18794e">AZ-A / private A 10.42.16.0/20 (illustrative where used)</text>
+<rect data-header-strip="1" x="980" y="122" width="900" height="28" rx="6" fill="#eef3f8" opacity=".85"/>
+<text data-header-strip="1" x="996" y="141" font-size="13" font-family="IBM Plex Sans,system-ui,sans-serif" fill="#0b5cad">AZ-B / private B 10.42.32.0/20 (illustrative where used)</text>
+<polyline points="1760.0,360 1760.0,425 1226.7,425 1226.7,360" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="1226.7,360 1226.7,435 693.3,435 693.3,360" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="693.3,360 693.3,445 160.0,445 160.0,360" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<g id="client" data-actor="client" data-node-highlight="1" data-icon="admin_laptop">
+<rect data-node-highlight="1" x="60.0" y="265.0" width="200" height="100" rx="14" fill="#fff6e8" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="160.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="260.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="160.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="60.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(72.0,277.0)" data-stencil="admin_laptop"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="admin_laptop"><rect x="6" y="10" width="36" height="24" rx="2" fill="#526578"/><rect x="9" y="13" width="30" height="18" fill="#eef3f8"/><rect x="4" y="34" width="40" height="4" rx="1" fill="#182838"/><text x="24" y="26" text-anchor="middle" font-size="8" font-weight="700" fill="#182838">admin</text></svg></g>
+<text data-caption="1" x="170.0" y="315.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">HTTPS client</text>
+</g>
+<g id="alb" data-actor="alb" data-node-highlight="1" data-icon="application_load_balancer">
+<rect data-node-highlight="1" x="593.3" y="265.0" width="200" height="100" rx="14" fill="#e8f1fb" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="693.3" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="793.3" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="693.3" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="593.3" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(605.3,277.0)" data-stencil="application_load_balancer"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="application load balancer"><g transform="translate(3.60,3.60) scale(0.9273)"><path d="M22.001,0 C9.869,0 0,9.869 0,22 C0,34.131 9.869,44 22.001,44 C34.131,44 44.001,34.131 44.001,22 C44.001,9.869 34.131,0 22.001,0 M22.001,42 C10.972,42 2,33.028 2,22 C2,10.972 10.972,2 22.001,2 C33.029,2 42.001,10.972 42.001,22 C42.001,33.028 33.029,42 22.001,42 M35.035,28 L33.501,28 L33.501,24.625 C33.501,24.072 33.053,23.625 32.501,23.625 L30.001,23.625 L30.001,20.25 C30.001,19.697 29.553,19.25 29.001,19.25 L23.001,19.25 L23.001,16.875 L29.001,16.875 C29.553,16.875 30.001,16.428 30.001,15.875 L30.001,8 C30.001,7.447 29.553,7 29.001,7 L15.001,7 C14.448,7 14.001,7.447 14.001,8 L14.001,15.875 C14.001,16.428 14.448,16.875 15.001,16.875 L21.001,16.875 L21.001,19.25 L15.001,19.25 C14.448,19.25 14.001,19.697 14.001,20.25 L14.001,23.625 L11.501,23.625 C10.948,23.625 10.501,24.072 10.501,24.625 L10.501,28 L8.965,28 C8.413,28 7.965,28.447 7.965,29 L7.965,33.375 C7.965,33.928 8.413,34.375 8.965,34.375 L13.251,34.375 C13.803,34.375 14.251,33.928 14.251,33.375 L14.251,29 C14.251,28.447 13.803,28 13.251,28 L12.501,28 L12.501,25.625 L16.626,25.625 L16.626,28 L15.876,28 C15.323,28 14.876,28.447 14.876,29 L14.876,33.375 C14.876,33.928 15.323,34.375 15.876,34.375 L20.251,34.375 C20.803,34.375 21.251,33.928 21.251,33.375 L21.251,29 C21.251,28.447 20.803,28 20.251,28 L18.626,28 L18.626,24.625 C18.626,24.072 18.178,23.625 17.626,23.625 L16.001,23.625 L16.001,21.25 L28.001,21.25 L28.001,23.625 L26.376,23.625 C25.823,23.625 25.376,24.072 25.376,24.625 L25.376,28 L23.751,28 C23.198,28 22.751,28.447 22.751,29 L22.751,33.375 C22.751,33.928 23.198,34.375 23.751,34.375 L28.126,34.375 C28.678,34.375 29.126,33.928 29.126,33.375 L29.126,29 C29.126,28.447 28.678,28 28.126,28 L27.376,28 L27.376,25.625 L31.501,25.625 L31.501,28 L30.69,28 C30.137,28 29.69,28.447 29.69,29 L29.69,33.375 C29.69,33.928 30.137,34.375 30.69,34.375 L35.035,34.375 C35.587,34.375 36.035,33.928 36.035,33.375 L36.035,29 C36.035,28.447 35.587,28 35.035,28 M16.001,14.875 L16.001,9 L28.001,9 L28.001,14.875 M9.966,32.375 L9.966,30 L12.251,30 L12.251,32.375 M16.876,32.375 L16.876,30 L19.251,30 L19.251,32.375 M24.751,32.375 L24.751,30 L27.126,30 L27.126,32.375 M31.69,32.375 L31.69,30 L34.035,30 L34.035,32.375 Z" fill="#232F3E"/></g></svg></g>
+<text data-caption="1" x="703.3" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">ALB listener /</text>
+<text data-caption="1" x="703.3" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">rule</text>
+</g>
+<g id="vpc" data-actor="vpc" data-node-highlight="1" data-icon="vpc">
+<rect data-node-highlight="1" x="1126.7" y="265.0" width="200" height="100" rx="14" fill="#e8f1fb" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="1226.7" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1326.7" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="1226.7" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="1126.7" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(1138.7,277.0)" data-stencil="vpc"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="vpc"><g transform="translate(3.60,4.25) scale(0.7261)"><path d="M49,29.583 L43.5,27.383 L43.5,47.334 C45.106,47.174 46.401,46.646 47.321,45.712 C49.021,43.984 49.001,41.451 49,41.426 M41.5,47.347 L41.5,27.383 L36,29.583 L36,41.406 C36.007,41.613 36.234,46.763 41.5,47.347 M51,41.406 C51.003,41.519 51.053,44.753 48.765,47.096 C47.269,48.629 45.16,49.406 42.5,49.406 C35.927,49.406 34.065,44.188 34,41.43 L34,28.906 C34,28.497 34.249,28.129 34.629,27.977 L42.129,24.977 C42.367,24.882 42.633,24.882 42.871,24.977 L50.371,27.977 C50.751,28.129 51,28.497 51,28.906 M54.001,39.44 L54,26.083 L42.5,21.483 L31,26.083 L31,39.406 C30.998,39.497 30.865,45.634 34.534,49.41 C36.466,51.398 39.146,52.406 42.5,52.406 C45.877,52.406 48.57,51.391 50.504,49.39 C54.168,45.598 54.003,39.501 54.001,39.44 M51.942,50.779 C49.617,53.186 46.44,54.406 42.5,54.406 C38.579,54.406 35.413,53.19 33.09,50.792 C28.831,46.399 28.991,39.659 29,39.375 L29,25.406 C29,24.997 29.249,24.629 29.629,24.477 L42.129,19.477 C42.367,19.382 42.633,19.382 42.871,19.477 L55.371,24.477 C55.751,24.629 56,24.997 56,25.406 L56,39.406 C56.009,39.656 56.189,46.384 51.942,50.779 M11.055,35.406 L26,35.406 L26,37.406 L11.055,37.406 C4.977,37.406 0.337,33.354 0.024,27.771 C0.002,27.543 0,27.277 0,27.011 C0,20.142 4.803,17.613 7.604,16.723 C7.584,16.402 7.574,16.077 7.574,15.75 C7.574,10.297 11.464,4.592 16.621,2.48 C22.677,0 29.062,1.201 33.695,5.687 C35.256,7.208 36.446,8.832 37.307,10.621 C38.513,9.586 39.969,9.03 41.529,9.03 C44.834,9.03 48.33,11.624 48.931,16.593 C51.114,17.143 53.854,18.311 55.788,20.791 L54.212,22.021 C52.43,19.735 49.741,18.783 47.8,18.385 C47.355,18.295 47.028,17.917 47.002,17.465 C46.741,13.044 43.982,11.03 41.529,11.03 C40.067,11.03 38.771,11.72 37.78,13.025 C37.559,13.317 37.199,13.468 36.835,13.41 C36.474,13.355 36.17,13.108 36.045,12.765 C35.278,10.675 34.054,8.829 32.302,7.122 C28.258,3.208 22.676,2.163 17.379,4.331 C12.93,6.153 9.574,11.062 9.574,15.75 C9.574,16.291 9.605,16.826 9.668,17.339 C9.729,17.84 9.405,18.308 8.915,18.43 C6.333,19.069 2,21.035 2,27.011 C2,27.213 1.998,27.416 2.018,27.619 C2.272,32.147 6.072,35.406 11.055,35.406 Z" fill="#232F3E"/></g></svg></g>
+<text data-caption="1" x="1236.7" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Public subnet VPC</text>
+<text data-caption="1" x="1236.7" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">RT</text>
+</g>
+<g id="pod" data-actor="pod" data-node-highlight="1" data-icon="k8s_pod">
+<rect data-node-highlight="1" x="1660.0" y="265.0" width="200" height="100" rx="14" fill="#eaf6ef" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="1760.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1860.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="1760.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="1660.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(1672.0,277.0)" data-stencil="k8s_pod"><svg width="36" height="36" viewBox="0 0 18.035334 17.500378" width="48" height="48" data-stencil="k8s_pod" data-native="k8s-community"><g
+     id="layer1"
+     transform="translate(-0.99262638,-1.174181)">
+    <g
+       id="g70"
+       transform="matrix(1.0148887,0,0,1.0148887,16.902146,-2.698726)">
+      <path
+         id="path3055"
+         d="m -6.8492015,4.2724668 a 1.1191255,1.1099671 0 0 0 -0.4288818,0.1085303 l -5.8524037,2.7963394 a 1.1191255,1.1099671 0 0 0 -0.605524,0.7529759 l -1.443828,6.2812846 a 1.1191255,1.1099671 0 0 0 0.151943,0.851028 1.1191255,1.1099671 0 0 0 0.06362,0.08832 l 4.0508,5.036555 a 1.1191255,1.1099671 0 0 0 0.874979,0.417654 l 6.4961011,-0.0015 a 1.1191255,1.1099671 0 0 0 0.8749788,-0.416906 L 1.3818872,15.149453 A 1.1191255,1.1099671 0 0 0 1.5981986,14.210104 L 0.15212657,7.9288154 A 1.1191255,1.1099671 0 0 0 -0.45339794,7.1758396 L -6.3065496,4.3809971 A 1.1191255,1.1099671 0 0 0 -6.8492015,4.2724668 Z"
+         style="fill:#326ce5;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         id="path3054-2-9"
+         d="M -6.8523435,3.8176372 A 1.1814304,1.171762 0 0 0 -7.3044284,3.932904 l -6.1787426,2.9512758 a 1.1814304,1.171762 0 0 0 -0.639206,0.794891 l -1.523915,6.6308282 a 1.1814304,1.171762 0 0 0 0.160175,0.89893 1.1814304,1.171762 0 0 0 0.06736,0.09281 l 4.276094,5.317236 a 1.1814304,1.171762 0 0 0 0.92363,0.440858 l 6.8576188,-0.0015 a 1.1814304,1.171762 0 0 0 0.9236308,-0.44011 l 4.2745966,-5.317985 a 1.1814304,1.171762 0 0 0 0.228288,-0.990993 L 0.53894439,7.6775738 A 1.1814304,1.171762 0 0 0 -0.10026101,6.8834313 L -6.2790037,3.9321555 A 1.1814304,1.171762 0 0 0 -6.8523435,3.8176372 Z m 0.00299,0.4550789 a 1.1191255,1.1099671 0 0 1 0.5426517,0.1085303 l 5.85315169,2.7948425 A 1.1191255,1.1099671 0 0 1 0.15197811,7.9290648 L 1.598051,14.21035 a 1.1191255,1.1099671 0 0 1 -0.2163123,0.939348 l -4.0493032,5.037304 a 1.1191255,1.1099671 0 0 1 -0.8749789,0.416906 l -6.4961006,0.0015 a 1.1191255,1.1099671 0 0 1 -0.874979,-0.417652 l -4.0508,-5.036554 a 1.1191255,1.1099671 0 0 1 -0.06362,-0.08832 1.1191255,1.1099671 0 0 1 -0.151942,-0.851028 l 1.443827,-6.2812853 a 1.1191255,1.1099671 0 0 1 0.605524,-0.7529758 l 5.8524036,-2.7963395 a 1.1191255,1.1099671 0 0 1 0.4288819,-0.1085303 z"
+         style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:Sans;-inkscape-font-specification:Sans;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;baseline-shift:baseline;text-anchor:start;display:inline;overflow:visible;visibility:visible;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;marker:none;enable-background:accumulate" />
+    </g>
+    <g
+       id="g3341"
+       transform="translate(0.12766661,0.35147801)">
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="M 6.2617914,7.036086 9.8826317,5.986087 13.503462,7.036086 9.8826317,8.086087 Z"
+         id="path910" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="m 6.2617914,7.43817 0,3.852778 3.3736103,1.868749 0.0167,-4.713193 z"
+         id="path912" />
+      <path
+         style="fill:#ffffff;fill-rule:evenodd;stroke:none;stroke-width:0.26458332;stroke-linecap:square;stroke-miterlimit:10"
+         d="m 13.503462,7.43817 0,3.852778 -3.37361,1.868749 -0.0167,-4.713193 z"
+         id="path914" />
+    </g>
+  </g></svg></g>
+<text data-caption="1" x="1770.0" y="315.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Pod B IP target</text>
+</g>
+<g id="dynamic-layer"></g></svg>

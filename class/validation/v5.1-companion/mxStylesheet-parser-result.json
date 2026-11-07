@@ -1,0 +1,7 @@
+{
+  "total": 258,
+  "ok": 258,
+  "fail": 0,
+  "samples": [],
+  "using": "native mxStylesheet.prototype.getCellStyle"
+}

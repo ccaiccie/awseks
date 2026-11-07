@@ -1,6 +1,6 @@
 # Chapter, lab, and diagram map
 
-Chapters are the 26 lecture units in [class/CURRICULUM.md](../class/CURRICULUM.md) (00 through 25). Labs L00–L17 and diagrams F01–F29 are defined there and in [class/labs/README.md](../class/labs/README.md). SVG and draw.io for each F id live under [class/diagrams/](../class/diagrams/README.md). PNG previews are static renders, not the animated lesson. Repo labs in `labs/` are the shorter path through the Terraform and AWS CLI implementations in this repository. They do not replace L00–L17.
+This table lines practice labs up with the 26 curriculum chapters. The measured class timing, 335 scenes and 2:09:55, is [class/build/SCENE-CHAPTER-MAP.md](../class/build/SCENE-CHAPTER-MAP.md). The lecture diagram is [class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio](../class/diagrams/EKS-Masterclass-v5.1-Lecture-and-Flow.drawio). F01–F29 SVG and PNG files under [class/diagrams/](../class/diagrams/README.md) are the static reference geometry. Labs L00–L17 are in [class/labs/README.md](../class/labs/README.md). Repo labs in `labs/` are the shorter Terraform and AWS CLI path. They do not replace L00–L17.
 
 | Ch | Unit | Class lab | Class diagrams | Repo lab |
 | --- | --- | --- | --- | --- |

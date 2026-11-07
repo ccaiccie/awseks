@@ -1,0 +1,1341 @@
+Spoken transcript — EKS Masterclass v5.1
+
+## s0000 · Orientation and safety · Welcome
+
+Welcome to the channel. Please subscribe. This class takes you from novice to expert on Amazon Elastic Kubernetes Service: how the managed control plane works, how workers live in your virtual private cloud, how Pods get addresses, how Services and load balancers publish applications, and how identity, policy, storage, scaling, upgrades, cost, and recovery fit together. There is no arbitrary runtime cap. Length is measured after narration. Before any create command: this is a billable sandbox. Stopping your laptop does not stop Amazon Web Services billing. Practice commands use the canonical eksclass-cli stack scripts. A separate practice repository may show awseks-cli or awseks-tf paths on a pull request branch — that is not the same as merged default-branch content, and no live cloud acceptance is claimed here.
+
+## s0001 · Orientation and safety · Managed service is not free
+
+Amazon E K S manages an isolated Kubernetes control plane across Availability Zones, but you still own workers, I A M and R B A C, network policy, applications, backups, add-on versions, and cost. A P I access is not application access. Region, account, and Availability Zone choices are design inputs.
+
+## s0002 · Orientation and safety · Architecture map
+
+Canonical track: Standard Amazon E K S, Amazon Linux two thousand twenty-three managed E C 2, IPv4, virtual private cloud C N I, iptables kube proxy, core D N S Deployment, AWS Load Balancer Controller. Auto Mode, Fargate, and IPv6 are separate variants. Illustrative virtual private cloud ten forty-two slash sixteen; private workers; public A P I restricted to your real slash thirty-two; service C I D R one seventy-two twenty slash sixteen.
+
+## s0003 · Orientation and safety · CLI versus Terraform ownership
+
+Class labs teach eksclass-cli scripts. The practice repository separately may contain awseks-cli and awseks-tf paths. Never mix IDs across ownership boundaries. Watching does not require a live account. Runtime cloud tests of these labs are still pending.
+
+## s0004 · Orientation and safety · Cost and create discipline preview
+
+Read labs cost documentation before any create. Preflight discovers account, two Availability Zones, and a standard-support Kubernetes version — it creates nothing. COST_ACK is an operator acknowledgement, not a spend cap.
+
+## s0005 · Orientation and safety · Preflight before create (eksclass-cli)
+
+Run preflight only. Verify caller identity, two Availability Zones, and that your selected Kubernetes version remains in standard support. No virtual private cloud or cluster is created yet.
+
+## s0006 · Orientation and safety · Why closing the laptop does not stop billing
+
+Knowledge check. If you created the cluster and two network address translation gateways, then closed your laptop, what still bills?
+
+## s0007 · Orientation and safety · Why closing the laptop does not stop billing — answer
+
+Answer. E K S control-plane hours, network address translation gateway hours, elastic IPs, and any load balancers, disks, or endpoints continue until destroyed with cleanup scripts. The laptop shell is irrelevant. Preflight alone creates no billable virtual private cloud resources.
+
+## s0008 · Orientation and safety · Orientation takeaway
+
+Takeaway. Ownership is split. A P I is not app access. eksclass-cli stays separate from Terraform practice paths. Cost gate before create.
+
+## s0009 · Linux and networks foundations · Linux and networks foundations
+
+Chapter one. Processes share a kernel; namespaces and cgroups reshape visibility and resource limits. Sockets, loopback, virtual ethernet pairs, and route lookup decide the next hop. Same-node traffic does not need an Internet gateway.
+
+## s0010 · Linux and networks foundations · Longest-prefix matching
+
+Every containing prefix is a candidate; the longest wins. Slash thirty-two beats slash twenty-four beats slash sixteen beats slash zero. Linux host tables and virtual private cloud subnet tables obey the same idea but are different owning tables.
+
+## s0011 · Linux and networks foundations · Security group versus network ACL
+
+Security groups are stateful elastic network interface allow sets. Network A C Ls are stateless subnet filters needing return ephemeral ports. A route does not grant permission.
+
+## s0012 · Linux and networks foundations · F04: Pod network namespace default route
+
+At a, the decision is Pod network namespace default route. eth0→veth peer; no encapsulation Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot sixteen dot one hundred two:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0013 · Linux and networks foundations · F04: Linux FIB local Pod route
+
+At host, the decision is Linux FIB local Pod route. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot sixteen dot one hundred two:eight thousand eighty T C P. Owning table Linux node network namespace routing policy/FIB. Lookup destination ten dot forty-two dot sixteen dot one hundred two. Winning prefix ten dot forty-two dot sixteen dot one hundred two, slash thirty-two via Pod C veth. Illustrative directly configured Pod host route; inspect ip route/ip rule before quoting exact runtime rules Addresses are illustrative teaching values.
+
+## s0014 · Linux and networks foundations · F04: Network policy + socket accept
+
+At c, the decision is Network policy + socket accept. Ingress/egress policies if selected; not a required virtual private cloud/network A C L traversal Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot sixteen dot one hundred two:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0015 · Linux and networks foundations · F04: Linux FIB local Pod route
+
+At host, the decision is Linux FIB local Pod route. Packet before: ten dot forty-two dot sixteen dot one hundred two:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Owning table Linux node network namespace routing policy/FIB. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot sixteen dot one hundred one, slash thirty-two via Pod A veth. Illustrative directly configured Pod host route; inspect ip route/ip rule before quoting exact runtime rules Addresses are illustrative teaching values.
+
+## s0016 · Linux and networks foundations · F04: Terminal return delivery
+
+At a, the decision is Terminal return delivery. Complete the remaining return hop host→a. Response reaches a. Addresses are illustrative teaching values.
+
+## s0017 · Linux and networks foundations · F05: Node ENI / CNI forwarding
+
+At a, the decision is Node elastic network interface / C N I forwarding. virtual private cloud Pod destination excluded from default off-virtual private cloud source network address translation Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0018 · Linux and networks foundations · F05: Subnet route lookup
+
+At vpc, the decision is Subnet route lookup. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0019 · Linux and networks foundations · F05: ENI SG / subnet NACL / Pod policy
+
+At b, the decision is elastic network interface SG / subnet network A C L / Pod policy. All must allow; local virtual private cloud target is not an overlay tunnel Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0020 · Linux and networks foundations · F05: Subnet route lookup
+
+At vpc, the decision is Subnet route lookup. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Owning table Customer virtual private cloud route table rt-b. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0021 · Linux and networks foundations · F05: Stateful return + host Pod route
+
+At a, the decision is Stateful return + host Pod route. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Owning table Linux node network namespace routing policy/FIB. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot sixteen dot one hundred one, slash thirty-two via Pod A veth. Illustrative directly configured Pod host route; inspect ip route/ip rule before quoting exact runtime rules Addresses are illustrative teaching values.
+
+## s0022 · Linux and networks foundations · Winning prefix for Pod B
+
+Destination ten forty-two thirty-two one oh one. Candidates: slash sixteen local, slash zero network address translation A. Which wins?
+
+## s0023 · Linux and networks foundations · Winning prefix for Pod B — answer
+
+Answer. Slash sixteen local wins by longest prefix. network address translation would be wrong for in-virtual private cloud Pod traffic.
+
+## s0024 · Linux and networks foundations · Linux nets takeaway
+
+Takeaway. Own the table. Longest prefix wins. Same-node stays local.
+
+## s0025 · Images to containers · Images to containers
+
+Chapter two. Images are immutable layered filesystems addressed by digest. Tags move; digests do not. containerd via C R I starts an O C I runtime. A container is not a V M and not a full security boundary.
+
+## s0026 · Images to containers · Tag versus digest and pull path
+
+Pin a reviewed digest. Private Amazon E C R pulls need E C R A P I, E C R DKR, and S3 layer access — an E C R interface endpoint alone is not enough.
+
+## s0027 · Images to containers · F03: Kubernetes object submission
+
+At client, the decision is Kubernetes object submission. T L S authorized create Deployment; object persisted and A P I ACK occurs before convergence Addresses are illustrative teaching values.
+
+## s0028 · Images to containers · F03: Desired-state persistence
+
+At api, the decision is Desired-state persistence. Deployment controller creates ReplicaSet; ReplicaSet creates Pods asynchronously Addresses are illustrative teaching values.
+
+## s0029 · Images to containers · F03: Terminal return delivery
+
+At client, the decision is Terminal return delivery. Complete the remaining return hop api→client. Response reaches client. Addresses are illustrative teaching values.
+
+## s0030 · Images to containers · F03: Deployment watch and object writes
+
+At sched, the decision is Deployment watch and object writes. Separate control exchange — not one serial data packet. Controllers watch intent and write ReplicaSet/Pod objects; scheduler watches then writes binding. Visits: api then sched then api. Hop api→sched. Addresses are illustrative teaching values.
+
+## s0031 · Images to containers · F03: Deployment watch and object writes
+
+At api, the decision is Deployment watch and object writes. Separate control exchange — not one serial data packet. Controllers watch intent and write ReplicaSet/Pod objects; scheduler watches then writes binding. Visits: api then sched then api. Hop sched→api. Addresses are illustrative teaching values.
+
+## s0032 · Images to containers · F03: Registry image bytes
+
+At registry, the decision is Registry image bytes. Separate control exchange — not one serial data packet. Authenticated image manifests/layers; separate from A P I acknowledgement. Visits: node then registry then node. Hop node→registry. Addresses are illustrative teaching values.
+
+## s0033 · Images to containers · F03: Registry image bytes
+
+At node, the decision is Registry image bytes. Separate control exchange — not one serial data packet. Authenticated image manifests/layers; separate from A P I acknowledgement. Visits: node then registry then node. Hop registry→node. Addresses are illustrative teaching values.
+
+## s0034 · Images to containers · F03: API watch delivers Pod spec to kubelet
+
+Separate control exchange — not one serial data packet. The A P I watch informs the kube let that a Pod is assigned. Animate api→node only for this watch delivery. Status reporting is the next hop in the opposite direction. Addresses are illustrative teaching values.
+
+## s0035 · Images to containers · F03: Node reports readiness status to API
+
+Separate control exchange — not one serial data packet. After the kube let has the Pod, the node reports readiness and status back to the A P I. Animate node→api for this status write — the opposite direction from the watch hop. Addresses are illustrative teaching values.
+
+## s0036 · Images to containers · Images takeaway
+
+Takeaway. Pin digests; understand pull dependencies.
+
+## s0037 · Kubernetes object model · Kubernetes object model
+
+Chapter three. Declare desired state; controllers reconcile. Pods share network namespace. Deployment owns ReplicaSet owns Pods. Scheduler binds; kube let executes. Readiness is not liveness.
+
+## s0038 · Kubernetes object model · Reconciliation is asynchronous
+
+A P I acknowledgment means the object persisted — not that the Pod is Ready. Treat watch, schedule, image pull, and readiness as separate exchanges.
+
+## s0039 · Kubernetes object model · F03: Kubernetes object submission
+
+At client, the decision is Kubernetes object submission. T L S authorized create Deployment; object persisted and A P I ACK occurs before convergence Addresses are illustrative teaching values.
+
+## s0040 · Kubernetes object model · F03: Desired-state persistence
+
+At api, the decision is Desired-state persistence. Deployment controller creates ReplicaSet; ReplicaSet creates Pods asynchronously Addresses are illustrative teaching values.
+
+## s0041 · Kubernetes object model · F03: Terminal return delivery
+
+At client, the decision is Terminal return delivery. Complete the remaining return hop api→client. Response reaches client. Addresses are illustrative teaching values.
+
+## s0042 · Kubernetes object model · F03: Deployment watch and object writes
+
+At sched, the decision is Deployment watch and object writes. Separate control exchange — not one serial data packet. Controllers watch intent and write ReplicaSet/Pod objects; scheduler watches then writes binding. Visits: api then sched then api. Hop api→sched. Addresses are illustrative teaching values.
+
+## s0043 · Kubernetes object model · F03: Deployment watch and object writes
+
+At api, the decision is Deployment watch and object writes. Separate control exchange — not one serial data packet. Controllers watch intent and write ReplicaSet/Pod objects; scheduler watches then writes binding. Visits: api then sched then api. Hop sched→api. Addresses are illustrative teaching values.
+
+## s0044 · Kubernetes object model · F03: Registry image bytes
+
+At registry, the decision is Registry image bytes. Separate control exchange — not one serial data packet. Authenticated image manifests/layers; separate from A P I acknowledgement. Visits: node then registry then node. Hop node→registry. Addresses are illustrative teaching values.
+
+## s0045 · Kubernetes object model · F03: Registry image bytes
+
+At node, the decision is Registry image bytes. Separate control exchange — not one serial data packet. Authenticated image manifests/layers; separate from A P I acknowledgement. Visits: node then registry then node. Hop registry→node. Addresses are illustrative teaching values.
+
+## s0046 · Kubernetes object model · F03: API watch delivers Pod spec to kubelet
+
+Separate control exchange — not one serial data packet. The A P I watch informs the kube let that a Pod is assigned. Animate api→node only for this watch delivery. Status reporting is the next hop in the opposite direction. Addresses are illustrative teaching values.
+
+## s0047 · Kubernetes object model · F03: Node reports readiness status to API
+
+Separate control exchange — not one serial data packet. After the kube let has the Pod, the node reports readiness and status back to the A P I. Animate node→api for this status write — the opposite direction from the watch hop. Addresses are illustrative teaching values.
+
+## s0048 · Kubernetes object model · Delete one Pod
+
+Delete one Deployment-owned Pod. Do name and IP stay? Is emptyDir kept?
+
+## s0049 · Kubernetes object model · Delete one Pod — answer
+
+Answer. New Pod name and usually new IP. emptyDir gone. P V C data follows volume rules.
+
+## s0050 · Kubernetes object model · Object model takeaway
+
+Takeaway. ACK is not Ready. Pods are replaceable; data needs volumes.
+
+## s0051 · Config and lifecycle · Config and lifecycle
+
+Chapter four. Configuration and container lifecycle on Kubernetes. ConfigMap and Secret values injected as environment variables are fixed at container start — changing the object does not rewrite a running process environment. Mounted files can update depending on the kube let sync path, but your application must re-read them. Base64 in a Secret is encoding, not encryption at rest; encryption at rest is a separate A P I-server or provider setting. Resource requests drive scheduling and Horizontal Pod Autoscaler signals; CPU limits throttle; memory limits can O O M-kill the container.
+
+## s0052 · Config and lifecycle · Mechanism — config projection
+
+Worked mechanism. A Deployment references a ConfigMap key as an env var and a Secret key as a volume file. Apply updates the objects. New Pods from a rollout see the new env. Old Pods keep the old env until replaced. For files, kube let eventually refreshes the projected volume; the process only notices if it reloads. Never treat base64 visibility in etcd-backed Secret objects as confidentiality against cluster-admin readers.
+
+## s0053 · Config and lifecycle · Probes and drain
+
+StartupProbe delays liveness and readiness until the app finishes slow boot — use it for migrations or JIT warm-up. LivenessProbe failure restarts the container locally; pointing it at a dependency creates restart storms when that dependency blips. ReadinessProbe failure removes the Pod from Service endpoints and load balancer targets without killing it. On delete, terminationGracePeriodSeconds must cover connection drain; align it with target-group deregistration delay so the balancer stops new sends before the process exits.
+
+## s0054 · Config and lifecycle · Observable check — rollout and probes
+
+Observable check. After changing a ConfigMap used as env, confirm the Deployment template still references the ConfigMap, then inspect the running Pod environment separately — get deploy -o yaml shows the template, not the live process. Prefer exec printenv only if the reviewed image has a shell; agnhost is not guaranteed to. Otherwise compare env on a replaced Pod after rollout. Watch `kube control -n eksclass rollout status deployment/web`. Describe a Pod and read Last State for O O MKilled versus probe failures. Failure lab: set a readiness path that 404s and confirm endpoint slice empties while the Pod stays Running; set a liveness path that fails and confirm restarts climb.
+
+## s0055 · Config and lifecycle · Lifecycle lab pointers
+
+Use the digest-pinned app Deployment from scripts/04-app.sh as the base. Adjust probes only in a reviewed overlay. Observe; do not invent a second unpinned image.
+
+## s0056 · Config and lifecycle · Config takeaway
+
+Takeaway. Env needs a new container; base64 is not encryption; requests schedule and limits enforce; readiness gates traffic; liveness is local; drain must match the balancer.
+
+## s0057 · EKS architecture · EKS architecture
+
+Chapter five. Standard Amazon E K S architecture for this class: a managed Kubernetes control plane and customer-owned workers in your virtual private cloud. The managed plane keeps at least two A P I server endpoints and three etcd members across three Availability Zones inside the AWS-managed account boundary. Your worker virtual private cloud may use two Availability Zones; that does not shrink the plane's three-availability zone design. Elastic network interfaces for the plane appear in your subnets so the A P I can reach Pods and kubelets. There is no SSH to etcd and no customer export of managed etcd snapshots.
+
+## s0058 · EKS architecture · Mechanism — shared responsibility
+
+AWS operates A P I servers, etcd, and the managed plane network path. You own node A M Is and kube let skew, I A M and access entries, Kubernetes R B A C, network policy agents, application Deployments, persistent data backups, add-on version choices, and cost. Managed node groups do not silently patch the OS just because the control plane minor moved. Upgrading the plane without preparing workers and add-ons is a skew and webhook risk — covered again in the upgrade chapter.
+
+## s0059 · EKS architecture · Worked example — describe the cluster boundary
+
+Worked example. After scripts/02-cluster.sh in an authorized sandbox, `aws eks describe-cluster --name "$STACK"` shows endpoint private-or-public settings, version, and virtual private cloud config. `kube control get --raw=/readyz?verbose` checks A P I readiness through your kubeconfig — not etcd SSH. Nodes appear only after the managed node group joins. Failure mode: treating plane multi-availability zone as application multi-availability zone, or expecting a user-accessible etcd snapshot for region disaster recovery.
+
+## s0060 · EKS architecture · Architecture takeaway
+
+Takeaway. Plane HA is multi-availability zone inside AWS; workers, identity, policy, apps, and backups are yours. Cluster ENIs live in your virtual private cloud. No etcd export.
+
+## s0061 · Compute choice · Compute choice
+
+Chapter six. Canonical lab: managed node groups on Amazon Linux two thousand twenty-three. Fargate and Auto Mode differ — do not copy aws-node knobs into Auto Mode NodeClass.
+
+## s0062 · Compute choice · Variant matrix
+
+Fargate: per-Pod compute, IP LB targets, I R S A, no DaemonSets. Auto Mode: managed networking/storage, built-in pod identity, Security Group Policy via eks.amazonaws.com/v1 on Kubernetes 1.36+, Gateway A P I with explicit C R D managed enablement — T L S Route unverified here.
+
+## s0063 · Compute choice · Compute takeaway
+
+Takeaway. One compute model per design.
+
+## s0064 · Plan VPC and IP budgets · Plan VPC and IP budgets
+
+Chapter seven. Two Availability Zones, subnet roles, E K S elastic network interface headroom. Budget node, Pod, load balancer, and endpoint addresses. Service C I D R must not overlap virtual private cloud or connected networks.
+
+## s0065 · Plan VPC and IP budgets · Public versus private is routing
+
+Public or private is decided by routes and addressing, not the subnet name. Private A and B defaults aim at same-availability zone network address translation gateways; public default aims at the Internet gateway. No virtual private cloud route for the Service C I D R.
+
+## s0066 · Plan VPC and IP budgets · Build teaching VPC (eksclass-cli)
+
+After cost acknowledgement, create virtual private cloud, D N S flags, public and private subnets, Internet gateway, two elastic IPs and network address translation gateways, and distinct private route tables. Checkpoint: private defaults to same-availability zone NATs; no Service C I D R route.
+
+## s0067 · Plan VPC and IP budgets · F05: Node ENI / CNI forwarding
+
+At a, the decision is Node elastic network interface / C N I forwarding. virtual private cloud Pod destination excluded from default off-virtual private cloud source network address translation Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0068 · Plan VPC and IP budgets · F05: Subnet route lookup
+
+At vpc, the decision is Subnet route lookup. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0069 · Plan VPC and IP budgets · F05: ENI SG / subnet NACL / Pod policy
+
+At b, the decision is elastic network interface SG / subnet network A C L / Pod policy. All must allow; local virtual private cloud target is not an overlay tunnel Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0070 · Plan VPC and IP budgets · F05: Subnet route lookup
+
+At vpc, the decision is Subnet route lookup. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Owning table Customer virtual private cloud route table rt-b. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0071 · Plan VPC and IP budgets · F05: Stateful return + host Pod route
+
+At a, the decision is Stateful return + host Pod route. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Owning table Linux node network namespace routing policy/FIB. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot sixteen dot one hundred one, slash thirty-two via Pod A veth. Illustrative directly configured Pod host route; inspect ip route/ip rule before quoting exact runtime rules Addresses are illustrative teaching values.
+
+## s0072 · Plan VPC and IP budgets · F12: Default CNI off-VPC SNAT
+
+At node, the decision is Default C N I off-virtual private cloud source network address translation. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-three to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Addresses are illustrative teaching values.
+
+## s0073 · Plan VPC and IP budgets · F12: Private A subnet route lookup
+
+At node, the decision is Private A subnet route lookup. Packet before: ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination one hundred ninety-eight dot fifty-one dot one hundred dot eighty. Winning prefix zero dot zero dot zero dot zero, slash zero via nat-a. No more-specific route; default wins Addresses are illustrative teaching values.
+
+## s0074 · Plan VPC and IP budgets · F12: Stateful NAT translation
+
+At nat, the decision is Stateful network address translation translation. Packet before: ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Addresses are illustrative teaching values.
+
+## s0075 · Plan VPC and IP budgets · F12: Public subnet route lookup
+
+At nat, the decision is Public subnet route lookup. Packet before: ten dot forty-two dot zero dot ten:sixty-one thousand to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination one hundred ninety-eight dot fifty-one dot one hundred dot eighty. Winning prefix zero dot zero dot zero dot zero, slash zero via igw-class. No more-specific route; default wins Addresses are illustrative teaching values.
+
+## s0076 · Plan VPC and IP budgets · F12: EIP address mapping
+
+At igw, the decision is EIP address mapping. Packet before: ten dot forty-two dot zero dot ten:sixty-one thousand to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Addresses are illustrative teaching values.
+
+## s0077 · Plan VPC and IP budgets · F12: Terminal delivery to destination
+
+At peer, the decision is Terminal delivery to destination. Complete the remaining hop igw→peer. Delivery arrives at peer; this is not a decision replay of earlier stages. Addresses are illustrative teaching values.
+
+## s0078 · Plan VPC and IP budgets · F12: Reverse EIP mapping
+
+At igw, the decision is Reverse EIP mapping. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to one hundred ninety-eight dot fifty-one dot one hundred dot ten:sixty-one thousand T C P. Addresses are illustrative teaching values.
+
+## s0079 · Plan VPC and IP budgets · F12: NAT connection-state reverse translation
+
+At nat, the decision is network address translation connection-state reverse translation. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to ten dot forty-two dot zero dot ten:sixty-one thousand T C P. Addresses are illustrative teaching values.
+
+## s0080 · Plan VPC and IP budgets · F12: Public subnet local route to node
+
+At nat, the decision is Public subnet local route to node. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination ten dot forty-two dot sixteen dot ten. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0081 · Plan VPC and IP budgets · F12: Reverse CNI SNAT + host delivery
+
+At node, the decision is Reverse C N I source network address translation + host delivery. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three T C P. Addresses are illustrative teaching values.
+
+## s0082 · Plan VPC and IP budgets · F12: Terminal return delivery
+
+At pod, the decision is Terminal return delivery. Complete the remaining return hop node→pod. Response reaches pod. Addresses are illustrative teaching values.
+
+## s0083 · Plan VPC and IP budgets · VPC plan takeaway
+
+Takeaway. Budget IPs; own each route table; service C I D R stays virtual.
+
+## s0084 · Build Standard cluster · Build Standard cluster
+
+Chapter eight. Discover and pin a standard-support version. Create I A M roles with precise trust and PassRole. Explicit IPv4, private workers, public A P I slash thirty-two plus private endpoint, managed add-ons, then node group. Do not wait core D N S Active before nodes exist.
+
+## s0085 · Build Standard cluster · Create cluster and node group
+
+Create cluster role, node role, dedicated C N I pod identity role, cluster with private workers and restricted public C I D R, managed add-ons, launch template with I M D Sv2 hop limit one, then Amazon Linux two thousand twenty-three managed node group. Wait cluster, then node group, then add-ons.
+
+## s0086 · Build Standard cluster · F01: Local SigV4 token signing + TLS
+
+At client, the decision is Local SigV4 token signing + T L S. kubeconfig exec uses mapped I A M role. Optional role assumption is separate S T S flow, not SSH. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0087 · Build Standard cluster · F01: Endpoint public CIDR admission
+
+At api, the decision is Endpoint public prefix admission. Only actual operator public /32; cluster SG not public endpoint control Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0088 · Build Standard cluster · F01: IAM authentication then authorization
+
+At api, the decision is I A M authentication then authorization. Access entry + E K S access-policy or Kubernetes R B A C allow; no route lookup Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0089 · Build Standard cluster · F01: API response
+
+At api, the decision is A P I response. T L S session response Packet before: public-api.example:443 to two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand T C P. Addresses are illustrative teaching values.
+
+## s0090 · Build Standard cluster · F03: Kubernetes object submission
+
+At client, the decision is Kubernetes object submission. T L S authorized create Deployment; object persisted and A P I ACK occurs before convergence Addresses are illustrative teaching values.
+
+## s0091 · Build Standard cluster · F03: Desired-state persistence
+
+At api, the decision is Desired-state persistence. Deployment controller creates ReplicaSet; ReplicaSet creates Pods asynchronously Addresses are illustrative teaching values.
+
+## s0092 · Build Standard cluster · F03: Terminal return delivery
+
+At client, the decision is Terminal return delivery. Complete the remaining return hop api→client. Response reaches client. Addresses are illustrative teaching values.
+
+## s0093 · Build Standard cluster · F03: Deployment watch and object writes
+
+At sched, the decision is Deployment watch and object writes. Separate control exchange — not one serial data packet. Controllers watch intent and write ReplicaSet/Pod objects; scheduler watches then writes binding. Visits: api then sched then api. Hop api→sched. Addresses are illustrative teaching values.
+
+## s0094 · Build Standard cluster · F03: Deployment watch and object writes
+
+At api, the decision is Deployment watch and object writes. Separate control exchange — not one serial data packet. Controllers watch intent and write ReplicaSet/Pod objects; scheduler watches then writes binding. Visits: api then sched then api. Hop sched→api. Addresses are illustrative teaching values.
+
+## s0095 · Build Standard cluster · F03: Registry image bytes
+
+At registry, the decision is Registry image bytes. Separate control exchange — not one serial data packet. Authenticated image manifests/layers; separate from A P I acknowledgement. Visits: node then registry then node. Hop node→registry. Addresses are illustrative teaching values.
+
+## s0096 · Build Standard cluster · F03: Registry image bytes
+
+At node, the decision is Registry image bytes. Separate control exchange — not one serial data packet. Authenticated image manifests/layers; separate from A P I acknowledgement. Visits: node then registry then node. Hop registry→node. Addresses are illustrative teaching values.
+
+## s0097 · Build Standard cluster · F03: API watch delivers Pod spec to kubelet
+
+Separate control exchange — not one serial data packet. The A P I watch informs the kube let that a Pod is assigned. Animate api→node only for this watch delivery. Status reporting is the next hop in the opposite direction. Addresses are illustrative teaching values.
+
+## s0098 · Build Standard cluster · F03: Node reports readiness status to API
+
+Separate control exchange — not one serial data packet. After the kube let has the Pod, the node reports readiness and status back to the A P I. Animate node→api for this status write — the opposite direction from the watch hop. Addresses are illustrative teaching values.
+
+## s0099 · Build Standard cluster · Build takeaway
+
+Takeaway. Pin versions; order waits correctly; private workers with restricted public A P I.
+
+## s0100 · Human access · Human access
+
+Chapter nine. Amazon Web Services service A P I versus Kubernetes A P I endpoint. get-token signs I A M authentication. Access entries map principals. E K S access policies and Kubernetes R B A C are additive allows. Four oh one versus four oh three versus timeout mean different layers.
+
+## s0101 · Human access · Access entry and kubeconfig
+
+Create access entry for the admin role, associate cluster admin access policy for sandbox bootstrap, write dedicated kubeconfig with exec role, wait nodes Ready, and prove kube proxy iptables mode from config or logs.
+
+## s0102 · Human access · F01: Local SigV4 token signing + TLS
+
+At client, the decision is Local SigV4 token signing + T L S. kubeconfig exec uses mapped I A M role. Optional role assumption is separate S T S flow, not SSH. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0103 · Human access · F01: Endpoint public CIDR admission
+
+At api, the decision is Endpoint public prefix admission. Only actual operator public /32; cluster SG not public endpoint control Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0104 · Human access · F01: IAM authentication then authorization
+
+At api, the decision is I A M authentication then authorization. Access entry + E K S access-policy or Kubernetes R B A C allow; no route lookup Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0105 · Human access · F01: API response
+
+At api, the decision is A P I response. T L S session response Packet before: public-api.example:443 to two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand T C P. Addresses are illustrative teaching values.
+
+## s0106 · Human access · F02: Private DNS resolution
+
+At runner, the decision is Private D N S resolution. E K S-managed private zone requires virtual private cloud D N S; no network address translation is inbound path Packet before: ten dot forty-two dot sixteen dot sixty:fifty-two thousand one to ten dot forty-two dot sixteen dot fifty:443 T C P. Addresses are illustrative teaching values.
+
+## s0107 · Human access · F02: VPC subnet route lookup
+
+At vpc, the decision is virtual private cloud subnet route lookup. Packet before: ten dot forty-two dot sixteen dot sixty:fifty-two thousand one to ten dot forty-two dot sixteen dot fifty:443 T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot sixteen dot fifty. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0108 · Human access · F02: Cluster SG then IAM/RBAC
+
+At api, the decision is Cluster SG then I A M/R B A C. Runner SG allows TCP443; mapped I A M principal still required Packet before: ten dot forty-two dot sixteen dot sixty:fifty-two thousand one to ten dot forty-two dot sixteen dot fifty:443 T C P. Addresses are illustrative teaching values.
+
+## s0109 · Human access · F02: VPC subnet route lookup
+
+At vpc, the decision is virtual private cloud subnet route lookup. Packet before: ten dot forty-two dot sixteen dot fifty:443 to ten dot forty-two dot sixteen dot sixty:fifty-two thousand one T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot sixteen dot sixty. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0110 · Human access · F02: Terminal return delivery
+
+At runner, the decision is Terminal return delivery. Complete the remaining return hop vpc→runner. Response reaches runner. Addresses are illustrative teaching values.
+
+## s0111 · Human access · F22: IAM authentication succeeds
+
+At api, the decision is I A M authentication succeeds. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0112 · Human access · F22: RBAC/EKS access authorization
+
+At api, the decision is R B A C/E K S access authorization. Viewer role has no Secret-read permission; no route failure Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0113 · Human access · F22: 403 response on existing TLS session
+
+At api, the decision is 403 response on existing T L S session. This is the return-path stop. The request was allowed earlier; the reply is dropped here. No fabricated success reply continues past this point. Addresses are illustrative teaching values.
+
+## s0114 · Human access · Namespace viewer
+
+A viewer role can get Pods in eksclass but not Secrets. Which layer denied Secrets — and did that grant S3?
+
+## s0115 · Human access · Namespace viewer — answer
+
+Answer. Kubernetes R B A C or E K S access-policy scope denied Secrets. Cluster admin in Kubernetes still does not grant Amazon S3. Workload AWS calls use a different identity boundary.
+
+## s0116 · Human access · Access takeaway
+
+Takeaway. Authn, authz, and path are separate. I A M is not R B A C.
+
+## s0117 · VPC CNI deep mechanics · VPC CNI deep mechanics
+
+Chapter ten. aws-node and ipamd maintain elastic network interface and secondary IPv4 pools. Prefix delegation uses contiguous slash twenty-eights on supported Nitro types. Custom networking and Security Group for Pods are separate planned variants.
+
+## s0118 · VPC CNI deep mechanics · F23: Scheduling successful
+
+At sched, the decision is Scheduling successful. Addresses are illustrative teaching values.
+
+## s0119 · VPC CNI deep mechanics · F23: CNI ADD
+
+At kube let, the decision is C N I ADD. FailedCreatePodSandBox event, not necessarily failed scheduler Addresses are illustrative teaching values.
+
+## s0120 · VPC CNI deep mechanics · F23: IP/prefix allocation
+
+At ipamd, the decision is IP/prefix allocation. Subnet exhaustion, fragmented /28 or elastic network interface/A P I/quota constraint; diagnose distinct causes Addresses are illustrative teaching values.
+
+## s0121 · VPC CNI deep mechanics · F23: Error events and retry
+
+At kube let, the decision is Error events and retry. No application packet exists; Pod Pending/ContainerCreating This is the return-path stop. The request was allowed earlier; the reply is dropped here. No fabricated success reply continues past this point. Addresses are illustrative teaching values.
+
+## s0122 · VPC CNI deep mechanics · Observe CNI
+
+Compare Pod and node IPs, inspect aws-node, and record observations. Do not mutate C N I flags in the primary lab without a reviewed plan.
+
+## s0123 · VPC CNI deep mechanics · CNI takeaway
+
+Takeaway. Pools consume IPs; prefix needs contiguous space; variants are planned upgrades.
+
+## s0124 · Service discovery and proxying · Service discovery and proxying
+
+Chapter eleven. Service and endpoint slice. core D N S search and forwarding. ClusterIP is virtual — not an elastic network interface and not a virtual private cloud route. kube proxy programs destination network address translation and conntrack. Prove iptables mode before claiming this lecture path.
+
+## s0125 · Service discovery and proxying · F06: Kubernetes Service DNAT
+
+At proxy, the decision is Kubernetes Service destination network address translation. kube D N S endpoint slice selects core D N S:53; NOT virtual private cloud route to service prefix Packet before: ten dot forty-two dot sixteen dot one hundred one:fifty-three thousand one to one hundred seventy-two dot twenty dot zero dot ten:53 U D P. Addresses are illustrative teaching values.
+
+## s0126 · Service discovery and proxying · F06: DNS zone/cache lookup
+
+At dns, the decision is D N S zone/cache lookup. cluster.local Service answer from cache; external query is separate forwarder flow; T C P fallback allowed Packet before: ten dot forty-two dot sixteen dot one hundred one:fifty-three thousand one to ten dot forty-two dot thirty-two dot fifty-three:53 U D P. Addresses are illustrative teaching values.
+
+## s0127 · Service discovery and proxying · F06: Conntrack reverse Service DNAT
+
+At proxy, the decision is Conntrack reverse Service destination network address translation. U D P conntrack entry Packet before: ten dot forty-two dot thirty-two dot fifty-three:53 to ten dot forty-two dot sixteen dot one hundred one:fifty-three thousand one U D P. Addresses are illustrative teaching values.
+
+## s0128 · Service discovery and proxying · F06: Terminal return delivery
+
+At a, the decision is Terminal return delivery. Complete the remaining return hop proxy→a. Response reaches a. Addresses are illustrative teaching values.
+
+## s0129 · Service discovery and proxying · F07: Service/EndpointSlice backend selection + DNAT
+
+At proxy, the decision is Service/endpoint slice backend selection + destination network address translation. one hundred seventy-two dot twenty dot ten dot twenty:80 → ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty; ready endpoint; internal non-hairpin source retained Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to one hundred seventy-two dot twenty dot ten dot twenty:80 T C P. Addresses are illustrative teaching values.
+
+## s0130 · Service discovery and proxying · F07: Private A subnet route lookup AFTER DNAT
+
+At vpc, the decision is Private A subnet route lookup AFTER destination network address translation. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0131 · Service discovery and proxying · F07: Pod ingress policy then application
+
+At b, the decision is Pod ingress policy then application. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0132 · Service discovery and proxying · F07: Private B subnet route lookup
+
+At vpc, the decision is Private B subnet route lookup. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Owning table Customer virtual private cloud route table rt-b. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0133 · Service discovery and proxying · F07: Conntrack reverse DNAT
+
+At proxy, the decision is Conntrack reverse destination network address translation. Established conntrack mapping reverses destination translation as reply source Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Addresses are illustrative teaching values.
+
+## s0134 · Service discovery and proxying · F07: Terminal return delivery
+
+At a, the decision is Terminal return delivery. Complete the remaining return hop proxy→a. Response reaches a. Addresses are illustrative teaching values.
+
+## s0135 · Service discovery and proxying · F08: Service DNAT
+
+At host, the decision is Service destination network address translation. VIP80 → local PodC8080 Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to one hundred seventy-two dot twenty dot ten dot twenty:80 T C P. Addresses are illustrative teaching values.
+
+## s0136 · Service discovery and proxying · F08: Linux local Pod route
+
+At host, the decision is Linux local Pod route. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot sixteen dot one hundred two:eight thousand eighty T C P. Owning table Linux node network namespace routing policy/FIB. Lookup destination ten dot forty-two dot sixteen dot one hundred two. Winning prefix ten dot forty-two dot sixteen dot one hundred two, slash thirty-two via Pod C veth. Illustrative directly configured Pod host route; inspect ip route/ip rule before quoting exact runtime rules Addresses are illustrative teaching values.
+
+## s0137 · Service discovery and proxying · F08: Terminal delivery to destination
+
+At c, the decision is Terminal delivery to destination. Complete the remaining hop host→c. Delivery arrives at c; this is not a decision replay of earlier stages. Addresses are illustrative teaching values.
+
+## s0138 · Service discovery and proxying · F08: Reverse conntrack
+
+At host, the decision is Reverse conntrack. Packet before: ten dot forty-two dot sixteen dot one hundred two:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Addresses are illustrative teaching values.
+
+## s0139 · Service discovery and proxying · F08: Terminal return delivery
+
+At a, the decision is Terminal return delivery. Complete the remaining return hop host→a. Response reaches a. Addresses are illustrative teaching values.
+
+## s0140 · Service discovery and proxying · Ordinary DNAT versus policy fixture ports
+
+Keep this ordinary Service lesson as port eighty to eight thousand eighty. Native C N I policy acceptance uses a separate equal-port fixture — taught in the policy chapter — without rewriting this destination network address translation model.
+
+## s0141 · Service discovery and proxying · Services takeaway
+
+Takeaway. VIP is virtual; destination network address translation is not a virtual private cloud route lookup.
+
+## s0142 · Four identity boundaries · Four identity boundaries
+
+Chapter twelve. Human I A M plus authorization; node I A M; workload AWS I A M; controller AWS I A M. Kubernetes R B A C is different. Granting cluster admin does not grant S3.
+
+## s0143 · Four identity boundaries · Pod Identity versus IRSA
+
+pod identity: projected token and agent to E K S Auth AssumeRoleForPodIdentity, then temporary credentials. I R S A: O I D C and AssumeRoleWithWebIdentity to regional S T S. Setup control planes are not in-path packet gateways for app data.
+
+## s0144 · Four identity boundaries · F14: SDK container-credential provider
+
+At pod, the decision is SDK container-credential provider. Injected URI/token path; never expose credential values in diagram/log Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand to one hundred sixty-nine dot two hundred fifty-four dot one hundred seventy dot twenty-three:80 T C P. Addresses are illustrative teaching values.
+
+## s0145 · Four identity boundaries · F14: Node-authorized EKS Auth request
+
+At agent, the decision is Node-authorized E K S Auth request. Packet before: ten dot forty-two dot sixteen dot ten:forty-nine thousand one to eks-auth regional endpoint:443 T C P. Addresses are illustrative teaching values.
+
+## s0146 · Four identity boundaries · F14: Association + service role trust + tags
+
+At auth, the decision is Association + service role trust + tags. Addresses are illustrative teaching values.
+
+## s0147 · Four identity boundaries · F14: Credential response via agent
+
+At agent, the decision is Credential response via agent. E K S Auth returns temporary workload credentials on the existing pod identity exchange. This is the credential response, not an application data call. Packet before: eks-auth regional endpoint:443 to ten dot forty-two dot sixteen dot ten:forty-nine thousand one T C P. Addresses are illustrative teaching values.
+
+## s0148 · Four identity boundaries · F14: Credentials delivered to Pod
+
+At pod, the decision is Credentials delivered to Pod. Agent delivers temporary credentials to the Pod credential provider. Application AWS signing happens later on a separate exchange. Packet before: one hundred sixty-nine dot two hundred fifty-four dot one hundred seventy dot twenty-three:80 to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand T C P. Addresses are illustrative teaching values.
+
+## s0149 · Four identity boundaries · F14: Signed application request (outbound)
+
+Separate signed application request after credentials exist. Packet ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand two to AWS A P I endpoint:443 T C P. Animate pod→aws. The server response is the next hop with reversed addresses. Addresses are illustrative teaching values.
+
+## s0150 · Four identity boundaries · F14: Signed application response (return)
+
+Application response on the signed exchange. Packet before: AWS A P I endpoint:443 to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand two T C P. Animate aws→pod. This reverse tuple is the server reply — not a repeated outbound signing request. Addresses are illustrative teaching values.
+
+## s0151 · Four identity boundaries · F15: WebIdentity SDK provider
+
+At pod, the decision is WebIdentity SDK provider. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand three to regional-sts:443 T C P. Addresses are illustrative teaching values.
+
+## s0152 · Four identity boundaries · F15: AssumeRoleWithWebIdentity trust validation
+
+At sts, the decision is AssumeRoleWithWebIdentity trust validation. Addresses are illustrative teaching values.
+
+## s0153 · Four identity boundaries · F15: STS credential response to Pod
+
+At pod, the decision is S T S credential response to Pod. Regional S T S returns temporary credentials from AssumeRoleWithWebIdentity to the Pod. This hop is the credential response. A later signed AWS A P I call is a separate message. Packet before: regional-sts:443 to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand three T C P. Addresses are illustrative teaching values.
+
+## s0154 · Four identity boundaries · F15: Signed application request (outbound)
+
+Separate signed application request after credentials exist. Packet ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand four to AWS resource:443 T C P. Animate pod→aws. The server response is the next hop with reversed addresses. Addresses are illustrative teaching values.
+
+## s0155 · Four identity boundaries · F15: Signed application response (return)
+
+Application response on the signed exchange. Packet before: AWS resource:443 to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand four T C P. Animate aws→pod. This reverse tuple is the server reply — not a repeated outbound signing request. Addresses are illustrative teaching values.
+
+## s0156 · Four identity boundaries · Identity lab pointer
+
+Workload identity lab uses an independent reader role association — not the node role.
+
+## s0157 · Four identity boundaries · Workload identity lab
+
+Create dedicated service account and pod identity association for a reader role. Identity-check Pod must assume the stack reader role, not the node role.
+
+## s0158 · Four identity boundaries · Identity takeaway
+
+Takeaway. Four boundaries. R B A C ≠ I A M. Controllers get their own roles.
+
+## s0159 · Pod egress and private AWS · Pod egress and private AWS
+
+Chapter thirteen. Default C N I SNATs off-virtual private cloud IPv4 to the node primary IP; network address translation translates; Internet gateway maps to the E I P. Private interface endpoints resolve to virtual private cloud ENIs — plus S3 gateway for E C R layers.
+
+## s0160 · Pod egress and private AWS · F12: Default CNI off-VPC SNAT
+
+At node, the decision is Default C N I off-virtual private cloud source network address translation. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-three to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Addresses are illustrative teaching values.
+
+## s0161 · Pod egress and private AWS · F12: Private A subnet route lookup
+
+At node, the decision is Private A subnet route lookup. Packet before: ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination one hundred ninety-eight dot fifty-one dot one hundred dot eighty. Winning prefix zero dot zero dot zero dot zero, slash zero via nat-a. No more-specific route; default wins Addresses are illustrative teaching values.
+
+## s0162 · Pod egress and private AWS · F12: Stateful NAT translation
+
+At nat, the decision is Stateful network address translation translation. Packet before: ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Addresses are illustrative teaching values.
+
+## s0163 · Pod egress and private AWS · F12: Public subnet route lookup
+
+At nat, the decision is Public subnet route lookup. Packet before: ten dot forty-two dot zero dot ten:sixty-one thousand to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination one hundred ninety-eight dot fifty-one dot one hundred dot eighty. Winning prefix zero dot zero dot zero dot zero, slash zero via igw-class. No more-specific route; default wins Addresses are illustrative teaching values.
+
+## s0164 · Pod egress and private AWS · F12: EIP address mapping
+
+At igw, the decision is EIP address mapping. Packet before: ten dot forty-two dot zero dot ten:sixty-one thousand to one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 T C P. Addresses are illustrative teaching values.
+
+## s0165 · Pod egress and private AWS · F12: Terminal delivery to destination
+
+At peer, the decision is Terminal delivery to destination. Complete the remaining hop igw→peer. Delivery arrives at peer; this is not a decision replay of earlier stages. Addresses are illustrative teaching values.
+
+## s0166 · Pod egress and private AWS · F12: Reverse EIP mapping
+
+At igw, the decision is Reverse EIP mapping. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to one hundred ninety-eight dot fifty-one dot one hundred dot ten:sixty-one thousand T C P. Addresses are illustrative teaching values.
+
+## s0167 · Pod egress and private AWS · F12: NAT connection-state reverse translation
+
+At nat, the decision is network address translation connection-state reverse translation. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to ten dot forty-two dot zero dot ten:sixty-one thousand T C P. Addresses are illustrative teaching values.
+
+## s0168 · Pod egress and private AWS · F12: Public subnet local route to node
+
+At nat, the decision is Public subnet local route to node. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination ten dot forty-two dot sixteen dot ten. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0169 · Pod egress and private AWS · F12: Reverse CNI SNAT + host delivery
+
+At node, the decision is Reverse C N I source network address translation + host delivery. Packet before: one hundred ninety-eight dot fifty-one dot one hundred dot eighty:443 to ten dot forty-two dot sixteen dot ten:forty-nine thousand, one hundred fifty-three T C P. Addresses are illustrative teaching values.
+
+## s0170 · Pod egress and private AWS · F12: Terminal return delivery
+
+At pod, the decision is Terminal return delivery. Complete the remaining return hop node→pod. Response reaches pod. Addresses are illustrative teaching values.
+
+## s0171 · Pod egress and private AWS · F13: Private DNS
+
+At pod, the decision is Private D N S. Service hostname resolves to private endpoint elastic network interface; same-virtual private cloud destination no default node source network address translation Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-four to ten dot forty-two dot sixteen dot seventy:443 T C P. Addresses are illustrative teaching values.
+
+## s0172 · Pod egress and private AWS · F13: Private A subnet route lookup
+
+At vpc, the decision is Private A subnet route lookup. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-four to ten dot forty-two dot sixteen dot seventy:443 T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot sixteen dot seventy. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0173 · Pod egress and private AWS · F13: Endpoint SG + endpoint policy + IAM
+
+At vpce, the decision is Endpoint SG + endpoint policy + I A M. TCP443 from intended clients; endpoint policy does not grant I A M by itself Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-four to ten dot forty-two dot sixteen dot seventy:443 T C P. Addresses are illustrative teaching values.
+
+## s0174 · Pod egress and private AWS · F13: Separate ECR/S3 layer subflow
+
+At aws, the decision is Separate E C R/S3 layer subflow. E C R A P I+Dkr interface calls then layer download to S3 via gateway prefix-list route, not a serial packet through E C R into S3 Owning table Customer virtual private cloud route table rt-a. Lookup destination AWS-managed S3 layer destination. Winning prefix pl-S3-regional (resolve actual prefixes at runtime) via vpce-s3. Managed S3 destination prefix matches before default Addresses are illustrative teaching values.
+
+## s0175 · Pod egress and private AWS · F13: ECR S3 layer download (separate connection)
+
+At vpc, the decision is E C R S3 layer download (separate connection). Separate control exchange — not one serial data packet. For ordinary EC2 Pod external S3 destination, default C N I source network address translation PodIPv4 to node primaryIPv4; private RT managed S3 prefix-list wins over network address translation default. Gateway endpoint has no elastic network interface/SG and endpoint+bucket/I A M policy still applies. Image pulls originate on node under node role.. Visits: pod then vpc then aws then vpc then pod. Hop pod→vpc. Addresses are illustrative teaching values.
+
+## s0176 · Pod egress and private AWS · F13: ECR S3 layer download (separate connection)
+
+At aws, the decision is E C R S3 layer download (separate connection). Separate control exchange — not one serial data packet. For ordinary EC2 Pod external S3 destination, default C N I source network address translation PodIPv4 to node primaryIPv4; private RT managed S3 prefix-list wins over network address translation default. Gateway endpoint has no elastic network interface/SG and endpoint+bucket/I A M policy still applies. Image pulls originate on node under node role.. Visits: pod then vpc then aws then vpc then pod. Hop vpc→aws. Addresses are illustrative teaching values.
+
+## s0177 · Pod egress and private AWS · F13: ECR S3 layer download (separate connection)
+
+At vpc, the decision is E C R S3 layer download (separate connection). Separate control exchange — not one serial data packet. For ordinary EC2 Pod external S3 destination, default C N I source network address translation PodIPv4 to node primaryIPv4; private RT managed S3 prefix-list wins over network address translation default. Gateway endpoint has no elastic network interface/SG and endpoint+bucket/I A M policy still applies. Image pulls originate on node under node role.. Visits: pod then vpc then aws then vpc then pod. Hop aws→vpc. Addresses are illustrative teaching values.
+
+## s0178 · Pod egress and private AWS · F13: ECR S3 layer download (separate connection)
+
+At pod, the decision is E C R S3 layer download (separate connection). Separate control exchange — not one serial data packet. For ordinary EC2 Pod external S3 destination, default C N I source network address translation PodIPv4 to node primaryIPv4; private RT managed S3 prefix-list wins over network address translation default. Gateway endpoint has no elastic network interface/SG and endpoint+bucket/I A M policy still applies. Image pulls originate on node under node role.. Visits: pod then vpc then aws then vpc then pod. Hop vpc→pod. Addresses are illustrative teaching values.
+
+## s0179 · Pod egress and private AWS · F13: Terminal return delivery
+
+At vpce, the decision is Terminal return delivery. Return hop aws→vpce in physical order. Complete delivery before later lookups. Addresses are illustrative teaching values.
+
+## s0180 · Pod egress and private AWS · F13: Endpoint subnet return local route
+
+At vpc, the decision is Endpoint subnet return local route.  Physical order hop 1: vpce→vpc. Packet before: ten dot forty-two dot sixteen dot seventy:443 to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-four T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0181 · Pod egress and private AWS · F13: Terminal return delivery
+
+At pod, the decision is Terminal return delivery. Return hop vpc→pod in physical order. Complete delivery before later lookups. Addresses are illustrative teaching values.
+
+## s0182 · Pod egress and private AWS · Optional private endpoints
+
+Optional cost: interface endpoints for E C R A P I and DKR, S T S, E K S Auth, logs, E C 2, plus S3 gateway. network address translation remains until a measured redesign removes dependencies.
+
+## s0183 · Pod egress and private AWS · Egress takeaway
+
+Takeaway. source network address translation, network address translation, and Internet gateway are distinct. Endpoints need D N S, SG, and policy.
+
+## s0184 · Expose applications · Expose applications
+
+Chapter fourteen. ClusterIP, port-forward, NodePort, LoadBalancer. Ingress is configuration; the load balancer is the data path. load balancer controller reconciles. A L B is two connections with T L S at the balancer; I P targets skip NodePort.
+
+## s0185 · Expose applications · F09: TLS termination and L7 rule/healthy target selection
+
+At alb, the decision is T L S termination and L7 rule/healthy target selection. A L B ingress SG client /32; backend SG from A L B SG; X-Forwarded-For is header not socket source Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-four thousand to A L B-public-front:443 T C P. Addresses are illustrative teaching values.
+
+## s0186 · Expose applications · F09: ALB subnet route lookup
+
+At vpc, the decision is A L B subnet route lookup. Packet before: ten dot forty-two dot zero dot twenty-five:forty-six thousand to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0187 · Expose applications · F09: Terminal delivery to destination
+
+At pod, the decision is Terminal delivery to destination. Complete the remaining hop vpc→pod. Delivery arrives at pod; this is not a decision replay of earlier stages. Addresses are illustrative teaching values.
+
+## s0188 · Expose applications · F09: Backend subnet route lookup
+
+At vpc, the decision is Backend subnet route lookup. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot zero dot twenty-five:forty-six thousand T C P. Owning table Customer virtual private cloud route table rt-b. Lookup destination ten dot forty-two dot zero dot twenty-five. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0189 · Expose applications · F09: Proxy backend response onto client TLS connection
+
+At alb, the decision is Proxy backend response onto client T L S connection. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot zero dot twenty-five:forty-six thousand T C P. Addresses are illustrative teaching values.
+
+## s0190 · Expose applications · F09: Terminal return delivery
+
+At client, the decision is Terminal return delivery. Complete the remaining return hop alb→client. Response reaches client. Addresses are illustrative teaching values.
+
+## s0191 · Expose applications · F10: ALB subnet route lookup
+
+At vpcA, the decision is A L B subnet route lookup. Packet before: ten dot forty-two dot zero dot twenty-five:forty-six thousand one to ten dot forty-two dot sixteen dot ten:thirty thousand eighty T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination ten dot forty-two dot sixteen dot ten. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0192 · Expose applications · F10: NodePort DNAT and external Cluster masquerade
+
+At node, the decision is NodePort destination network address translation and external Cluster masquerade. Packet before: ten dot forty-two dot zero dot twenty-five:forty-six thousand one to ten dot forty-two dot sixteen dot ten:thirty thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0193 · Expose applications · F10: Node subnet route lookup
+
+At vpcB, the decision is Node subnet route lookup. Packet before: ten dot forty-two dot sixteen dot ten:forty-six thousand one to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0194 · Expose applications · F10: Terminal delivery to destination
+
+At pod, the decision is Terminal delivery to destination. Complete the remaining hop vpcB→pod. Delivery arrives at pod; this is not a decision replay of earlier stages. Addresses are illustrative teaching values.
+
+## s0195 · Expose applications · F10: PodB subnet route lookup
+
+At vpcB, the decision is PodB subnet route lookup. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot ten:forty-six thousand one T C P. Owning table Customer virtual private cloud route table rt-b. Lookup destination ten dot forty-two dot sixteen dot ten. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0196 · Expose applications · F10: Reverse conntrack DNAT/SNAT
+
+At node, the decision is Reverse conntrack destination network address translation/source network address translation. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot ten:forty-six thousand one T C P. Addresses are illustrative teaching values.
+
+## s0197 · Expose applications · F10: NodeA route to ALB
+
+At vpcA, the decision is NodeA route to A L B. Packet before: ten dot forty-two dot sixteen dot ten:thirty thousand eighty to ten dot forty-two dot zero dot twenty-five:forty-six thousand one T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot zero dot twenty-five. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0198 · Expose applications · F10: Terminal return delivery
+
+At alb, the decision is Terminal return delivery. Complete the remaining return hop vpcA→alb. Response reaches alb. Addresses are illustrative teaching values.
+
+## s0199 · Expose applications · Deploy app first (04-app, B1 namespace order)
+
+“First create the namespace for real with its reviewed Pod Security labels, and wait until it is active. A server dry run never saves that namespace. Each object is a separate request, so the remaining namespaced objects can only be server-validated after their namespace actually exists. Now validate them, then apply them.” Run scripts/04-app.sh before Load Balancer Controller or Service examples. That script creates namespace eksclass, writes a digest-pinned $STATE_DIR/app.yaml from the reviewed manifest and APP_IMAGE, server dry-runs, then applies and waits for deployment/web.
+
+## s0200 · Expose applications · Install LBC and internal LBs (after 04-app)
+
+Only after the app namespace and Deployment exist: install AWS Load Balancer Controller chart appVersion v3.6.2 with dedicated pod identity, then create internal A L B IP and internal N L B IP examples. Test from a private runner.
+
+## s0201 · Expose applications · Expose takeaway
+
+Takeaway. A L B proxies two connections; instance mode uses NodePort.
+
+## s0202 · NLB and Gateway API · NLB and Gateway API
+
+Chapter fifteen. N L B is L4. Teaching N L B IP disables client preservation so the Pod sees N L B. Instance Local preserves client IP with capacity consequences. Gateway A P I attachment differs from Ingress; Auto Mode uses different controller names and explicit C R D enablement.
+
+## s0203 · NLB and Gateway API · F11: L4 healthy target selection + source/destination translation
+
+At nlb, the decision is L4 healthy target selection + source/destination translation. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-five thousand to N L B-front:80 T C P. Addresses are illustrative teaching values.
+
+## s0204 · NLB and Gateway API · F11: LB subnet route lookup
+
+At vpc, the decision is LB subnet route lookup. Packet before: ten dot forty-two dot zero dot twenty-five:forty-seven thousand to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0205 · NLB and Gateway API · F11: Terminal delivery to destination
+
+At pod, the decision is Terminal delivery to destination. Complete the remaining hop vpc→pod. Delivery arrives at pod; this is not a decision replay of earlier stages. Addresses are illustrative teaching values.
+
+## s0206 · NLB and Gateway API · F11: Backend subnet route lookup
+
+At vpc, the decision is Backend subnet route lookup. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot zero dot twenty-five:forty-seven thousand T C P. Owning table Customer virtual private cloud route table rt-b. Lookup destination ten dot forty-two dot zero dot twenty-five. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0207 · NLB and Gateway API · F11: Reverse flow mapping
+
+At nlb, the decision is Reverse flow mapping. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot zero dot twenty-five:forty-seven thousand T C P. Addresses are illustrative teaching values.
+
+## s0208 · NLB and Gateway API · F11: Terminal return delivery
+
+At client, the decision is Terminal return delivery. Complete the remaining return hop nlb→client. Response reaches client. Addresses are illustrative teaching values.
+
+## s0209 · NLB and Gateway API · F24: Frontend-to-instance tuple mapping
+
+At nlb, the decision is Frontend-to-instance tuple mapping. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-five thousand one to N L B-front:80 T C P. Addresses are illustrative teaching values.
+
+## s0210 · NLB and Gateway API · F24: NLB target selection preserving client IPv4
+
+At nlb, the decision is N L B target selection preserving client IPv4. Instance T C P target default preservation; health/cross-zone settings explicit Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-five thousand one to ten dot forty-two dot sixteen dot ten:thirty thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0211 · NLB and Gateway API · F24: NLB subnet route to node target
+
+At nlb, the decision is N L B subnet route to node target. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-five thousand one to ten dot forty-two dot sixteen dot ten:thirty thousand eighty T C P. Owning table Customer virtual private cloud route table rt-public. Lookup destination ten dot forty-two dot sixteen dot ten. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0212 · NLB and Gateway API · F24: Local NodePort DNAT, no remote-node forward
+
+At node, the decision is Local NodePort destination network address translation, no remote-node forward. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-five thousand one to ten dot forty-two dot sixteen dot ten:thirty thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0213 · NLB and Gateway API · F24: Application socket
+
+At pod, the decision is Application socket. Client source visible; backend SG/policy must allow actual preservation semantics Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-five thousand one to ten dot forty-two dot sixteen dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0214 · NLB and Gateway API · F24: Reverse NodePort mapping
+
+At node, the decision is Reverse NodePort mapping. Packet before: ten dot forty-two dot sixteen dot one hundred one:eight thousand eighty to two hundred three dot zero dot one hundred thirteen dot ten:fifty-five thousand one T C P. Addresses are illustrative teaching values.
+
+## s0215 · NLB and Gateway API · F24: LB return flow mapping
+
+At nlb, the decision is LB return flow mapping. Managed LB data path returns frontend source to client; do not draw pod direct Internet bypass Addresses are illustrative teaching values.
+
+## s0216 · NLB and Gateway API · F24: Terminal return delivery
+
+At client, the decision is Terminal return delivery. Complete the remaining return hop nlb→client. Response reaches client. Addresses are illustrative teaching values.
+
+## s0217 · NLB and Gateway API · F25: Resource attachment / ReferenceGrant validation
+
+At route, the decision is Resource attachment / ReferenceGrant validation. LBC3.6.2 + Gateway1.6.0 CRDs; do not mix L4/L7 Addresses are illustrative teaching values.
+
+## s0218 · NLB and Gateway API · F25: IAM-authorized reconciliation
+
+At ctrl, the decision is I A M-authorized reconciliation. Addresses are illustrative teaching values.
+
+## s0219 · NLB and Gateway API · F25: Listener/target provisioning
+
+At elb, the decision is Listener/target provisioning. HTTPRoute/GRPCRoute A L B; T C P/U D P/TLSRoute N L B for verified load balancer controller Addresses are illustrative teaching values.
+
+## s0220 · NLB and Gateway API · F25: Target health
+
+At target, the decision is Target health. Addresses are illustrative teaching values.
+
+## s0221 · NLB and Gateway API · F25: Accepted / ResolvedRefs / Programmed status
+
+At ctrl, the decision is Accepted / ResolvedRefs / Programmed status. After Programmed, client datapath F09/F11 bypasses controller Addresses are illustrative teaching values.
+
+## s0222 · NLB and Gateway API · Guided Gateway note
+
+Standard lab Gateway walkthrough is guided: pin Gateway A P I v1.6.0 C R Ds with load balancer controller v3.6.2 extensions from the same release. Auto Mode needs elasticLoadBalancing.gatewayApi.crds.managed and eks.amazonaws.com/gateway-alb or gateway-nlb. Auto Mode T L S Route remains unverified. Not fully scripted cloud-tested automation.
+
+## s0223 · NLB and Gateway API · NLB/Gateway takeaway
+
+Takeaway. N L B≠A L B. Preservation defaults differ. Gateway is attachment plus datapath.
+
+## s0224 · DNS and TLS operations · DNS and TLS operations
+
+Chapter sixteen. Public name resolution and transport security for published applications. Route 53 alias records follow the load balancer D N S name and hosted zone — a fixed A record to one current node IP breaks on replacement. Amazon Certificate Manager certificates are regional; request them in the same region as the load balancer and validate with D N S records you own. T L S commonly terminates at the Application Load Balancer; re-encryption to Pods is a deliberate second hop. This class never mutates an example or unowned domain.
+
+## s0225 · DNS and TLS operations · Mechanism — resolver and certificate chain
+
+Mechanism. Browser or client resolver asks public D N S for your FQDN. Route 53 returns an alias answer that tracks the load balancer. The client opens T L S to the balancer; SNI selects the certificate; the SAN must include your hostname. A C M owns private keys for certificates it issues. After T L S terminates at the A L B, the backend connection is a separate decision — cleartext to Pod IP targets, or re-encrypt if you configured it. Security groups and health checks still gate targets independently of certificate validity.
+
+## s0226 · DNS and TLS operations · Worked example — owned domain procedure
+
+Worked example on an owned domain only. Request an A C M certificate in the load balancer region with D N S validation. Create the validation CNAMEs in your hosted zone and wait for ISSUED. Create an alias A or AAAA record to the load balancer D N S name and hosted zone ID — not a guessed node IP. Annotate the Ingress with the certificate ARN and optional HTTPS redirect. Failure modes: certificate in the wrong region; alias pointed at a deleted balancer; security group allowing 443 but health check failing on the wrong path; network policy or network A C L dropping return traffic after T L S succeeds.
+
+## s0227 · DNS and TLS operations · DNS/TLS observation (no unowned writes)
+
+Read-only observation commands. Do not create Route 53 records unless the domain is yours and reviewed. Class build does not mutate D N S.
+
+## s0228 · DNS and TLS operations · DNS/TLS takeaway
+
+Takeaway. Alias to LB D N S; A C M is regional; terminate deliberately; verify SAN/SNI; own the domain; correlate health and SG when T L S is fine but the app is not.
+
+## s0229 · East-west security · East-west security
+
+Chapter seventeen. network policy is additive isolation. Manifests do nothing without an enforcing agent. Security groups are stateful; NACLs are stateless. Ordinary namespace network policy is not Admin/Baseline ClusterNetworkPolicy.
+
+## s0230 · East-west security · V1 — discover the real agent
+
+“The container name alone is not an enforcement check. Inspect the exact recorded add-on build and its schema, discover the policy agent from its image and arguments, and verify that policy processing is explicitly enabled. Check its container readiness on every node in this Linux track. Then inspect the provider-managed endpoint records and agent evidence. Do not edit those managed endpoint objects, and do not assume a container that merely exists is enforcing policy.”
+
+## s0231 · East-west security · Policy agent discovery commands
+
+“The container name alone is not an enforcement check. Inspect the exact recorded add-on build and its schema, discover the policy agent from its image and arguments, and verify that policy processing is explicitly enabled. Check its container readiness on every node in this Linux track. Then inspect the provider-managed endpoint records and agent evidence. Do not edit those managed endpoint objects, and do not assume a container that merely exists is enforcing policy.”
+
+## s0232 · East-west security · B2/V2 — fixture semantics
+
+“Our ordinary Service lesson still maps port eighty to port eight thousand eighty. For this provider-specific policy exercise, we deliberately use a separate Service with port eight thousand eighty at both ends. The clients are controlled by Deployments, not bare Pods. First prove that both clients reach the ready web Pod, that the independent sink is reachable, and that D N S works. Save the exact Pod identities and addresses. After policy converges, the permitted client must still reach the web application, and the unisolated client must still reach the sink. A blocked-client connection directly to the ready web Pod tests destination ingress. A permitted-client connection directly to the otherwise healthy sink tests source egress independently. A timeout by itself never proves that a policy caused the failure; correlate it with the agent and managed endpoint evidence.”
+
+## s0233 · East-west security · Policy baseline → apply → enforce
+
+“Our ordinary Service lesson still maps port eighty to port eight thousand eighty. For this provider-specific policy exercise, we deliberately use a separate Service with port eight thousand eighty at both ends. The clients are controlled by Deployments, not bare Pods. First prove that both clients reach the ready web Pod, that the independent sink is reachable, and that D N S works. Save the exact Pod identities and addresses. After policy converges, the permitted client must still reach the web application, and the unisolated client must still reach the sink. A blocked-client connection directly to the ready web Pod tests destination ingress. A permitted-client connection directly to the otherwise healthy sink tests source egress independently. A timeout by itself never proves that a policy caused the failure; correlate it with the agent and managed endpoint evidence.”
+
+## s0234 · East-west security · F16: Source subnet VPC route lookup
+
+At vpc, the decision is Source subnet virtual private cloud route lookup. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0235 · East-west security · F16: Destination ingress NetworkPolicy
+
+At dest, the decision is Destination ingress network policy. Selected web Pod only permits role=permitted-client; source label not matched Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Stop point — processing ends here for this exchange. Addresses are illustrative teaching values.
+
+## s0236 · East-west security · F17: Source egress allow union
+
+At client, the decision is Source egress allow union. role=permitted-client → app=web TCP8080; separate core D N S T C P/UDP53 allow Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0237 · East-west security · F17: Subnet route lookup
+
+At vpc, the decision is Subnet route lookup. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0238 · East-west security · F17: Destination ingress allow union
+
+At web, the decision is Destination ingress allow union. Selected web permits permitted-client Pod selector in same namespace Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0239 · East-west security · F17: Reverse route and established policy state
+
+At vpc, the decision is Reverse route and established policy state. Reply implicitly allowed for admitted connection Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Owning table Customer virtual private cloud route table rt-b. Lookup destination ten dot forty-two dot sixteen dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0240 · East-west security · F17: Terminal return delivery
+
+At client, the decision is Terminal return delivery. Complete the remaining return hop vpc→client. Response reaches client. Addresses are illustrative teaching values.
+
+## s0241 · East-west security · F26: Source subnet local route
+
+At vpc, the decision is Source subnet local route. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0242 · East-west security · F26: Stateless inbound rule
+
+At nacl, the decision is Stateless inbound rule. TCP8080 permitted toward PodB Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0243 · East-west security · F26: Response generated
+
+At dest, the decision is Response generated. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Addresses are illustrative teaching values.
+
+## s0244 · East-west security · F26: Stateless outbound ordered rules
+
+At nacl, the decision is Stateless outbound ordered rules. Missing ephemeral49152 return allowance; SG established state cannot override network A C L Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. This is the return-path stop. The request was allowed earlier; the reply is dropped here. No fabricated success reply continues past this point. Addresses are illustrative teaching values.
+
+## s0245 · East-west security · Policy takeaway
+
+Takeaway. Discover enablement; use controller-owned equal-port fixtures; separate ingress and egress evidence.
+
+## s0246 · Persistent storage · Persistent storage
+
+Chapter eighteen. P V C, P V, StorageClass. E B S is availability zone-bound R W O. WaitForFirstConsumer avoids premature binding. E F S is a guided shared N F S option.
+
+## s0247 · Persistent storage · F18: StorageClass delayed binding
+
+At pvc, the decision is StorageClass delayed binding. ebs.csi.aws.com gp3 encrypted; no immediate volume until consumer placement Addresses are illustrative teaching values.
+
+## s0248 · Persistent storage · F18: Scheduling selected AZ
+
+At sched, the decision is Scheduling selected availability zone. Resources/topology determine availability zone-A before provisioning Addresses are illustrative teaching values.
+
+## s0249 · Persistent storage · F18: Bound/ready status
+
+At pvc, the decision is Bound/ready status. Status ACK not a return data packet. Application I/O is Pod→mounted filesystem→E B S block datapath. Addresses are illustrative teaching values.
+
+## s0250 · Persistent storage · F18: CSI cloud API control
+
+At ec2, the decision is C S I cloud A P I control. Separate control exchange — not one serial data packet. Create/attach requests under C S I controller I A M; not volume I/O. Visits: csi then ec2 then csi. Hop csi→ec2. Addresses are illustrative teaching values.
+
+## s0251 · Persistent storage · F18: CSI cloud API control
+
+At csi, the decision is C S I cloud A P I control. Separate control exchange — not one serial data packet. Create/attach requests under C S I controller I A M; not volume I/O. Visits: csi then ec2 then csi. Hop ec2→csi. Addresses are illustrative teaching values.
+
+## s0252 · Persistent storage · F18: Node mount
+
+At csi, the decision is Node mount. Separate control exchange — not one serial data packet. C S I mount orchestration after compatible availability zone provisioning. Visits: csi then node. Addresses are illustrative teaching values.
+
+## s0253 · Persistent storage · F27: PV nodeAffinity / CSI topology
+
+At sched, the decision is P V nodeAffinity / C S I topology. Cannot attach availability zone-A E B S volume directly to availability zone-B node; scheduler should prevent invalid placement Stop point — processing ends here for this exchange. Addresses are illustrative teaching values.
+
+## s0254 · Persistent storage · F27: Pending event / repair choices
+
+At pod, the decision is Pending event / repair choices. Reschedule to availability zone-A if available; snapshot restore in B with recovery plan; or redesign app for E F S/replicated data Addresses are illustrative teaching values.
+
+## s0255 · Persistent storage · EBS lab
+
+Dedicated E B S C S I role with current V2 managed policy, addon, gp3 encrypted WaitForFirstConsumer, P V C and consumer.
+
+## s0256 · Persistent storage · Storage takeaway
+
+Takeaway. E B S follows availability zone; restore is deliberate; E F S is guided.
+
+## s0257 · Scaling and availability · Scaling and availability
+
+Chapter nineteen. H P A needs metrics and requests. Pending Pods may be IPs or capacity — not H P A failure alone. P D B gates voluntary eviction, not hardware failure or Spot guarantees.
+
+## s0258 · Scaling and availability · F19: Metrics query
+
+At metrics, the decision is Metrics query. Metrics-server supplies CPU; H P A target based on utilization vs requests Addresses are illustrative teaching values.
+
+## s0259 · Scaling and availability · F19: Desired replica calculation
+
+At hpa, the decision is Desired replica calculation. Update Deployment scale; bounded2..4, stabilization Addresses are illustrative teaching values.
+
+## s0260 · Scaling and availability · F19: Unschedulable resource assessment
+
+At sched, the decision is Unschedulable resource assessment. Requests/affinity/IP/storage can block placement Addresses are illustrative teaching values.
+
+## s0261 · Scaling and availability · F19: Choose ONE capacity owner
+
+At scaler, the decision is Choose ONE capacity owner. CA ASG template or Karpenter NodePool; H P A alone does not launch nodes Addresses are illustrative teaching values.
+
+## s0262 · Scaling and availability · F19: EC2 provisioning + bootstrap
+
+At node, the decision is EC2 provisioning + bootstrap. I A M, C N I IPs, readiness, system addons all needed Addresses are illustrative teaching values.
+
+## s0263 · Scaling and availability · F19: Readiness and EndpointSlice inclusion
+
+At pod, the decision is Readiness and endpoint slice inclusion. Addresses are illustrative teaching values.
+
+## s0264 · Scaling and availability · F19: Observed metrics stabilize
+
+At hpa, the decision is Observed metrics stabilize. Scale-down and P D B/capacity decisions have separate controllers/timing Addresses are illustrative teaching values.
+
+## s0265 · Scaling and availability · F20: Rolling update budget
+
+At deploy, the decision is Rolling update budget. maxUnavailable0/maxSurge1; resource and IP spare capacity needed Addresses are illustrative teaching values.
+
+## s0266 · Scaling and availability · F20: Startup then readiness
+
+At new, the decision is Startup then readiness. New image healthy before ready endpoint, LB target health/readiness gates separate Addresses are illustrative teaching values.
+
+## s0267 · Scaling and availability · F20: Target registration/health
+
+At lb, the decision is Target registration/health. New LB target may take time after Kubernetes readiness Addresses are illustrative teaching values.
+
+## s0268 · Scaling and availability · F20: Termination and deregistration
+
+At old, the decision is Termination and deregistration. Stop new requests, drain connections, graceful signals; no guaranteed instant handoff Addresses are illustrative teaching values.
+
+## s0269 · Scaling and availability · F20: Rollout observed generation
+
+At deploy, the decision is Rollout observed generation. P D B constrains eviction operations, not every Deployment replacement or involuntary failure Addresses are illustrative teaching values.
+
+## s0270 · Scaling and availability · HPA lab
+
+Discover metrics-server addon; apply H P A; finite load exercise. Node desired count changes are separate cost-reviewed E K S nodegroup config updates.
+
+## s0271 · Scaling and availability · Scale takeaway
+
+Takeaway. H P A≠node autoscaler. P D B≠disaster immunity.
+
+## s0272 · Observability · Observability
+
+Chapter twenty. How you prove what happened. Events, container logs, node logs, control-plane A P I and audit logs, metrics, and traces answer different questions. E K S can ship control-plane logs to CloudWatch when enabled — that costs money and still does not show Pod-to-Pod payload. virtual private cloud Flow Logs show accepted or rejected tuples at elastic network interface boundaries; they are not full local dataplane truth and cannot alone prove a same-node network policy drop. metrics-server feeds H P A; it is not durable monitoring or APM.
+
+## s0273 · Observability · Mechanism — pick the layer
+
+Mechanism. Start with a hypothesis: D N S, path, identity, policy, capacity, or application. Kubernetes Events explain scheduler and probe decisions. `kube control logs` and node journal cover process output. core D N S and aws-node logs cover discovery and C N I. CloudWatch control-plane logs cover A P I authn/authz and audit. virtual private cloud Flow Logs cover elastic network interface-level allow/deny. Load balancer access logs and target health cover the publish path. Querying every collector without a hypothesis wastes quota and buries the signal.
+
+## s0274 · Observability · Worked diagnosis walkthrough
+
+Worked example. Symptom: client timeout to Service. Check D N S inside the client Pod. Curl the Pod IP directly. Inspect endpoint slice. Confirm kube proxy mode. Only then look at network policy agent logs and Flow Logs. Symptom: A P I four oh three. Read access entry mapping and R B A C — do not chase Flow Logs. Symptom: image pull fail. Check node role, E C R endpoint or network address translation, and digests — not H P A. scripts/14-diagnostics.sh gathers a reviewed read-only bundle; protect audit exports and never dump Secret values into tickets.
+
+## s0275 · Observability · Diagnostics
+
+Read-only evidence collection. Hypothesize layer before flooding collectors. Protect audit logs; avoid Secret dumps. Enabling control-plane log types or flow log retention changes cost and needs review.
+
+## s0276 · Observability · Observe takeaway
+
+Takeaway. Hypothesis first; match the signal to the layer; Flow Logs are incomplete for local policy; metrics-server is not APM.
+
+## s0277 · Failure lab practicum · Failure lab practicum
+
+Chapter twenty-one. Timeout versus D N S versus four oh one or four oh three versus five oh two. C N I shortage, NodeNotReady, probes, unhealthy targets, webhook nine four four three, I A M deny, P V C topology, missing private endpoint.
+
+## s0278 · Failure lab practicum · F22: IAM authentication succeeds
+
+At api, the decision is I A M authentication succeeds. Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0279 · Failure lab practicum · F22: RBAC/EKS access authorization
+
+At api, the decision is R B A C/E K S access authorization. Viewer role has no Secret-read permission; no route failure Packet before: two hundred three dot zero dot one hundred thirteen dot ten:fifty-two thousand to public-api.example:443 T C P. Addresses are illustrative teaching values.
+
+## s0280 · Failure lab practicum · F22: 403 response on existing TLS session
+
+At api, the decision is 403 response on existing T L S session. This is the return-path stop. The request was allowed earlier; the reply is dropped here. No fabricated success reply continues past this point. Addresses are illustrative teaching values.
+
+## s0281 · Failure lab practicum · F23: Scheduling successful
+
+At sched, the decision is Scheduling successful. Addresses are illustrative teaching values.
+
+## s0282 · Failure lab practicum · F23: CNI ADD
+
+At kube let, the decision is C N I ADD. FailedCreatePodSandBox event, not necessarily failed scheduler Addresses are illustrative teaching values.
+
+## s0283 · Failure lab practicum · F23: IP/prefix allocation
+
+At ipamd, the decision is IP/prefix allocation. Subnet exhaustion, fragmented /28 or elastic network interface/A P I/quota constraint; diagnose distinct causes Addresses are illustrative teaching values.
+
+## s0284 · Failure lab practicum · F23: Error events and retry
+
+At kube let, the decision is Error events and retry. No application packet exists; Pod Pending/ContainerCreating This is the return-path stop. The request was allowed earlier; the reply is dropped here. No fabricated success reply continues past this point. Addresses are illustrative teaching values.
+
+## s0285 · Failure lab practicum · F26: Source subnet local route
+
+At vpc, the decision is Source subnet local route. Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Owning table Customer virtual private cloud route table rt-a. Lookup destination ten dot forty-two dot thirty-two dot one hundred one. Winning prefix ten dot forty-two dot zero dot zero, slash sixteen via local. Longest matching virtual private cloud /16 over default Addresses are illustrative teaching values.
+
+## s0286 · Failure lab practicum · F26: Stateless inbound rule
+
+At nacl, the decision is Stateless inbound rule. TCP8080 permitted toward PodB Packet before: ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two to ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty T C P. Addresses are illustrative teaching values.
+
+## s0287 · Failure lab practicum · F26: Response generated
+
+At dest, the decision is Response generated. Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. Addresses are illustrative teaching values.
+
+## s0288 · Failure lab practicum · F26: Stateless outbound ordered rules
+
+At nacl, the decision is Stateless outbound ordered rules. Missing ephemeral49152 return allowance; SG established state cannot override network A C L Packet before: ten dot forty-two dot thirty-two dot one hundred one:eight thousand eighty to ten dot forty-two dot sixteen dot one hundred one:forty-nine thousand, one hundred fifty-two T C P. This is the return-path stop. The request was allowed earlier; the reply is dropped here. No fabricated success reply continues past this point. Addresses are illustrative teaching values.
+
+## s0289 · Failure lab practicum · F27: PV nodeAffinity / CSI topology
+
+At sched, the decision is P V nodeAffinity / C S I topology. Cannot attach availability zone-A E B S volume directly to availability zone-B node; scheduler should prevent invalid placement Stop point — processing ends here for this exchange. Addresses are illustrative teaching values.
+
+## s0290 · Failure lab practicum · F27: Pending event / repair choices
+
+At pod, the decision is Pending event / repair choices. Reschedule to availability zone-A if available; snapshot restore in B with recovery plan; or redesign app for E F S/replicated data Addresses are illustrative teaching values.
+
+## s0291 · Failure lab practicum · Troubleshooting order
+
+No D N S answer: resolv, kube D N S, core D N S, policy fifty-three, virtual private cloud D N S. A P I timeout: resolved destination, endpoint mode, slash thirty-two or private SG — do not edit R B A C to fix T C P. Four oh three: identity mapping and authz. Pending: events, resources, C N I. Service timeout: PodIP direct, endpoint slice, proxy mode — no invented virtual private cloud Service route.
+
+## s0292 · Failure lab practicum · Failure takeaway
+
+Takeaway. Name the stop point; gather matching evidence; fix minimally.
+
+## s0293 · Upgrade and release engineering · Upgrade and release engineering
+
+Chapter twenty-two. One minor at a time. Insights and A P I removals. Add-on and controller compatibility. Node AMI and kube let skew. Conditional previous-minor rollback within seven days is real — with eligibility constraints. Not categorical no-downgrade.
+
+## s0294 · Upgrade and release engineering · B3 — preparation before control-plane rollback
+
+“Eligible E K S clusters can return to the previous minor version within the documented seven-day window. Start with eligibility and rollback-readiness insights, and assess application, controller and A P I compatibility. Before the control plane goes back, prepare workers for the target version and downgrade any add-on that is incompatible with it. Wait until each changed add-on is active, ready and functioning, and recheck blockers. Standard managed-node and self-managed preparation is the operator’s responsibility. Auto Mode manages its node rollback before the control plane; Fargate needs the documented affected-Pod replacement plan instead. Only after these preparation gates should the control-plane rollback begin. Verify the applications, networking, storage and add-ons again afterward. This preserves existing data; it does not restore older application or database state.”
+
+## s0295 · Upgrade and release engineering · F28 narrator beat
+
+First confirm eligibility and inspect rollback-readiness insights, including application, controller and A P I compatibility. Illustrative teaching only; no live rollback executed in this class build.
+
+## s0296 · Upgrade and release engineering · F28 narrator beat
+
+Before returning the control plane to the previous minor, prepare workers for the target version and downgrade any incompatible addon. Wait until each changed addon is active and healthy; self-managed components need their own checks. Illustrative teaching only; no live rollback executed in this class build.
+
+## s0297 · Upgrade and release engineering · F28 narrator beat
+
+In Standard managed-node and self-managed tracks, node preparation is the operator’s job. Auto Mode manages its node rollback before the control plane. Fargate requires the documented affected-Pod replacement plan. Illustrative teaching only; no live rollback executed in this class build.
+
+## s0298 · Upgrade and release engineering · F28 narrator beat
+
+Only then initiate the eligible control-plane rollback and monitor the update; afterward repeat application and addon validation. This preserves data and is not a historical data restore. Illustrative teaching only; no live rollback executed in this class build.
+
+## s0299 · Upgrade and release engineering · F28: Eligibility and rollback-readiness insights
+
+At gate, the decision is Eligibility and rollback-readiness insights. Within7days, eligible prior in-place upgrade, supported previous minor, ACTIVE; inspect point-in-time readiness and application/controller/A P I compatibility before any rollback. Addresses are illustrative teaching values.
+
+## s0300 · Upgrade and release engineering · F28: Target-compatible worker preparation
+
+At nodes, the decision is Target-compatible worker preparation. Standard MNG/self-managed nodes cannot remain newer than target A P I: operator prepares/replaces them first. Auto Mode node rollback is automatically managed before CP. Fargate cannot roll back workers: remove affected current-version Pods before CP and redeploy after, following documented availability plan. Addresses are illustrative teaching values.
+
+## s0301 · Upgrade and release engineering · F28: PRE-CP addon compatibility preparation
+
+At nodes, the decision is PRE-CP addon compatibility preparation. BEFORE control-plane rollback, review target compatibility and rollback-readiness insights; downgrade any incompatible E K S-managed addon to a target-compatible build, wait addon ACTIVE and validate readiness/function. Self-managed addons/controllers require independent compatibility checks; no automatic addon rollback. Recheck blockers; do not default --force. Addresses are illustrative teaching values.
+
+## s0302 · Upgrade and release engineering · F28: EKS managed previous-minor rollback
+
+At cp, the decision is E K S managed previous-minor rollback. Only AFTER worker and addon preparation gates; use describe-update to completion. Customer/etcd data preserved, not restored to an older application state. Addresses are illustrative teaching values.
+
+## s0303 · Upgrade and release engineering · F28: Post-rollback validation
+
+At verify, the decision is Post-rollback validation. Verify addon/controller/workload health, network/D N S/storage and version compatibility again. Final checks do not replace pre-CP preparation. Addresses are illustrative teaching values.
+
+## s0304 · Upgrade and release engineering · F28: Recorded recovery decision
+
+At gate, the decision is Recorded recovery decision. Ineligible case stops before mutation; rebuild/restore plan is different Addresses are illustrative teaching values.
+
+## s0305 · Upgrade and release engineering · F21: Compatibility and capacity gate
+
+At plan, the decision is Compatibility and capacity gate. APIs/controllers/CRDs, snapshots/restore, Pod budgets, free IPs Addresses are illustrative teaching values.
+
+## s0306 · Upgrade and release engineering · F21: Managed control-plane update
+
+At cp, the decision is Managed control-plane update. One minor at a time; AWS control-plane HA not app guarantee Addresses are illustrative teaching values.
+
+## s0307 · Upgrade and release engineering · F21: Version-specific component compatibility
+
+At addons, the decision is Version-specific component compatibility. Exact order and allowed skew determined by chosen release matrix Addresses are illustrative teaching values.
+
+## s0308 · Upgrade and release engineering · F21: Managed nodegroup replacement
+
+At nodes, the decision is Managed nodegroup replacement. Nodegroups not automatically upgraded by control plane; P D B and surge Addresses are illustrative teaching values.
+
+## s0309 · Upgrade and release engineering · F21: Workload and network acceptance
+
+At test, the decision is Workload and network acceptance. Addresses are illustrative teaching values.
+
+## s0310 · Upgrade and release engineering · F21: Outcome / rollback decision
+
+At plan, the decision is Outcome / rollback decision. Current eligible E K S rollback F28; no casual arbitrary downgrade Addresses are illustrative teaching values.
+
+## s0311 · Upgrade and release engineering · Rollback command reference (authorized only)
+
+“Eligible E K S clusters can return to the previous minor version within the documented seven-day window. Start with eligibility and rollback-readiness insights, and assess application, controller and A P I compatibility. Before the control plane goes back, prepare workers for the target version and downgrade any add-on that is incompatible with it. Wait until each changed add-on is active, ready and functioning, and recheck blockers. Standard managed-node and self-managed preparation is the operator’s responsibility. Auto Mode manages its node rollback before the control plane; Fargate needs the documented affected-Pod replacement plan instead. Only after these preparation gates should the control-plane rollback begin. Verify the applications, networking, storage and add-ons again afterward. This preserves existing data; it does not restore older application or database state.”
+
+## s0312 · Upgrade and release engineering · Upgrade planning read-only
+
+List insights and describe addon versions for a reviewed target. Do not execute upgrade merely to follow the video.
+
+## s0313 · Upgrade and release engineering · Upgrade takeaway
+
+Takeaway. Prepare workers and incompatible add-ons before CP rollback; revalidate after.
+
+## s0314 · Production security and cost · Production security and cost
+
+Chapter twenty-three. Least privilege, Pod Security, image supply chain, encrypted secrets, network tenancy, backups and R T O/R P O, budgets, network address translation, idle load balancers, extended support costs.
+
+## s0315 · Production security and cost · F29: Backup consistency and keys
+
+At backup, the decision is Backup consistency and keys. Manifests/IaC + snapshots/files/backups + images/KMS/I A M; no user-managed E K S etcd export Addresses are illustrative teaching values.
+
+## s0316 · Production security and cost · F29: Independent recovery target
+
+At restore, the decision is Independent recovery target. Rebuild supported cluster, restore app data/topology, verify identities/network Addresses are illustrative teaching values.
+
+## s0317 · Production security and cost · F29: Correctness before DNS cutover
+
+At validate, the decision is Correctness before D N S cutover. Data consistency, transactions and security; multi-availability zone != regional DR Addresses are illustrative teaching values.
+
+## s0318 · Production security and cost · F29: Ordered deletion gate
+
+At delete, the decision is Ordered deletion gate. LB objects + P V C/consumers while controllers live → controller/addons → nodes/cluster → endpoints/network address translation/EIP/routes/subnets/virtual private cloud; retained logs/snapshots separately Addresses are illustrative teaching values.
+
+## s0319 · Production security and cost · DR tabletop
+
+Multi-availability zone HA is not region D R. No user-accessible managed etcd snapshot export is taught. Plan restore into a separate cluster with consistency checks.
+
+## s0320 · Production security and cost · Sec/cost takeaway
+
+Takeaway. Least privilege per identity boundary; budget before scale; DR is practiced restore.
+
+## s0321 · Terraform progression · Terraform progression
+
+Chapter twenty-four. A full Terraform practice class for the parallel repository path — not a six-bullet agenda. Practice repository https://github.com/ccaiccie/awseks on branch cursor/eks-practice-lab-1ef4 uses prefix awseks-tf-lab, Terraform 1.17.1, AWS provider 6.72.0, and Kubernetes teaching baseline 1.36. Class CLI labs remain eksclass-cli-*. Those two ownership domains never share a cluster name or state file. A pull request may hold practice code — that is not merged default-branch truth, and no live cloud apply is claimed in this class build.
+
+## s0322 · Terraform progression · Prerequisites and ownership boundary
+
+Prerequisites from the practice README: AWS CLI v2, kube control, Helm 3, jq, Python 3, and Terraform 1.17.1 for the Terraform path only. Authenticate with a profile or I A M Identity Center yourself — never commit access keys. Confirm `aws sts get-caller-identity`. Read docs/cost.md before any apply. Variable and shell guards reject pointing Terraform at eksclass-cli names or CLI scripts at awseks-tf-lab. Remote or local state must lock; the practice tree documents local terraform/terraform.tfstate as gitignored for the lab layout.
+
+## s0323 · Terraform progression · Worked commands — init through plan
+
+Worked Terraform commands from the practice repository documentation. Copy terraform.tfvars.example to terraform.tfvars and set region, name prefix awseks-tf-lab, and reviewed CIDRs. Then: terraform init; terraform fmt -check -recursive; terraform validate; terraform plan -out=tfplan. Read the plan. Apply only when the plan matches the cluster you meant. This class build does not run apply.
+
+## s0324 · Terraform progression · Terraform tools and versions
+
+Confirm tool pins before any Terraform work. Terraform 1.17.1 and AWS CLI v2 are required on the practice path.
+
+## s0325 · Terraform progression · Terraform init fmt validate plan
+
+Exact practice-repo sequence through plan. Read the plan. This class build does not apply.
+
+## s0326 · Terraform progression · Terraform apply and outputs (authorized sandbox only)
+
+Apply only in an authorized sandbox against awseks-tf-lab. Then kubeconfig, output, and state list.
+
+## s0327 · Terraform progression · Phase boundary — AWS then Kubernetes
+
+Phase boundary. Terraform in this practice layout creates virtual private cloud, I A M, standard E K S, managed node group, and managed add-ons. The AWS Load Balancer Controller and similar Helm stages stay out of the same plan that creates the cluster so Terraform does not need Kubernetes A P I access during bootstrap. After nodes are Ready, separate stages install controllers and apps. Mixing Helm providers into the first apply is a common failure mode — keep the boundary.
+
+## s0328 · Terraform progression · Destroy and evidence
+
+Destroy is destructive. Delete Ingress, Services of type LoadBalancer, and PVCs first so ENIs and disks do not block virtual private cloud deletion. Then terraform plan -destroy and terraform destroy only for this state. Confirm terraform state list is empty of the lab resources and that AWS consoles show no orphan network address translation or ELB for the prefix. Failure mode: running eksclass-cli cleanup against awseks-tf-lab or the reverse — ownership guards exist because that corruption is expensive.
+
+## s0329 · Terraform progression · Terraform takeaway
+
+Takeaway. Real init/fmt/validate/plan/apply/output/state/destroy on awseks-tf-lab with TF 1.17.1 and AWS provider 6.72.0; keep Kubernetes/Helm after AWS bootstrap; never share names or state with eksclass-cli.
+
+## s0330 · Capstone and teardown · Capstone and teardown
+
+Chapter twenty-five. Threat model, C I D R plan, route proof, identities, internal service first, constrained external only with intent, failure drill, restore drill, cost estimate, cleanup dependency graph.
+
+## s0331 · Capstone and teardown · Selected path recap
+
+You can now explain: virtual private cloud local versus network address translation; Service VIP destination network address translation versus virtual private cloud routes; A L B two connections versus N L B forwarding; four identities; policy evidence versus timeouts; rollback preparation order.
+
+## s0332 · Capstone and teardown · Teardown order
+
+Remove load balancer resources and wait for controller deletes; delete consumers then PVCs; then controller, addons, nodes, cluster, endpoints, network address translation; finally empty network and owned I A M. Preserve evidence.
+
+## s0333 · Capstone and teardown · Thank you
+
+Thank you for watching. Please subscribe to get updates on future lessons when they are posted.
+
+## s0334 · Capstone and teardown · Final hold
+
+You completed the continuous E K S masterclass path from foundations through networking, publishing, identity, policy, storage, scale, upgrades, and teardown discipline.

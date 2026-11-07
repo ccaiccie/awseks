@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 640" width="1920" height="640" data-scenario="F29" data-dir="forward">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0b5cad"/></marker>
+<marker id="arrow-ret" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b65b0a"/></marker>
+<marker id="arrow-stop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#bd3047"/></marker>
+<marker id="arrow-svc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7954b3"/></marker>
+<marker id="arrow-post" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#18794e"/></marker>
+</defs>
+<rect width="1920" height="640" fill="#ffffff"/>
+<rect data-header-strip="1" x="40" y="70" width="1840" height="44" rx="8" fill="#f0f5fa" stroke="#7898b5"/>
+<text data-header-strip="1" x="56" y="98" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="18" font-weight="700" fill="#0b5cad">F29 · Disaster recovery and teardown dependency graph</text>
+<rect data-header-strip="1" x="40" y="122" width="1840" height="28" rx="6" fill="#f0f5fa" opacity=".85"/>
+<text data-header-strip="1" x="56" y="141" font-size="13" font-family="IBM Plex Sans,system-ui,sans-serif" fill="#526578">Topology follows this scenario's actors — illustrative addresses only</text>
+<polyline points="160.0,270 160.0,210 693.3,210 693.3,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="693.3,270 693.3,200 1226.7,200 1226.7,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<polyline points="1226.7,270 1226.7,190 1760.0,190 1760.0,270" fill="none" stroke="#c9d8e4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+<g id="backup" data-actor="backup" data-node-highlight="1" data-icon="generic_process">
+<rect data-node-highlight="1" x="60.0" y="265.0" width="200" height="100" rx="14" fill="#fff6e8" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="160.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="260.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="160.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="60.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(72.0,277.0)" data-stencil="generic_process"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="generic_process"><rect x="6" y="6" width="36" height="36" rx="8" fill="#526578" opacity=".35"/><rect x="14" y="14" width="20" height="20" rx="4" fill="#526578"/><text x="24" y="28" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">proc</text></svg></g>
+<text data-caption="1" x="170.0" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Desired state +</text>
+<text data-caption="1" x="170.0" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">app data</text>
+</g>
+<g id="restore" data-actor="restore" data-node-highlight="1" data-icon="generic_process">
+<rect data-node-highlight="1" x="593.3" y="265.0" width="200" height="100" rx="14" fill="#fff6e8" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="693.3" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="793.3" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="693.3" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="593.3" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(605.3,277.0)" data-stencil="generic_process"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="generic_process"><rect x="6" y="6" width="36" height="36" rx="8" fill="#526578" opacity=".35"/><rect x="14" y="14" width="20" height="20" rx="4" fill="#526578"/><text x="24" y="28" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">proc</text></svg></g>
+<text data-caption="1" x="703.3" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">Separate restore</text>
+<text data-caption="1" x="703.3" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">cluster</text>
+</g>
+<g id="validate" data-actor="validate" data-node-highlight="1" data-icon="generic_process">
+<rect data-node-highlight="1" x="1126.7" y="265.0" width="200" height="100" rx="14" fill="#fff6e8" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="1226.7" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1326.7" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="1226.7" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="1126.7" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(1138.7,277.0)" data-stencil="generic_process"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="generic_process"><rect x="6" y="6" width="36" height="36" rx="8" fill="#526578" opacity=".35"/><rect x="14" y="14" width="20" height="20" rx="4" fill="#526578"/><text x="24" y="28" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">proc</text></svg></g>
+<text data-caption="1" x="1236.7" y="315.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">App/RPO/RTO checks</text>
+</g>
+<g id="delete" data-actor="delete" data-node-highlight="1" data-icon="ec2">
+<rect data-node-highlight="1" x="1660.0" y="265.0" width="200" height="100" rx="14" fill="#e8f1fb" stroke="#7898b5" stroke-width="2"/>
+<circle data-port="n" cx="1760.0" cy="265.0" r="3.5" fill="#7898b5"/>
+<circle data-port="e" cx="1860.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<circle data-port="s" cx="1760.0" cy="365.0" r="3.5" fill="#7898b5"/>
+<circle data-port="w" cx="1660.0" cy="315.0" r="3.5" fill="#7898b5"/>
+<g transform="translate(1672.0,277.0)" data-stencil="ec2"><svg width="36" height="36" viewBox="0 0 48 48" width="48" height="48" data-stencil="ec2"><g transform="translate(3.60,3.60) scale(0.7286)"><path d="M15,41 L40,41 L40,16 L15,16 M42,16 L46,16 L46,18 L42,18 L42,22 L46,22 L46,24 L42,24 L42,27 L46,27 L46,29 L42,29 L42,33 L46,33 L46,35 L42,35 L42,39 L46,39 L46,41 L42,41 L42,41.136 C42,42.164 41.164,43 40.136,43 L40,43 L40,47 L38,47 L38,43 L34,43 L34,47 L32,47 L32,43 L29,43 L29,47 L27,47 L27,43 L23,43 L23,47 L21,47 L21,43 L17,43 L17,47 L15,47 L15,43 L14.864,43 C13.836,43 13,42.164 13,41.136 L13,41 L10,41 L10,39 L13,39 L13,35 L10,35 L10,33 L13,33 L13,29 L10,29 L10,27 L13,27 L13,24 L10,24 L10,22 L13,22 L13,18 L10,18 L10,16 L13,16 L13,15.864 C13,14.836 13.836,14 14.864,14 L15,14 L15,10 L17,10 L17,14 L21,14 L21,10 L23,10 L23,14 L27,14 L27,10 L29,10 L29,14 L32,14 L32,10 L34,10 L34,14 L38,14 L38,10 L40,10 L40,14 L40.136,14 C41.164,14 42,14.836 42,15.864 M29,53.876 C29,53.944 28.944,54 28.876,54 L2.124,54 C2.056,54 2,53.944 2,53.876 L2,27.124 C2,27.056 2.056,27 2.124,27 L8,27 L8,25 L2.124,25 C0.953,25 0,25.953 0,27.124 L0,53.876 C0,55.047 0.953,56 2.124,56 L28.876,56 C30.047,56 31,55.047 31,53.876 L31,49 L29,49 M56,2.124 L56,28.876 C56,30.047 55.047,31 53.876,31 L48,31 L48,29 L53.876,29 C53.944,29 54,28.944 54,28.876 L54,2.124 C54,2.056 53.944,2 53.876,2 L27.124,2 C27.056,2 27,2.056 27,2.124 L27,8 L25,8 L25,2.124 C25,0.953 25.953,0 27.124,0 L53.876,0 C55.047,0 56,0.953 56,2.124 Z" fill="#232F3E"/></g></svg></g>
+<text data-caption="1" x="1770.0" y="308.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">LB/PVC/controller/</text>
+<text data-caption="1" x="1770.0" y="324.0" text-anchor="middle" font-family="IBM Plex Sans,system-ui,sans-serif" font-size="15" font-weight="650" fill="#182838">node order</text>
+</g>
+<g id="dynamic-layer"></g></svg>
