@@ -1,6 +1,6 @@
 # Class index
 
-The canonical class source is the `class/` tree, copied from the 2026-11-07 research bundle. Start at [class/README.md](../class/README.md), then [class/CURRICULUM.md](../class/CURRICULUM.md), [class/TECHNICAL-SPEC.md](../class/TECHNICAL-SPEC.md), and [class/labs/README.md](../class/labs/README.md). The chapter-to-lab-to-diagram table is [chapter-map.md](chapter-map.md). Version conditions that are easy to over-read are in [versions.md](versions.md).
+The canonical class source is the `class/` tree, reconciled to source bundle v2 (2026-11-07). `class/AUDIT-RESOLUTION.md` and `class/NARRATION-CORRECTIONS-v2.md` record the audit fixes. The animated lesson is still being built. Start at [class/README.md](../class/README.md), then [class/CURRICULUM.md](../class/CURRICULUM.md), [class/TECHNICAL-SPEC.md](../class/TECHNICAL-SPEC.md), and [class/labs/README.md](../class/labs/README.md). The chapter-to-lab-to-diagram table is [chapter-map.md](chapter-map.md). Version conditions that are easy to over-read are in [versions.md](versions.md).
 
 ## What is a preview
 

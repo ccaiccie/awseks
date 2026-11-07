@@ -32,12 +32,12 @@ variable "cluster_name" {
 
 variable "kubernetes_version" {
   type        = string
-  description = "EKS Kubernetes minor version on standard support. Default 1.36 matches the class teaching baseline. 1.34, 1.35, and 1.37 remain accepted."
+  description = "EKS Kubernetes minor for this stack. Default 1.36 is the class teaching baseline. Before apply, confirm it with aws eks describe-cluster-versions --version-status STANDARD_SUPPORT. This validation only checks the shape."
   default     = "1.36"
 
   validation {
-    condition     = contains(["1.34", "1.35", "1.36", "1.37"], var.kubernetes_version)
-    error_message = "kubernetes_version must be an EKS standard-support minor verified for this lab: 1.34, 1.35, 1.36, or 1.37. Extended-support minors are rejected because they change the price."
+    condition     = can(regex("^1\\.[0-9]+$", var.kubernetes_version))
+    error_message = "kubernetes_version must look like 1.36. Standard support is decided by describe-cluster-versions at preflight, not by a fixed list in this module."
   }
 }
 

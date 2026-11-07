@@ -42,6 +42,7 @@ items={
 'S54':'https://kubernetes.io/docs/concepts/configuration/secret/',
 'S55':'https://kubernetes.io/docs/concepts/architecture/',
 'S56':'https://docs.aws.amazon.com/cli/latest/reference/eks/create-nodegroup.html',
+'S67':E+'cni-network-policy.html','S68':'https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/master/config/master/aws-k8s-cni.yaml','S69':'https://kubernetes.io/docs/reference/using-api/api-concepts/',
 'S60':E+'eks-architecture.html',
 'S61':'https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/gateway/l7gateway/',
 'S62':'https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html',
@@ -58,7 +59,7 @@ def fetch(pair):
   r=requests.get(u,timeout=40);r.raise_for_status();r.encoding='utf-8'
   soup=BeautifulSoup(r.text,'html.parser');body=soup.find('main') or soup.find(id='main-content') or soup.body or soup
   for e in body(['script','style','nav','footer']): e.decompose()
-  text=body.get_text('\n',strip=True)
+  text=r.text if u.endswith('.yaml') else body.get_text('\n',strip=True)
   (ROOT/'sources'/f'{i}.txt').write_text(f'URL: {u}\nFetched: {datetime.datetime.now().astimezone().isoformat()}\n\n{text}\n')
   return {'id':i,'url':u,'status':r.status_code,'bytes':len(text),'sha256':hashlib.sha256(text.encode()).hexdigest(),'file':f'sources/{i}.txt'}
  except Exception as e:return {'id':i,'url':u,'error':str(e)}

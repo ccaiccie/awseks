@@ -32,8 +32,17 @@ locals {
     }
   }
 
+  documented_for_selected_minor = lookup(local.documented_addon_versions, var.kubernetes_version, {})
+  discovered_networking_addons = {
+    vpc-cni    = data.aws_eks_addon_version.vpc_cni.version
+    kube-proxy = data.aws_eks_addon_version.kube_proxy.version
+    coredns    = data.aws_eks_addon_version.coredns.version
+  }
+  # A dated pin from docs/versions.md overrides discovery only for minors listed there.
+  # Any other minor uses the default compatible version from the EKS API.
   pinned_addons = merge(
-    local.documented_addon_versions[var.kubernetes_version],
+    local.discovered_networking_addons,
+    local.documented_for_selected_minor,
     { for key, value in var.addon_version_overrides : key => value if value != "" }
   )
 

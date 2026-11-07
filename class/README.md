@@ -17,3 +17,6 @@ Start: CURRICULUM.md → TECHNICAL-SPEC.md → FLOW-SCENARIOS.json → labs/READ
 Separate CLI stack `eksclass-cli-*` from Terraform stack `eksclass-tf-*`. Repo https://github.com/ccaiccie/awseks is implemented in a parallel workstream; this package does not clone/edit it and makes no claim that repo files were reviewed. Never run both methods against the same resources or put CLI-generated IDs into Terraform state without a deliberate import/migration plan.
 
 No single flat script is required to learn everything: stop at checkpoints, inspect outputs and own the costs. Defaults favor two AZs and two NAT gateways; a cost-reduced single-NAT variant is a documented design exercise, not silently substituted. A cluster itself is billable even when nodes are idle. See labs/COSTS.md before commands.
+
+## v2 audit correction boundary
+AUDIT-RESOLUTION.md maps B1/B2/B3/V1/V2 to changed lines, local tests and source evidence. Independent audit is retained unchanged for re-review. Fresh Namespace persistence, controller-owned/equal-port independent policy controls and pre-CP rollback addon preparation are now explicit. All live acceptance remains pending. The separately running class/ worktree is NOT part of this source ZIP and is neither modified nor validated by these source corrections.

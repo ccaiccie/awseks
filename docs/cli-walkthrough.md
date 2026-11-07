@@ -20,7 +20,7 @@ aws ec2 describe-availability-zones \
   --query 'AvailabilityZones[].ZoneName' --output text
 aws eks describe-addon-versions \
   --addon-name vpc-cni \
-  --kubernetes-version 1.35 \
+  --kubernetes-version 1.36 \
   --query 'addons[0].addonVersions[0].addonVersion' \
   --output text
 ```
@@ -216,8 +216,8 @@ EXAMPLE `kubectl get nodes`:
 
 ```text
 NAME                                          STATUS   ROLES    AGE   VERSION
-ip-10-0-10-12.us-west-2.compute.internal      Ready    <none>   4m    v1.35.x-eks-...
-ip-10-0-11-48.us-west-2.compute.internal      Ready    <none>   4m    v1.35.x-eks-...
+ip-10-0-10-12.us-west-2.compute.internal      Ready    <none>   4m    v1.36.x-eks-...
+ip-10-0-11-48.us-west-2.compute.internal      Ready    <none>   4m    v1.36.x-eks-...
 ```
 
 `80-verify.sh` also rolls out `coredns`, `aws-node`, `kube-proxy`, `eks-pod-identity-agent`, and `ebs-csi-node`, and prints the cluster security group plus the private routes. A `0.0.0.0/0` route whose target is a NAT is VPC egress. It is not the ClusterIP implementation.

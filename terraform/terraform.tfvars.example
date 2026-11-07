@@ -5,7 +5,7 @@ region       = "us-west-2"
 owner        = "student"
 cluster_name = "awseks-tf-lab"
 
-# Class teaching baseline is 1.36. 1.34, 1.35, and 1.37 are also standard-support minors.
+# Class teaching baseline is 1.36. Confirm standard support with describe-cluster-versions before apply.
 kubernetes_version = "1.36"
 
 vpc_cidr           = "10.0.0.0/16"

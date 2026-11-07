@@ -78,3 +78,9 @@ Public authoritative documentation; local snapshots retain source URL/fetch time
 
 ## Provenance boundaries
 Research excerpts/snapshots are retained for internal source traceability; final learner publication should link authoritative docs instead of reproducing entire vendor documentation. No AWS icon package or narration audio was generated in this phase. Original conceptual diagrams and source code were authored for this package; do not claim vendor certification.
+
+## v2 corrective evidence (actual public fetch, November7,2026 PST)
+- S67 https://docs.aws.amazon.com/eks/latest/userguide/cni-network-policy.html → sources/S67.txt: ownerReferences, Service/container port constraint and managed PolicyEndpoint warning.
+- S68 https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/master/config/master/aws-k8s-cni.yaml → sources/S68.txt: current upstream manifest naming/enablement discrepancy; NOT the unobserved EKS-managed addon build and NOT a manifest to apply.
+- S69 https://kubernetes.io/docs/reference/using-api/api-concepts/ → sources/S69.txt: nonpersistent dry-run and separate resource requests.
+- Existing S50 rollback page supplies explicit pre-CP incompatible-addon downgrade and compute-variant requirements.

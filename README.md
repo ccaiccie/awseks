@@ -12,7 +12,7 @@ You can start from "what is a Pod" and finish at identity, ingress, storage, dis
 
 - An AWS account you are allowed to spend money in, and an IAM principal that can create the resources in [policies/operator-baseline.json](policies/operator-baseline.json). That file is a review aid. Nothing here attaches it for you.
 - AWS CLI v2, kubectl, Helm 3, jq, and Python 3. Terraform 1.17.1 is required only for the Terraform path.
-- A region that offers the Kubernetes minor you select. The lab accepts 1.34, 1.35, 1.36, and 1.37, which were the standard-support minors on the EKS version page fetched on 2026-11-07.
+- A region where `aws eks describe-cluster-versions --version-status STANDARD_SUPPORT` still lists the minor you select. On 2026-11-07 that command's documented set was 1.34, 1.35, 1.36, and 1.37. The preflight uses the live response.
 
 You do not need SSH keys. Nodes are not given one.
 
@@ -120,16 +120,16 @@ New clusters would enter extended support unless the support type is set. Both p
 Pins, the date they were read, and how to re-check them are in [docs/versions.md](docs/versions.md).
 
 - Terraform 1.17.1 and AWS provider 6.72.0.
-- Default Kubernetes minor 1.36, the class teaching baseline. Also accepted: 1.34, 1.35, 1.37.
+- Default Kubernetes minor 1.36, the class teaching baseline. Whether it is still in standard support is a live `describe-cluster-versions` result.
 - Default AMI `AL2023_x86_64_STANDARD`. No SSH key. IMDSv2 required, hop limit 1.
-- VPC CNI, kube-proxy, and CoreDNS versions are the user-guide table values from 2026-11-07. Pod Identity Agent, EBS CSI, and Metrics Server versions are the default compatible version from `aws eks describe-addon-versions` at plan or install time, because the user guide does not publish one table row for those on 1.35.
-- AWS Load Balancer Controller upstream release `v3.6.2` with Helm chart `3.6.2`. The EKS user-guide install page fetched the same day still shows controller `v2.14.1` and chart `1.14.0`. The IAM policy bytes at those two tags match. Gateway API `v1.6.0` is stated on the controller `/latest/` guide, not in the v3.6.2 release notes snapshot. See [docs/versions.md](docs/versions.md).
+- Dated user-guide pins for VPC CNI, kube-proxy, and CoreDNS are in [docs/versions.md](docs/versions.md). Apply-time selection still checks `describe-addon-versions`. Pod Identity Agent, EBS CSI, and Metrics Server use that API's default compatible build.
+- AWS Load Balancer Controller upstream release `v3.6.2` with Helm chart `3.6.2`. Gateway API `v1.6.0` is the mapping on the v3.6 controller guide. The EKS user-guide install page fetched the same day still shows chart `1.14.0`; this repo does not follow that older example. See [docs/versions.md](docs/versions.md).
 - Demo image `nginx/nginx-unprivileged@sha256:847080049e23239e86144f01a4b79252db60494cebea58e827ae4e7d66c96c58`, tag `1.30.6` on Docker Hub on 2026-11-07. It listens on 8080 as a non-root user.
 
 Limits that are easy to miss:
 
 - IPv6, Auto Mode, and Fargate are comparison reading in [labs/14-comparisons.md](labs/14-comparisons.md). They are not provisioned and their features are not claimed for this cluster.
-- Karpenter on Kubernetes 1.35 requires Karpenter `>= 1.9` per the compatibility matrix fetched on 2026-11-07. It is not installed. Do not run it beside Cluster Autoscaler on the same capacity.
+- Karpenter is not installed. The compatibility matrix fetched on 2026-11-07 lists Kubernetes 1.36 as Karpenter `>= 1.13`. Do not run it beside Cluster Autoscaler on the same capacity.
 - The public API rejects `0.0.0.0/0` and documentation ranges such as `203.0.113.10/32`.
 - `vpc_cni_use_pod_identity` stays false on the first apply. See [docs/iam.md](docs/iam.md).
 - Static CI does not prove a cluster will become ACTIVE.
@@ -147,9 +147,6 @@ Limits that are easy to miss:
 | CNI, DNS, ClusterIP, NAT, endpoints | [labs/07-networking.md](labs/07-networking.md) |
 | NetworkPolicy, security groups, NACLs | [labs/08-policy-and-load-balancers.md](labs/08-policy-and-load-balancers.md) |
 | Storage, scale, upgrades, cleanup | [labs/09-operate.md](labs/09-operate.md) |
-| CNI, DNS, NAT, endpoints | [labs/07-networking.md](labs/07-networking.md) |
-| NetworkPolicy and load balancers | [labs/08-policy-and-load-balancers.md](labs/08-policy-and-load-balancers.md) |
-| Storage, scale, upgrades, cleanup | [labs/09-operate.md](labs/09-operate.md) |
 | IPv6, Auto Mode, Fargate | [labs/14-comparisons.md](labs/14-comparisons.md) |
 | Full 26-chapter class | [docs/chapter-map.md](docs/chapter-map.md) |
 
@@ -157,7 +154,7 @@ The chapter map that the finished class should follow is [docs/chapter-map.md](d
 
 ## Diagrams
 
-Canonical class diagrams, 37 flow pages plus the architecture page, are in [class/diagrams/](class/diagrams/README.md). PNG files under `class/diagrams/previews/` are static renders of those SVGs. The draw.io source is `class/diagrams/eks-scenarios.drawio`. None of that is the animated lesson. The index is [docs/class-index.md](docs/class-index.md) and the chapter map is [docs/chapter-map.md](docs/chapter-map.md).
+The class diagrams now in the repo are the v2 static sources: SVG, draw.io, and PNG previews under [class/diagrams/](class/diagrams/README.md). The animated lesson is still being built. Later rendered assets, if they arrive, belong beside those sources rather than replacing this tree. The index is [docs/class-index.md](docs/class-index.md). The chapter map is [docs/chapter-map.md](docs/chapter-map.md).
 
 `docs/diagrams/` holds smaller repo sketches for the Terraform and AWS CLI write-up. Do not cite them as the class pictures.
 

@@ -14,10 +14,10 @@ for ((n=0;n<40;n++)); do
  python3 -c "import time; time.sleep(15)"
 done
 # Delete exact lesson resources, not broad selectors or kube-system namespace.
+kubectl -n eksclass delete service web-policy --ignore-not-found
 kubectl -n eksclass delete hpa web --ignore-not-found
-kubectl -n eksclass delete deployment volume-demo web permitted-client blocked-client other-dest --ignore-not-found --wait=true --timeout=5m
-kubectl -n eksclass delete service web-policy --ignore-not-found --wait=true --timeout=2m
-kubectl -n eksclass delete pod identity-check permitted-client blocked-client --ignore-not-found --wait=true --timeout=5m
+kubectl -n eksclass delete deployment volume-demo web permitted-client blocked-client egress-sink --ignore-not-found --wait=true --timeout=5m
+kubectl -n eksclass delete pod identity-check --ignore-not-found --wait=true --timeout=5m
 kubectl -n eksclass delete pvc data --ignore-not-found --wait=true --timeout=10m
 PV=$(get pv)
 if [[ -n "$PV" ]]; then

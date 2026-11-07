@@ -4,22 +4,22 @@
     {
       "name": "bash -n",
       "status": "PASS",
-      "detail": "20 scripts parse; no script executed"
+      "detail": "21 scripts parse; no script executed"
     },
     {
       "name": "ShellCheck",
       "status": "PASS",
-      "detail": "20 scripts, warning severity or higher, no findings"
+      "detail": "21 scripts, warning severity or higher, no findings"
     },
     {
       "name": "YAML parse and object identity",
       "status": "PASS",
-      "detail": "17 YAML documents, unique object keys and basic structure"
+      "detail": "20 YAML documents, unique object keys and basic structure"
     },
     {
       "name": "Kubernetes1.36 strict schemas",
       "status": "PASS",
-      "detail": "17 docs validated against strict standalone Kubernetes1.36.0-derived schemas (community schema mirror), NOT live API server"
+      "detail": "20 docs validated against strict standalone Kubernetes1.36.0-derived schemas (community schema mirror), NOT live API server"
     },
     {
       "name": "Scenario semantic structure",
@@ -40,6 +40,16 @@
       "name": "SVG XML",
       "status": "PASS",
       "detail": "38 valid SVG XMLs"
+    },
+    {
+      "name": "Audit regression tests",
+      "status": "PASS",
+      "detail": "19 local/synthetic regression tests PASS: B1/B2/B3/V1/V2 and immutable independent audit; no cloud execution"
+    },
+    {
+      "name": "Flow JSON formal schema",
+      "status": "PASS",
+      "detail": "PASS"
     }
   ],
   "warnings": []

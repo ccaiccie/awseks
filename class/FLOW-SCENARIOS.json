@@ -6727,7 +6727,8 @@
       ],
       "returnProcessing": [],
       "notes": [
-        "No app delivery or successful response. Check fresh connections after policy convergence; ICMP not generic proof of L4 policy."
+        "No app delivery or successful response. Check fresh connections after policy convergence; ICMP not generic proof of L4 policy.",
+        "Use blocked-client Deployment\u2192ReplicaSet-owned Pod and ready direct webPod8080 after positive pre-policy baseline; DNS positive test remains separate. No bare client Pods."
       ],
       "failure": {
         "stopAt": "dest",
@@ -7044,10 +7045,31 @@
         }
       ],
       "notes": [
-        "Service variant F07 DNATs to Pod8080; do not match policy port80 just because service listens80. NAT ordering outside this tested label path is implementation-dependent."
+        "Use controller-owned client Deployments and web-policy Service8080\u21928080 (port name http matches container). Keep original F07/F08 web80\u21928080 DNAT lesson separate.",
+        "Baseline DNS + permitted/blocked\u2192ready direct web Pod + permitted\u2192independent sink BEFORE policy. AFTER convergence: permitted\u2192web succeeds, blocked\u2192sink stays healthy, blocked\u2192direct web times out (ingress), permitted\u2192sink times out (independent egress). Correlate each negative with live agent/PolicyEndpoint evidence.",
+        "Service/NAT ordering is implementation-dependent; this conservative fixture follows documented native-CNI equal-port prerequisite."
       ],
       "failure": null,
       "protocolEnvelope": "none; native VPC, no overlay",
+      "policyAcceptance": {
+        "sourceOwnership": "Deployment\u2192ReplicaSet\u2192Pod ownerReferences required",
+        "service": "web-policy:8080\u2192Pod:8080; named http on both",
+        "ordinaryDNATLesson": "F07/F08 web:80\u21928080 unchanged; NOT native-policy acceptance",
+        "baseline": [
+          "DNS resolves",
+          "permitted and blocked reach ready direct webPod:8080",
+          "permitted reaches independent egress-sinkPod:8080",
+          "blocked reaches independent sink",
+          "equal-port Service reachable"
+        ],
+        "afterPolicy": [
+          "DNS and permitted\u2192web/direct+Service succeed",
+          "blocked\u2192sink still succeeds: sink health control",
+          "blocked\u2192direct web times out: ingress candidate",
+          "permitted\u2192direct sink times out: independent egress candidate"
+        ],
+        "causalGate": "Fresh connections + unchanged Pod UID/IP + correct pinned agent image/enable flags/readiness + managed PolicyEndpoint and agent evidence. Timeouts alone never prove policy cause."
+      },
       "contextBand": {
         "x": 48,
         "y": 660,
@@ -10626,12 +10648,12 @@
       "id": "F28",
       "title": "Conditional EKS seven-day previous-minor rollback",
       "kind": "rollback-control",
-      "track": "Standard EC2 IPv4 unless variant explicitly named",
+      "track": "Standard managed/self-managed EC2 primary; Auto Mode and Fargate caveats explicit",
       "illustrative": true,
       "nodes": [
         {
           "id": "gate",
-          "label": "Downgrade add-ons",
+          "label": "Eligibility + insights",
           "bounds": {
             "x": 70.0,
             "y": 270,
@@ -10659,7 +10681,7 @@
         },
         {
           "id": "nodes",
-          "label": "Roll back newer nodes",
+          "label": "Nodes + addon downgrade first",
           "bounds": {
             "x": 603.3,
             "y": 270,
@@ -10755,35 +10777,43 @@
       "forwardProcessing": [
         {
           "actor": "gate",
-          "decisionEngine": "Eligibility decision",
+          "decisionEngine": "Eligibility and rollback-readiness insights",
           "packetBefore": null,
           "packetAfter": null,
           "routeLookup": null,
-          "detail": "Within 7 days, prior in-place upgrade, supported target, ACTIVE, feature checks. Downgrade incompatible EKS add-ons here, before nodes and before the control plane. No --force."
+          "detail": "Within7days, eligible prior in-place upgrade, supported previous minor, ACTIVE; inspect point-in-time readiness and application/controller/API compatibility before any rollback."
         },
         {
           "actor": "nodes",
-          "decisionEngine": "Kubelet skew preparation",
+          "decisionEngine": "Target-compatible worker preparation",
           "packetBefore": null,
           "packetAfter": null,
           "routeLookup": null,
-          "detail": "After add-on downgrade and before the control plane: do not leave kubelets newer than the target API. Standard managed and self-managed nodes are operator-owned. Auto Mode rolls its nodes back itself. Fargate pods are replaced by their own documented path."
+          "detail": "Standard MNG/self-managed nodes cannot remain newer than target API: operator prepares/replaces them first. Auto Mode node rollback is automatically managed before CP. Fargate cannot roll back workers: remove affected current-version Pods before CP and redeploy after, following documented availability plan."
+        },
+        {
+          "actor": "nodes",
+          "decisionEngine": "PRE-CP addon compatibility preparation",
+          "packetBefore": null,
+          "packetAfter": null,
+          "routeLookup": null,
+          "detail": "BEFORE control-plane rollback, review target compatibility and rollback-readiness insights; downgrade any incompatible EKS-managed addon to a target-compatible build, wait addon ACTIVE and validate readiness/function. Self-managed addons/controllers require independent compatibility checks; no automatic addon rollback. Recheck blockers; do not default --force."
         },
         {
           "actor": "cp",
-          "decisionEngine": "EKS managed rollback operation",
+          "decisionEngine": "EKS managed previous-minor rollback",
           "packetBefore": null,
           "packetAfter": null,
           "routeLookup": null,
-          "detail": "Previous minor only, preserves customer/etcd data; not restoring old application state"
+          "detail": "Only AFTER worker and addon preparation gates; use describe-update to completion. Customer/etcd data preserved, not restored to an older application state."
         },
         {
           "actor": "verify",
-          "decisionEngine": "Addons/controllers/workload checks",
+          "decisionEngine": "Post-rollback validation",
           "packetBefore": null,
           "packetAfter": null,
           "routeLookup": null,
-          "detail": "After the control plane reaches the previous minor, verify add-ons, nodes, and workloads. This stage does not replace the pre-rollback add-on downgrade. No --force."
+          "detail": "Verify addon/controller/workload health, network/DNS/storage and version compatibility again. Final checks do not replace pre-CP preparation."
         }
       ],
       "returnProcessing": [
@@ -10797,10 +10827,17 @@
         }
       ],
       "notes": [
-        "S50: downgrade incompatible add-ons before the control plane, then nodes that would be newer than the target API, then the control plane, then verify. Seven-day previous-minor rollback stays; it is not a general downgrade and --force is not the default."
+        "S50 current docs supersede old categorical no-downgrade guidance; stateful workload compatibility still must be evaluated."
       ],
       "failure": null,
       "protocolEnvelope": "none; native VPC, no overlay",
+      "visualContext": "BEFORE control-plane rollback: inspect readiness/apps/controllers/APIs; prepare compatible Standard workers; downgrade incompatible addons and wait ACTIVE + healthy. Auto Mode manages node rollback; Fargate needs affected-Pod replacement. Final validation follows CP rollback.",
+      "narrationHints": [
+        "First confirm eligibility and inspect rollback-readiness insights, including application, controller and API compatibility.",
+        "Before returning the control plane to the previous minor, prepare workers for the target version and downgrade any incompatible addon. Wait until each changed addon is active and healthy; self-managed components need their own checks.",
+        "In Standard managed-node and self-managed tracks, node preparation is the operator\u2019s job. Auto Mode manages its node rollback before the control plane. Fargate requires the documented affected-Pod replacement plan.",
+        "Only then initiate the eligible control-plane rollback and monitor the update; afterward repeat application and addon validation. This preserves data and is not a historical data restore."
+      ],
       "animationSemantics": "Each hop/message stage has its own token and completion; NEVER one packet through every workflow-stage box. References to AWS calls, credential responses and app calls represent distinct messages/connections.",
       "contextBand": {
         "x": 48,

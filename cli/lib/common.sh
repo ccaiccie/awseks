@@ -60,7 +60,7 @@ load_config() {
   [[ -n "${AWS_REGION:-}" ]] || die "AWS_REGION is empty in ${CONFIG_FILE}."
   [[ -n "${CLUSTER_NAME:-}" ]] || die "CLUSTER_NAME is empty in ${CONFIG_FILE}."
   [[ "${CLUSTER_NAME}" =~ ^awseks-cli-[a-z0-9-]{1,24}$ ]] || die "CLUSTER_NAME must match ^awseks-cli-[a-z0-9-]{1,24}$. The Terraform path uses the awseks-tf- prefix."
-  [[ "${KUBERNETES_VERSION}" =~ ^(1\.34|1\.35|1\.36|1\.37)$ ]] || die "KUBERNETES_VERSION must be 1.34, 1.35, 1.36, or 1.37."
+  [[ "${KUBERNETES_VERSION}" =~ ^1\.[0-9]+$ ]] || die "KUBERNETES_VERSION must look like 1.36. Standard support is checked with aws eks describe-cluster-versions, not a fixed list."
   [[ "${AZ_COUNT}" =~ ^[23]$ ]] || die "AZ_COUNT must be 2 or 3."
   [[ "${NAT_STRATEGY}" =~ ^(single|per_az|none)$ ]] || die "NAT_STRATEGY must be single, per_az, or none."
   [[ "${ENABLE_PUBLIC_ENDPOINT}" =~ ^(true|false)$ ]] || die "ENABLE_PUBLIC_ENDPOINT must be true or false."
@@ -223,7 +223,7 @@ documented_addon_pin() {
     1.36:coredns) printf '%s' "v1.14.7-eksbuild.22" ;;
     1.37:coredns) printf '%s' "v1.14.7-eksbuild.22" ;;
     *)
-      return 1
+      return 0
       ;;
   esac
 }

@@ -111,6 +111,13 @@ def svgs():
  for p in (R/'diagrams').glob('*.svg'):ET.parse(p)
  return f'{len(list((R/"diagrams").glob("*.svg")))} valid SVG XMLs'
 check('SVG XML',svgs)
+def auditregressions():
+ p=subprocess.run([sys.executable,str(R/'tools/test_audit_regressions.py')],capture_output=True,text=True)
+ assert p.returncode==0,p.stdout+p.stderr
+ return '19 local/synthetic regression tests PASS: B1/B2/B3/V1/V2 and immutable independent audit; no cloud execution'
+check('Audit regression tests',auditregressions)
+check('Flow JSON formal schema',lambda: (jsonschema.validate(model,json.loads((R/'FLOW-SCENARIOS.schema.json').read_text())) or 'PASS'))
+
 (R/'VALIDATION-RESULTS.json').write_text(json.dumps(report,indent=2)+'\n')
 print(json.dumps(report,indent=2))
 sys.exit(1 if any(c['status']=='FAIL' for c in report['checks']) else 0)

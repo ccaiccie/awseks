@@ -526,5 +526,29 @@
     "bytes": 15751,
     "sha256": "727b87cdd491a4665793c0961128a7cc737c99e221190f2a962c0938455a5cd6",
     "file": "sources/S66.txt"
+  },
+  {
+    "id": "S67",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/cni-network-policy.html",
+    "status": 200,
+    "bytes": 10459,
+    "sha256": "0ba57712f874bee5887401504530e99fb8ea3c85d950d0663faf88337a88880e",
+    "file": "sources/S67.txt"
+  },
+  {
+    "id": "S68",
+    "url": "https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/master/config/master/aws-k8s-cni.yaml",
+    "status": 200,
+    "bytes": 12160,
+    "sha256": "dfa86bbcd955db8af8e221a325c45c91739c180c879be7e2dc6151f9fc6ed4d9",
+    "file": "sources/S68.txt"
+  },
+  {
+    "id": "S69",
+    "url": "https://kubernetes.io/docs/reference/using-api/api-concepts/",
+    "status": 200,
+    "bytes": 72699,
+    "sha256": "3ed99f46ff3b5d8b89b855ac51b8279ba38a54ec508a974f6978ef9e21e88d5a",
+    "file": "sources/S69.txt"
   }
 ]

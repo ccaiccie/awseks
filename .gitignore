@@ -27,6 +27,8 @@ kubeconfig-*
 **/.kube/
 
 # Local editor and OS files.
+__pycache__/
+*.pyc
 .DS_Store
 .idea/
 .vscode/

@@ -24,8 +24,19 @@ def main():
     if pages != 37:
         fail(f"expected 37 draw.io pages, found {pages}")
     scripts = list((ROOT / "class/labs/scripts").glob("*.sh"))
-    if len(scripts) != 20:
-        fail(f"expected 20 class scripts, found {len(scripts)}")
+    if len(scripts) != 21:
+        fail(f"expected 21 class scripts, found {len(scripts)}")
+    for relative in (
+        "class/AUDIT-RESOLUTION.md",
+        "class/NARRATION-CORRECTIONS-v2.md",
+        "class/labs/helpers/inspect_policy_agent.py",
+        "class/labs/manifests/namespace.yaml",
+        "class/labs/manifests/policy-fixture.yaml",
+        "class/labs/scripts/policy-agent-check.sh",
+        "class/tools/test_audit_regressions.py",
+    ):
+        if not (ROOT / relative).is_file():
+            fail(f"missing {relative}")
     curriculum = (ROOT / "class/CURRICULUM.md").read_text()
     for chapter in range(26):
         needle = f"|{chapter:02d} "

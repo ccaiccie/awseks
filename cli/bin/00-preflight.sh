@@ -34,6 +34,12 @@ state_set PROVISIONER "awscli"
 state_set CLUSTER_NAME "${CLUSTER_NAME}"
 state_set AWS_REGION "${AWS_REGION}"
 
+aws_cli eks describe-cluster-versions --version-status STANDARD_SUPPORT --output json > "${STATE_DIR}/cluster-versions.json"
+if ! jq -e --arg version "${KUBERNETES_VERSION}" '.clusterVersions[] | select(.clusterVersion == $version)' "${STATE_DIR}/cluster-versions.json" >/dev/null; then
+  die "Kubernetes ${KUBERNETES_VERSION} is not in aws eks describe-cluster-versions --version-status STANDARD_SUPPORT for ${AWS_REGION}. The dated list in docs/versions.md is a snapshot, not a promise."
+fi
+info "describe-cluster-versions reports ${KUBERNETES_VERSION} in STANDARD_SUPPORT."
+
 eks_versions="$(aws_cli eks describe-addon-versions --addon-name vpc-cni --kubernetes-version "${KUBERNETES_VERSION}" --query 'addons[0].addonVersions[0].addonVersion' --output text)"
 [[ -n "${eks_versions}" && "${eks_versions}" != "None" ]] || die "Could not read vpc-cni add-on versions for Kubernetes ${KUBERNETES_VERSION}. The region may not offer that minor, or eks:DescribeAddonVersions is missing."
 info "describe-addon-versions is reachable for vpc-cni on ${KUBERNETES_VERSION}. A listed version is ${eks_versions}."

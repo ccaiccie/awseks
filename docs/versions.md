@@ -8,7 +8,7 @@ Fetched and checked on **2026-11-07**. Re-check before you teach from this file 
 | --- | --- | --- |
 | Terraform CLI | 1.17.1 | HashiCorp install page and the 1.17.1 GitHub release, 28 Oct 2026 |
 | AWS provider | 6.72.0 | Terraform Registry, published 4 Nov 2026 |
-| Kubernetes minors accepted | 1.34, 1.35, 1.36, 1.37 | EKS version lifecycle, standard support |
+| Kubernetes minors on the 2026-11-07 lifecycle page | 1.34, 1.35, 1.36, 1.37 | Snapshot only. `aws eks describe-cluster-versions --version-status STANDARD_SUPPORT` is the check the CLI preflight runs |
 | Default minor | 1.36 | Class teaching baseline. Standard support on the lifecycle page. 1.37 shipped 1 Oct 2026 and is accepted, but it is the newest minor |
 | Support type | STANDARD | `create-cluster` documents that new clusters would use extended support unless this is set |
 | Node AMI | `AL2023_x86_64_STANDARD` | `create-nodegroup` AMI type list. AL2 EKS-optimized AMIs stopped being published on 26 Nov 2025 |
@@ -34,8 +34,8 @@ Re-check:
 ```bash
 aws eks describe-addon-versions \
   --addon-name vpc-cni \
-  --kubernetes-version 1.35 \
-  --query 'addons[0].addonVersions[].{version:addonVersion,default:compatibilities[?clusterVersion==`1.35`].defaultVersion}'
+  --kubernetes-version 1.36 \
+  --query 'addons[0].addonVersions[].{version:addonVersion,default:compatibilities[?clusterVersion==`1.36`].defaultVersion}'
 ```
 
 The CLI path runs that API and refuses a pin that is not in the list. Terraform stores the three table pins in `terraform/locals.tf` and resolves the other two with `aws_eks_addon_version` (default version, `most_recent` left unset).
@@ -78,4 +78,4 @@ The class CLI scripts still refuse to run until `APP_IMAGE`, `AWSCLI_IMAGE`, and
 
 ## kubectl
 
-Use a kubectl minor within one of the cluster minor. For the default cluster, that is 1.35.x. The preflight prints `kubectl version --client` and does not download a binary.
+Use a kubectl minor within one of the cluster minor. For the default cluster, that is 1.36.x. The preflight prints `kubectl version --client` and does not download a binary.
