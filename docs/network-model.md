@@ -23,7 +23,8 @@ Security groups and NetworkPolicy do not check IAM. A pod that is allowed to ope
 - The cluster security group is stateful and attached to control plane ENIs and managed nodes. EKS restores the self-referential rules if you delete them.
 - The extra API security group allows TCP 443 from the VPC CIDR to the control plane ENIs only.
 - The default network ACL is left in place. A custom deny-all NACL is not applied by these scripts. NACLs are stateless, so a one-way rule breaks return traffic.
-- NetworkPolicy is enforced by the VPC CNI because the add-on is created with `enableNetworkPolicy=true`. The sample policy denies ingress in the `lab` namespace and then allows the client pod to reach demo on TCP 8080. It does not change the route table and it does not protect the AWS API.
+- NetworkPolicy enforcement here depends on the VPC CNI agent actually running with network policy enabled. Discover that container from its image or arguments. A fixed container name is not the test, and `--enable-network-policy=false` means the manifest is inert. The AWS considerations page (https://docs.aws.amazon.com/eks/latest/userguide/cni-network-policy.html) says enforcement is aimed at controller-owned pods and that a Service port used with the policy should match the container port.
+- The ordinary Service `demo` stays port 80 to container 8080. That is kube-proxy DNAT, not a VPC route. The policy exercise uses Service `demo-policy` on 8080 to container 8080, a direct pod IP on 8080, and a separate destination for egress. Clients are Deployments.
 
 ## Load balancers
 

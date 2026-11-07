@@ -10631,7 +10631,7 @@
       "nodes": [
         {
           "id": "gate",
-          "label": "Eligibility + insights",
+          "label": "Downgrade add-ons",
           "bounds": {
             "x": 70.0,
             "y": 270,
@@ -10759,7 +10759,7 @@
           "packetBefore": null,
           "packetAfter": null,
           "routeLookup": null,
-          "detail": "Within7days, prior in-place upgrade, supported target, ACTIVE, compatible feature set; no end-of-extended-support auto-upgrade rollback"
+          "detail": "Within 7 days, prior in-place upgrade, supported target, ACTIVE, feature checks. Downgrade incompatible EKS add-ons here, before nodes and before the control plane. No --force."
         },
         {
           "actor": "nodes",
@@ -10767,7 +10767,7 @@
           "packetBefore": null,
           "packetAfter": null,
           "routeLookup": null,
-          "detail": "Do not leave nodes newer than target API; MNG/self-managed separate responsibility"
+          "detail": "After add-on downgrade and before the control plane: do not leave kubelets newer than the target API. Standard managed and self-managed nodes are operator-owned. Auto Mode rolls its nodes back itself. Fargate pods are replaced by their own documented path."
         },
         {
           "actor": "cp",
@@ -10783,7 +10783,7 @@
           "packetBefore": null,
           "packetAfter": null,
           "routeLookup": null,
-          "detail": "Addon versions not automatically rolled back; no --force default"
+          "detail": "After the control plane reaches the previous minor, verify add-ons, nodes, and workloads. This stage does not replace the pre-rollback add-on downgrade. No --force."
         }
       ],
       "returnProcessing": [
@@ -10797,7 +10797,7 @@
         }
       ],
       "notes": [
-        "S50 current docs supersede old categorical no-downgrade guidance; stateful workload compatibility still must be evaluated."
+        "S50: downgrade incompatible add-ons before the control plane, then nodes that would be newer than the target API, then the control plane, then verify. Seven-day previous-minor rollback stays; it is not a general downgrade and --force is not the default."
       ],
       "failure": null,
       "protocolEnvelope": "none; native VPC, no overlay",

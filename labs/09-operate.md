@@ -28,7 +28,7 @@ aws eks describe-addon-versions --addon-name vpc-cni --kubernetes-version 1.37 \
   --query 'addons[0].addonVersions[0].addonVersion'
 ```
 
-Rollback exists only as documented in [docs/versions.md](../docs/versions.md): previous minor, within 7 days of a completed in-place upgrade, cluster ACTIVE, feature and insight checks. It does not restore an older etcd backup of your app, because this is not a customer etcd export.
+Rollback stays the conditional feature in [docs/versions.md](../docs/versions.md) and https://docs.aws.amazon.com/eks/latest/userguide/rollback-cluster.html: previous minor, within 7 days of a completed in-place upgrade, cluster ACTIVE, feature and insight checks. Before any control-plane rollback command, downgrade incompatible add-ons and move Standard nodes whose kubelets would be newer than the target. Verify add-ons and workloads after. Do not pass `--force`. Auto Mode moves its own nodes. This does not restore an older copy of your application data. The command order is written in `class/labs/EXPERT-COMMANDS.md`. It is a guided procedure, not a script in this repository.
 
 ## Expected observation
 

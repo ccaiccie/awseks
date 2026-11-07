@@ -12,7 +12,11 @@ aws eks describe-addon --cluster-name "$STACK" --addon-name vpc-cni
 kubectl -n kube-system get cm kube-proxy-config -o yaml
 kubectl -n kube-system logs daemonset/kube-proxy --tail=100
 kubectl -n kube-system get ds aws-node -o yaml
-kubectl -n kube-system logs daemonset/aws-node -c aws-network-policy-agent --tail=100
+# Discover the policy-agent container from image or args. Do not assume the name aws-network-policy-agent.
+kubectl -n kube-system get ds aws-node -o json | jq -r '.spec.template.spec.containers[] | select((.image|test("aws-network-policy-agent")) or ((.args//[])|join(" ")|test("enable-network-policy"))) | .name'
+kubectl -n kube-system logs daemonset/aws-node -c "$DISCOVERED_AGENT_CONTAINER" --tail=100
+kubectl get crd policyendpoints.networking.k8s.aws
+kubectl get policyendpoints -A
 ```
 Native nftables proxy mode isn't the same thing as iptables' nft backend. Do not change mode/schema blindly; primary flow lecture assumes **proven** iptables canonical track. Exact addon build/schema is discovered, then pinned; verify request values against returned schema before update.
 
@@ -73,7 +77,27 @@ aws eks describe-update --name "$STACK" --nodegroup-name "$STACK-ng" --update-id
 ```
 `--resolve-conflicts PRESERVE` preserves changed field ownership, not a compatibility guarantee. Don't pass newer nodes to an older control plane, skip minor versions or assume wait cluster-active proves workload health. For updated launch-template versions, follow explicit managed-nodegroup launch-template update constraints rather than inventing an AMI/launch-template combination.
 
-**Current conditional rollback**: source S50 documents previous-minor rollback within7days for eligible in-place upgrades. Validate eligibility/insights and roll back too-new nodes first, addons separately. The control-plane API is `aws eks update-cluster-version --name "$STACK" --kubernetes-version "$ELIGIBLE_PREVIOUS_MINOR"`; do not run against created-at-current clusters, unsupported boundaries or incompatible feature state. No `--force` default. This does not revert app/PV/etcd data.
+**Current conditional rollback** (https://docs.aws.amazon.com/eks/latest/userguide/rollback-cluster.html): previous minor only, and only within 7 days of a completed in-place upgrade. Do not run it against a cluster created at its current version. No `--force`.
+
+Before the control plane moves, downgrade incompatible add-ons and nodes. Standard managed and self-managed nodes are yours to move. Auto Mode moves its nodes as part of the control-plane rollback. Fargate is not that nodegroup command. Verify after.
+
+```bash
+aws eks list-insights --cluster-name "$STACK"
+aws eks describe-addon-versions --addon-name "$EXACT_ADDON_NAME" --kubernetes-version "$ELIGIBLE_PREVIOUS_MINOR"
+# Only after that list shows a compatible build. Example shape, not a universal version:
+aws eks update-addon --cluster-name "$STACK" --addon-name "$EXACT_ADDON_NAME" \
+  --addon-version "$REVIEWED_TARGET_BUILD" --resolve-conflicts PRESERVE
+aws eks wait addon-active --cluster-name "$STACK" --addon-name "$EXACT_ADDON_NAME"
+aws eks update-nodegroup-version --cluster-name "$STACK" --nodegroup-name "$STACK-ng" \
+  --kubernetes-version "$ELIGIBLE_PREVIOUS_MINOR"
+aws eks describe-update --name "$STACK" --nodegroup-name "$STACK-ng" --update-id "$EXACT_UPDATE_ID"
+aws eks update-cluster-version --name "$STACK" --kubernetes-version "$ELIGIBLE_PREVIOUS_MINOR"
+aws eks describe-update --name "$STACK" --update-id "$EXACT_UPDATE_ID"
+aws eks describe-addon --cluster-name "$STACK" --addon-name "$EXACT_ADDON_NAME"
+kubectl get nodes
+```
+
+This does not revert application or PV data. Preserved etcd data is not an older snapshot.
 
 ## Owned DNS + ACM TLS reference
 ```bash
