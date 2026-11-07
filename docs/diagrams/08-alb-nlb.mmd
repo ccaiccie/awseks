@@ -1,0 +1,7 @@
+flowchart TB
+  client[Client] --> alb[ALB]
+  client --> nlb[NLB]
+  alb --> ip[target-type ip: pod ENI]
+  alb --> inst[target-type instance: node port]
+  nlb --> ip
+  nlb --> inst

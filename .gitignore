@@ -1,0 +1,33 @@
+# Terraform local state and provider cache. Never commit these.
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Variable files can contain account-specific CIDRs. Keep the examples.
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# AWS CLI path records real resource IDs. Keep the example config only.
+cli/state/
+cli/config.env
+
+# Helm stage state and any kubeconfig written by a lab.
+stages/**/state/
+kubeconfig
+kubeconfig-*
+**/.kube/
+
+# Local editor and OS files.
+.DS_Store
+.idea/
+.vscode/
+*.swp

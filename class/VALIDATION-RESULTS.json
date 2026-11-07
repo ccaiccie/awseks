@@ -1,0 +1,46 @@
+{
+  "scope": "LOCAL STATIC ONLY; no AWS/account/API commands executed",
+  "checks": [
+    {
+      "name": "bash -n",
+      "status": "PASS",
+      "detail": "20 scripts parse; no script executed"
+    },
+    {
+      "name": "ShellCheck",
+      "status": "PASS",
+      "detail": "20 scripts, warning severity or higher, no findings"
+    },
+    {
+      "name": "YAML parse and object identity",
+      "status": "PASS",
+      "detail": "17 YAML documents, unique object keys and basic structure"
+    },
+    {
+      "name": "Kubernetes1.36 strict schemas",
+      "status": "PASS",
+      "detail": "17 docs validated against strict standalone Kubernetes1.36.0-derived schemas (community schema mirror), NOT live API server"
+    },
+    {
+      "name": "Scenario semantic structure",
+      "status": "PASS",
+      "detail": "29 distinct scenarios, forward/return ordering, stop actors and route ownership fields"
+    },
+    {
+      "name": "Flow geometry",
+      "status": "PASS",
+      "detail": "138 explicit orthogonal inter-device segments incl subflows; unrelated node bounds +20px clearance; topology bottom gap and 930px band bounds. Not full glyph/badge/arrowhead visual sign-off."
+    },
+    {
+      "name": "draw.io XML",
+      "status": "PASS",
+      "detail": "37 pages including explicit subflows, XML parses, unique IDs and valid source/target/parent refs; editor import NOT tested"
+    },
+    {
+      "name": "SVG XML",
+      "status": "PASS",
+      "detail": "38 valid SVG XMLs"
+    }
+  ],
+  "warnings": []
+}

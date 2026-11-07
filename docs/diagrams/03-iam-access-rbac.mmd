@@ -1,0 +1,7 @@
+flowchart TB
+  human[IAM role or user]
+  api[EKS access entry mode API]
+  policy[EKS access policy or Kubernetes RBAC]
+  nodeRole[Node IAM role]
+  human --> api --> policy
+  nodeRole --> api

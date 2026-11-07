@@ -1,0 +1,35 @@
+# Copy to terraform.tfvars and edit. terraform.tfvars is gitignored.
+# Do not apply the example file as-is: the documentation CIDR below is rejected on purpose.
+
+region       = "us-west-2"
+owner        = "student"
+cluster_name = "awseks-tf-lab"
+
+# Class teaching baseline is 1.36. 1.34, 1.35, and 1.37 are also standard-support minors.
+kubernetes_version = "1.36"
+
+vpc_cidr           = "10.0.0.0/16"
+service_ipv4_cidr  = "172.20.0.0/16"
+az_count           = 2
+nat_strategy       = "single" # single | per_az | none
+enable_interface_endpoints = false
+
+# Private API is always on. Public API stays off until you set a real client CIDR.
+# Replace 203.0.113.10/32 with the /32 from `curl -fsS https://checkip.amazonaws.com`.
+# Documentation ranges and 0.0.0.0/0 fail validation.
+enable_public_endpoint = false
+public_access_cidrs    = []
+
+deletion_protection              = true
+bootstrap_cluster_creator_admin  = true
+node_instance_types              = ["t3.medium"]
+node_ami_type                    = "AL2023_x86_64_STANDARD"
+node_capacity_type               = "ON_DEMAND"
+node_desired_size                = 2
+node_min_size                    = 2
+node_max_size                    = 3
+node_disk_gib                    = 20
+cluster_log_types                = []
+encrypt_kubernetes_secrets       = false
+enable_flow_logs                 = false
+vpc_cni_use_pod_identity         = false

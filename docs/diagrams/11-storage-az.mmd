@@ -1,0 +1,4 @@
+flowchart LR
+  pvc[PVC] --> sc[gp3 StorageClass]
+  sc --> vol[EBS volume in one AZ]
+  vol --> pod[Pod on a node in that AZ]

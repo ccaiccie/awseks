@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: eksclass-alb
+spec:
+  controller: ingress.k8s.aws/alb
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-alb
+  namespace: eksclass
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz
+    alb.ingress.kubernetes.io/inbound-cidrs: 10.42.0.0/16
+spec:
+  ingressClassName: eksclass-alb
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: web
+            port: {number: 80}

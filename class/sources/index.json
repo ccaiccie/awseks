@@ -1,0 +1,530 @@
+[
+  {
+    "id": "S01",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html",
+    "status": 200,
+    "bytes": 15912,
+    "sha256": "db24cd6620761f82a53afda9d6bd43e6ef289fae498e8a77cd064fea035a26ae",
+    "file": "sources/S01.txt"
+  },
+  {
+    "id": "S02",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/clusters.html",
+    "status": 200,
+    "bytes": 1686,
+    "sha256": "fb415a3d23017f630871b08e7e1a9602a4b0357e947190fe7946e094c77400ef",
+    "file": "sources/S02.txt"
+  },
+  {
+    "id": "S03",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html",
+    "status": 200,
+    "bytes": 11838,
+    "sha256": "578c481f7db49096b4ffee8f3dd605b822286ba0b4a29b278a3b09a15bedba36",
+    "file": "sources/S03.txt"
+  },
+  {
+    "id": "S04",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/network-reqs.html",
+    "status": 200,
+    "bytes": 19108,
+    "sha256": "8fc9c3cd49c522026cbbd1af42aaab2e3c3b22692c3459056f5ea562e6adb0f6",
+    "file": "sources/S04.txt"
+  },
+  {
+    "id": "S05",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/sec-group-reqs.html",
+    "status": 200,
+    "bytes": 6298,
+    "sha256": "9bad05244492624ddf0902db091d2941138a07454379eff80f86aa093e7ec9f3",
+    "file": "sources/S05.txt"
+  },
+  {
+    "id": "S06",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html",
+    "status": 200,
+    "bytes": 4105,
+    "sha256": "3134eae2c47f16abe31f2f389c05639e2951e9656fafa29836fa4b09d45f8910",
+    "file": "sources/S06.txt"
+  },
+  {
+    "id": "S07",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html",
+    "status": 200,
+    "bytes": 5649,
+    "sha256": "6abd1bfc9697230b484df201a83b020816ecc28bfa5ce736c7d404e1641877a6",
+    "file": "sources/S07.txt"
+  },
+  {
+    "id": "S08",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/pod-networking.html",
+    "status": 200,
+    "bytes": 2896,
+    "sha256": "8eb3f45c52ac764eca801a2b8c7e8d65e1a97b25279a4944abc00a666686e776",
+    "file": "sources/S08.txt"
+  },
+  {
+    "id": "S09",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/cni-increase-ip-addresses.html",
+    "status": 200,
+    "bytes": 5067,
+    "sha256": "9d0f809bbda0cf7ed773f0d9d628370d22732bd4a0c48ddb4341cc7e84ac42de",
+    "file": "sources/S09.txt"
+  },
+  {
+    "id": "S10",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/cni-custom-network.html",
+    "status": 200,
+    "bytes": 3003,
+    "sha256": "71c59f42768c9ef74e78ded6aaa8965f562a71a12fc49cb4021a43f6f3b7700f",
+    "file": "sources/S10.txt"
+  },
+  {
+    "id": "S11",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/security-groups-for-pods.html",
+    "status": 200,
+    "bytes": 5925,
+    "sha256": "96e6ad930ee4bf070489f4d510ade7752b8c191a193756ab0a5ba256573de14a",
+    "file": "sources/S11.txt"
+  },
+  {
+    "id": "S12",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/cni-network-policy-configure.html",
+    "status": 200,
+    "bytes": 10402,
+    "sha256": "a5b1fc5b9df5d737d9cb98b7be4610fb73c24686330a5842f44e2ee622d16531",
+    "file": "sources/S12.txt"
+  },
+  {
+    "id": "S13",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/external-snat.html",
+    "status": 200,
+    "bytes": 4514,
+    "sha256": "b56a51bf212776097ecead513d6b1bf4660eabcc8c41af80936d825661423a69",
+    "file": "sources/S13.txt"
+  },
+  {
+    "id": "S14",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/private-clusters.html",
+    "status": 200,
+    "bytes": 9331,
+    "sha256": "2fdbcf8c0179788f69bc721046707b8c6d3b5f39e947807c0d9924c55994afdb",
+    "file": "sources/S14.txt"
+  },
+  {
+    "id": "S15",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html",
+    "status": 200,
+    "bytes": 8516,
+    "sha256": "0d6a959a5a2b420fb93ad56bf86d75dea02e03273602a220966cdf6e7cad755e",
+    "file": "sources/S15.txt"
+  },
+  {
+    "id": "S16",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/pod-id-how-it-works.html",
+    "status": 200,
+    "bytes": 4295,
+    "sha256": "ced6575bf43bce0ddfe8136a763996df5bb2d630a1765b2574522bd79125285b",
+    "file": "sources/S16.txt"
+  },
+  {
+    "id": "S17",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html",
+    "status": 200,
+    "bytes": 6097,
+    "sha256": "2d1f4b9a63e3d38085996ba54358db34af1a11311f95e09c6d59a5d93a8c4406",
+    "file": "sources/S17.txt"
+  },
+  {
+    "id": "S18",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/auto-networking.html",
+    "status": 200,
+    "bytes": 7343,
+    "sha256": "6e9799d5fa2b9f6da13df1de14f94b06b4b611c6032f41828a3655ba3cdd30b2",
+    "file": "sources/S18.txt"
+  },
+  {
+    "id": "S19",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/fargate.html",
+    "status": 200,
+    "bytes": 10348,
+    "sha256": "516299c8bab59b5fef5c379e22349534107c9bea24f3dd3ed341ca9215dc80bf",
+    "file": "sources/S19.txt"
+  },
+  {
+    "id": "S20",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html",
+    "status": 200,
+    "bytes": 16661,
+    "sha256": "dde361d345a4fb2014ebd993e93cfd2a341f5793c6538abcab7ef07361aea88c",
+    "file": "sources/S20.txt"
+  },
+  {
+    "id": "S21",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html",
+    "status": 200,
+    "bytes": 14626,
+    "sha256": "0a3f01583f8e2b07ed44cc9cb7275d0945922f01b8003ae98ceaea6ba79f29ed",
+    "file": "sources/S21.txt"
+  },
+  {
+    "id": "S22",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html",
+    "status": 200,
+    "bytes": 12998,
+    "sha256": "17bbc28dc5d7c3ac4c036daeaebd78dbe9b927cbae324623c7b3ff8bc6eb1c16",
+    "file": "sources/S22.txt"
+  },
+  {
+    "id": "S23",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html",
+    "status": 200,
+    "bytes": 15596,
+    "sha256": "c2ce96a9d0bd46f6fe50491b8234e2e11fb47daa4da15e8e4431903e86d91ee2",
+    "file": "sources/S23.txt"
+  },
+  {
+    "id": "S24",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html",
+    "status": 200,
+    "bytes": 8704,
+    "sha256": "6527613c35751eeadcf81626cc120b28b786b7b849c574296865703bfce3085e",
+    "file": "sources/S24.txt"
+  },
+  {
+    "id": "S25",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/managing-kube-proxy.html",
+    "status": 200,
+    "bytes": 2925,
+    "sha256": "202ffc526eb9c492d3a5f496de5eedf6c1f4cde9732d41d97c54dfe46e11d464",
+    "file": "sources/S25.txt"
+  },
+  {
+    "id": "S26",
+    "url": "https://kubernetes.io/docs/reference/networking/virtual-ips/",
+    "status": 200,
+    "bytes": 36821,
+    "sha256": "2ecaf9868daf3decae3e28e1c96365466ed3ec9e3af1c758bf37b3603c540c2c",
+    "file": "sources/S26.txt"
+  },
+  {
+    "id": "S27",
+    "url": "https://kubernetes.io/docs/concepts/services-networking/network-policies/",
+    "status": 200,
+    "bytes": 22439,
+    "sha256": "3c353a5ad996d1e5a26e99a81e5be9ec6cd270faf1118e649b8933f4bf28f312",
+    "file": "sources/S27.txt"
+  },
+  {
+    "id": "S28",
+    "url": "https://kubernetes.io/docs/concepts/services-networking/service/",
+    "status": 200,
+    "bytes": 40869,
+    "sha256": "4df9771421da8df09db28390d4477e41cb01c6bec45608accd3709f0a583ebe4",
+    "file": "sources/S28.txt"
+  },
+  {
+    "id": "S29",
+    "url": "https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/gateway/gateway/",
+    "status": 200,
+    "bytes": 8465,
+    "sha256": "d57cb737816e1f6c05592a5f8da6fd33c1115521feb13fd6f312a9edb534c7d3",
+    "file": "sources/S29.txt"
+  },
+  {
+    "id": "S30",
+    "url": "https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/",
+    "status": 200,
+    "bytes": 60692,
+    "sha256": "9e269e6f13324dd3e89297480117d3fee1a94395c788e6723ef1c3a7b1c94e7f",
+    "file": "sources/S30.txt"
+  },
+  {
+    "id": "S31",
+    "url": "https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/service/annotations/",
+    "status": 200,
+    "bytes": 37883,
+    "sha256": "3d0d23287821a63f3bb029a8761d35e4ae1f96815c94d822890d7f1ee8e745ed",
+    "file": "sources/S31.txt"
+  },
+  {
+    "id": "S32",
+    "url": "https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/deploy/installation/",
+    "status": 200,
+    "bytes": 13921,
+    "sha256": "a2747dd54a783abb1922295aaa4a8b202b6b8e732f82bd4567b46077f70bffd6",
+    "file": "sources/S32.txt"
+  },
+  {
+    "id": "S33",
+    "url": "https://docs.aws.amazon.com/elasticloadbalancing/latest/network/edit-target-group-attributes.html",
+    "status": 200,
+    "bytes": 26588,
+    "sha256": "b64f1407f745ab8e08a1cce210159ac09eef4e1229b015127810b32314abb4f4",
+    "file": "sources/S33.txt"
+  },
+  {
+    "id": "S34",
+    "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html",
+    "status": 200,
+    "bytes": 5978,
+    "sha256": "40a931b86660abcf6944d08fbd3a2f5059574ca84b946b6c683bc0ba9cba09a0",
+    "file": "sources/S34.txt"
+  },
+  {
+    "id": "S35",
+    "url": "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html",
+    "status": 200,
+    "bytes": 4722,
+    "sha256": "2192140856b13972aa54ec14f1ed9f2418586c5435ca30f415cf9613a5615258",
+    "file": "sources/S35.txt"
+  },
+  {
+    "id": "S36",
+    "url": "https://docs.aws.amazon.com/eks/latest/best-practices/cas.html",
+    "status": 200,
+    "bytes": 25705,
+    "sha256": "c9ab8395057298a82bd5b51c0000ce0476f6606ab02c280662d5e6ae6a598052",
+    "file": "sources/S36.txt"
+  },
+  {
+    "id": "S37",
+    "url": "https://docs.aws.amazon.com/eks/latest/best-practices/karpenter.html",
+    "status": 200,
+    "bytes": 24392,
+    "sha256": "1a2f3b07319b29e3fccfd3bac7eb92e1ca3c03fc6390b3b398f0b9c7ece27b07",
+    "file": "sources/S37.txt"
+  },
+  {
+    "id": "S38",
+    "url": "https://docs.aws.amazon.com/eks/latest/best-practices/cost-opt-networking.html",
+    "status": 200,
+    "bytes": 36820,
+    "sha256": "6e13ba76867142edddfd804f871424e7753537ecba77f686b38e644524bde4c1",
+    "file": "sources/S38.txt"
+  },
+  {
+    "id": "S39",
+    "url": "https://docs.aws.amazon.com/cli/latest/reference/eks/create-cluster.html",
+    "status": 200,
+    "bytes": 63875,
+    "sha256": "50c2e25d5ddbec1aadc5483a00752a7c58686ec040ff4417f5a5bae213be021e",
+    "file": "sources/S39.txt"
+  },
+  {
+    "id": "S40",
+    "url": "https://docs.aws.amazon.com/cli/latest/reference/eks/describe-cluster-versions.html",
+    "status": 200,
+    "bytes": 17415,
+    "sha256": "ab90cea7042f1629080592c6c96730785e7ab3489b100729ceb2e669b3f281fc",
+    "file": "sources/S40.txt"
+  },
+  {
+    "id": "S41",
+    "url": "https://kubernetes.io/docs/concepts/workloads/controllers/deployment/",
+    "status": 200,
+    "bytes": 53573,
+    "sha256": "e46d605d80cd1f1bb2b9bb15323562137074d0c1ba3d5d6a17ba90bde85bcd88",
+    "file": "sources/S41.txt"
+  },
+  {
+    "id": "S42",
+    "url": "https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/",
+    "status": 200,
+    "bytes": 31071,
+    "sha256": "a20a2a196c0badb610418e95e49ecaddf1f89b9aed6ebc1128450531612dd91a",
+    "file": "sources/S42.txt"
+  },
+  {
+    "id": "S43",
+    "url": "https://kubernetes.io/docs/concepts/storage/storage-classes/",
+    "status": 200,
+    "bytes": 21419,
+    "sha256": "fd7968b3ed9498bb3cfc09108513056cfa3ab831aed9e8ccc45c38f67d8c219c",
+    "file": "sources/S43.txt"
+  },
+  {
+    "id": "S44",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html",
+    "status": 200,
+    "bytes": 6893,
+    "sha256": "7664074818daa6f4518ad5c5000cf2c0c5823129674559e9a5f6623726d69b36",
+    "file": "sources/S44.txt"
+  },
+  {
+    "id": "S45",
+    "url": "https://docs.aws.amazon.com/eks/latest/best-practices/prefix-mode-linux.html",
+    "status": 200,
+    "bytes": 9093,
+    "sha256": "a4419b414d315e94f9a65094ad0a14ff38079ca945998aba92dbcb725501a10d",
+    "file": "sources/S45.txt"
+  },
+  {
+    "id": "S46",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/auto-configure-gateway-api.html",
+    "status": 200,
+    "bytes": 13604,
+    "sha256": "74c633cba7a59f5f28e0af329587c0cde529c73b0df79eeb23a65ae99ec2f3a4",
+    "file": "sources/S46.txt"
+  },
+  {
+    "id": "S47",
+    "url": "https://aws.amazon.com/eks/pricing/",
+    "status": 200,
+    "bytes": 16421,
+    "sha256": "d4cc597390bed43e6a52d99636d1b43d182d9ca4f1fc265b1eda4e64be22234d",
+    "file": "sources/S47.txt"
+  },
+  {
+    "id": "S48",
+    "url": "https://docs.aws.amazon.com/AmazonECR/latest/userguide/vpc-endpoints.html",
+    "status": 200,
+    "bytes": 17425,
+    "sha256": "dc00cdcb8a69294430f03b7aa7e4a30c90ad2e863fcb6e1459bdf4e2db5e9d74",
+    "file": "sources/S48.txt"
+  },
+  {
+    "id": "S49",
+    "url": "https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/tag/v3.6.2",
+    "status": 200,
+    "bytes": 2942,
+    "sha256": "d3044a4a1ec1473c179b549e2f25a864cd116a33b4a3e78fc970485bcbbddbc1",
+    "file": "sources/S49.txt"
+  },
+  {
+    "id": "S50",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/rollback-cluster.html",
+    "status": 200,
+    "bytes": 15135,
+    "sha256": "c4977725f4ad66d89b890f831ddac34a62e7c0e938135be543d82a910a7f0b98",
+    "file": "sources/S50.txt"
+  },
+  {
+    "id": "S51",
+    "url": "https://docs.aws.amazon.com/eks/latest/best-practices/security.html",
+    "status": 200,
+    "bytes": 5614,
+    "sha256": "3b196a031d4e26380969bdbe0a00f2e9193223e3c3be9b08f3ed703b65441b0d",
+    "file": "sources/S51.txt"
+  },
+  {
+    "id": "S52",
+    "url": "https://docs.aws.amazon.com/eks/latest/best-practices/reliability.html",
+    "status": 200,
+    "bytes": 5306,
+    "sha256": "a2c4caa9346d25e4cca21f8b7877e76f0533d52489cab2ac92a596d438480854",
+    "file": "sources/S52.txt"
+  },
+  {
+    "id": "S53",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/alternate-cni-plugins.html",
+    "status": 200,
+    "bytes": 3023,
+    "sha256": "fbe92292cfad011a7e208ff2f4af5a8e417840077ccf6733d1d2b76f894de0c0",
+    "file": "sources/S53.txt"
+  },
+  {
+    "id": "S54",
+    "url": "https://kubernetes.io/docs/concepts/configuration/secret/",
+    "status": 200,
+    "bytes": 29863,
+    "sha256": "90aa8ce902f25b9b9a1e6d2f71e509d580c1affbdf1ca227eeeee631f354b664",
+    "file": "sources/S54.txt"
+  },
+  {
+    "id": "S55",
+    "url": "https://kubernetes.io/docs/concepts/architecture/",
+    "status": 200,
+    "bytes": 10894,
+    "sha256": "ecccae1191713034888ac07cdbd523f2fac5af40169e07dcea8fe631e4b2f12d",
+    "file": "sources/S55.txt"
+  },
+  {
+    "id": "S56",
+    "url": "https://docs.aws.amazon.com/cli/latest/reference/eks/create-nodegroup.html",
+    "status": 200,
+    "bytes": 50614,
+    "sha256": "e68d153114303ade6f790194ce680168dee13b248b8ac25c44154f141a7c6b28",
+    "file": "sources/S56.txt"
+  },
+  {
+    "id": "S57",
+    "url": "https://docs.aws.amazon.com/cli/latest/reference/eks/create-pod-identity-association.html",
+    "status": 200,
+    "bytes": 20049,
+    "sha256": "d6a441a7773395985b7bfcaa170acc94c63b64260a8187022dcd863484010d7e",
+    "file": "sources/S57.txt"
+  },
+  {
+    "id": "S58",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/pod-id-role.html",
+    "status": 200,
+    "bytes": 2344,
+    "sha256": "537236ad15de1ee74b046241bf2e8fa0a33395b6beeba1fea027909a3bcb7473",
+    "file": "sources/S58.txt"
+  },
+  {
+    "id": "S59",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/pod-id-abac.html",
+    "status": 200,
+    "bytes": 4411,
+    "sha256": "6ba3b94d77a8e150eff7eaf53926cbc96b1003adc00f2e523ec0ad4c1310bcf0",
+    "file": "sources/S59.txt"
+  },
+  {
+    "id": "S60",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/eks-architecture.html",
+    "status": 200,
+    "bytes": 7000,
+    "sha256": "3d937b11bdb8399512d28c3dff340905d3452fbfdf34f296f8fb81a0a11af7ba",
+    "file": "sources/S60.txt"
+  },
+  {
+    "id": "S61",
+    "url": "https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/gateway/l7gateway/",
+    "status": 200,
+    "bytes": 14107,
+    "sha256": "f77b65f97c194260a1f9a79f8d6088fbac6093a34b7f47971b3df5ece7633bdf",
+    "file": "sources/S61.txt"
+  },
+  {
+    "id": "S62",
+    "url": "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html",
+    "status": 200,
+    "bytes": 5528,
+    "sha256": "f848d49ddd03602d0191557ba84f036e94697579529b0004e2d2524c5672f396",
+    "file": "sources/S62.txt"
+  },
+  {
+    "id": "S63",
+    "url": "https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html",
+    "status": 200,
+    "bytes": 10525,
+    "sha256": "e1e74efe3a71108bd8f1de7ce1321e26a006b235f73007b6df129d6d72d1ff4c",
+    "file": "sources/S63.txt"
+  },
+  {
+    "id": "S64",
+    "url": "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html",
+    "status": 200,
+    "bytes": 2909,
+    "sha256": "ea19fa937365750b62797959b66beededcf7b75fa5cfdc58b6f878ed72a096aa",
+    "file": "sources/S64.txt"
+  },
+  {
+    "id": "S65",
+    "url": "https://docs.aws.amazon.com/eks/latest/userguide/metrics-server.html",
+    "status": 200,
+    "bytes": 4102,
+    "sha256": "7a9324195f8a30cd260475b32afc4c701ee775875a25d14cc88b2394e5319584",
+    "file": "sources/S65.txt"
+  },
+  {
+    "id": "S66",
+    "url": "https://docs.aws.amazon.com/cli/latest/reference/eks/describe-addon-configuration.html",
+    "status": 200,
+    "bytes": 15751,
+    "sha256": "727b87cdd491a4665793c0961128a7cc737c99e221190f2a962c0938455a5cd6",
+    "file": "sources/S66.txt"
+  }
+]

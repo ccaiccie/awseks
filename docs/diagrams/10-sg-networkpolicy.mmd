@@ -1,0 +1,4 @@
+flowchart TB
+  pkt[Packet] --> sg[Security group on ENI]
+  sg --> nacl[Network ACL on subnet]
+  nacl --> np[NetworkPolicy in the pod network]

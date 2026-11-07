@@ -1,0 +1,6 @@
+flowchart LR
+  node[Private node] --> nat[NAT gateway]
+  nat --> ecr[ECR public API]
+  node --> s3ep[S3 gateway endpoint]
+  node --> ecrep[ECR interface endpoints]
+  ecr --> s3[S3 layer buckets]

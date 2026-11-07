@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="370" viewBox="0 0 880 370" role="img">
+<title>CoreDNS, ClusterIP, DNAT, and conntrack</title>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<style>text{font-family:Helvetica,Arial,sans-serif;font-size:14px;fill:#1d2430} .title{font-size:18px;font-weight:700}</style>
+<text class='title' x='24' y='28'>CoreDNS, ClusterIP, DNAT, and conntrack</text>
+<rect x='30' y='86' width='150' height='70' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='105.0' y='121.0' text-anchor='middle'>Client pod</text>
+<rect x='220' y='76' width='180' height='80' rx='10' fill='#F3E8FF' stroke='#31415a' stroke-width='1.4'/>
+<text x='310.0' y='107.0' text-anchor='middle'>CoreDNS</text>
+<text x='310.0' y='125.0' text-anchor='middle'>service kube-dns</text>
+<rect x='440' y='76' width='180' height='80' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='530.0' y='107.0' text-anchor='middle'>ClusterIP</text>
+<text x='530.0' y='125.0' text-anchor='middle'>172.20.0.0/16</text>
+<rect x='660' y='76' width='180' height='80' rx='10' fill='#FFF4E0' stroke='#31415a' stroke-width='1.4'/>
+<text x='750.0' y='107.0' text-anchor='middle'>kube-proxy rules</text>
+<text x='750.0' y='125.0' text-anchor='middle'>DNAT to endpoint</text>
+<rect x='440' y='206' width='180' height='70' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='530.0' y='241.0' text-anchor='middle'>Endpoint pod</text>
+<rect x='660' y='206' width='180' height='70' rx='10' fill='#F7F7F5' stroke='#31415a' stroke-width='1.4'/>
+<text x='750.0' y='232.0' text-anchor='middle'>conntrack</text>
+<text x='750.0' y='250.0' text-anchor='middle'>return path</text>
+<rect x='30' y='306' width='810' height='60' rx='10' fill='#F7F7F5' stroke='#31415a' stroke-width='1.4'/>
+<text x='435.0' y='336.0' text-anchor='middle'>The service CIDR is not in the VPC route table. kube-proxy programs the node. CoreDNS answers the name.</text>
+</svg>

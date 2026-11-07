@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" role="img">
+<title>Standard EKS lab layout</title>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<style>text{font-family:Helvetica,Arial,sans-serif;font-size:14px;fill:#1d2430} .title{font-size:18px;font-weight:700}</style>
+<text class='title' x='24' y='28'>Standard EKS lab layout</text>
+<rect x='40' y='76' width='920' height='520' rx='10' fill='#E8F2FC' stroke='#31415a' stroke-width='1.4'/>
+<rect x='70' y='106' width='860' height='36' rx='10' fill='#E8F2FC' stroke='#31415a' stroke-width='1.4'/>
+<text x='500.0' y='124.0' text-anchor='middle'>VPC 10.0.0.0/16  ·  DNS hostnames on  ·  tagged awseks-practice</text>
+<rect x='70' y='166' width='400' height='160' rx='10' fill='#E5F6E8' stroke='#31415a' stroke-width='1.4'/>
+<text x='270.0' y='219.0' text-anchor='middle'>Public subnets</text>
+<text x='270.0' y='237.0' text-anchor='middle'>Internet gateway default route</text>
+<text x='270.0' y='255.0' text-anchor='middle'>NAT gateway lives here</text>
+<text x='270.0' y='273.0' text-anchor='middle'>Load balancer ENIs can live here</text>
+<rect x='500' y='166' width='430' height='160' rx='10' fill='#FFF4E0' stroke='#31415a' stroke-width='1.4'/>
+<text x='715.0' y='228.0' text-anchor='middle'>Private subnets, two or three AZs</text>
+<text x='715.0' y='246.0' text-anchor='middle'>No public IPv4 on nodes</text>
+<text x='715.0' y='264.0' text-anchor='middle'>Control plane ENIs and worker nodes</text>
+<rect x='70' y='366' width='250' height='90' rx='10' fill='#F3E8FF' stroke='#31415a' stroke-width='1.4'/>
+<text x='195.0' y='393.0' text-anchor='middle'>EKS API</text>
+<text x='195.0' y='411.0' text-anchor='middle'>private endpoint on</text>
+<text x='195.0' y='429.0' text-anchor='middle'>public endpoint optional</text>
+<rect x='350' y='366' width='250' height='90' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='475.0' y='393.0' text-anchor='middle'>Managed node group</text>
+<text x='475.0' y='411.0' text-anchor='middle'>AL2023, no SSH key</text>
+<text x='475.0' y='429.0' text-anchor='middle'>IMDSv2 hop limit 1</text>
+<rect x='630' y='366' width='270' height='90' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='765.0' y='393.0' text-anchor='middle'>Pods get VPC IPs</text>
+<text x='765.0' y='411.0' text-anchor='middle'>from the VPC CNI</text>
+<text x='765.0' y='429.0' text-anchor='middle'>Service CIDR is not a subnet</text>
+<rect x='70' y='486' width='830' height='70' rx='10' fill='#F7F7F5' stroke='#31415a' stroke-width='1.4'/>
+<text x='485.0' y='521.0' text-anchor='middle'>S3 gateway endpoint is on by default. Interface endpoints are optional and cost money. One NAT is cheaper and fails with that AZ.</text>
+</svg>

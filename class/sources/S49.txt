@@ -1,0 +1,114 @@
+URL: https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/tag/v3.6.2
+Fetched: 2026-11-07T10:57:50.626350-08:00
+
+Repository navigation
+v3.6.2
+Latest
+Latest
+Compare
+Choose a tag to compare
+Sorry, something went wrong.
+Filter
+Loading
+Sorry, something went wrong.
+Uh oh!
+There was an error while loading.
+Please reload this page
+.
+No results found
+View all tags
+shraddhabang
+released this
+25 Oct 00:54
+·
+9 commits
+to main
+          since this release
+v3.6.2
+d19307c
+This commit was created on GitHub.com and signed with GitHub’s
+verified signature
+.
+GPG key ID:
+B5690EEEBB952194
+Verified
+Learn about vigilant mode
+.
+⚠️
+Upgrade Notes
+No CRD updates required.
+This is a patch release with no CRD changes. Upgrading the controller is sufficient.
+If you are coming from a release older than v3.6.0, apply the CRD steps from the
+v3.6.0 release notes
+first.
+🔒 Security
+Controller image rebuilt on a base image that distrusts 5 certificate authorities
+The controller image is now built on
+eks-distro-minimal-base-nonroot:2026-10-23-1792785692.2023
+(from
+2026-07-27-1785178906.2023
+), which removes 5 distrusted eMudhra/emSign roots from the image CA bundle. Three were present and trusted in the previous base image --
+emSign ECC Root CA - G3
+,
+emSign ECC Root CA - C3
+and
+emSign Root CA - C1
+-- taking the trusted root count from 143 to 140. This affects outbound TLS trust decisions made by the controller; there is no change to controller behavior or configuration. Upstream change:
+aws/eks-distro-build-tooling#2169
+. (
+#4937
+,
+@shraddhabang
+)
+github.com/klauspost/compress
+updated to v1.18.7
+Addresses
+CVE-2026-63209
+, an out-of-bounds read in
+s2.NewDict
+. This is a test-only indirect dependency reached through the e2e suite (
+httpexpect
+->
+fasthttp
+) and is
+not
+linked into the controller binary, so released images were not affected -- the bump keeps source-level dependency scanning clean. (
+#4937
+,
+@shraddhabang
+)
+🔧 Enhancements and Fixes
+Gateway
+Skip the redundant child-resource fan-out during the controller's initial cache sync.
+Create
+handlers for HTTPRoute, GRPCRoute, TCPRoute, TLSRoute, UDPRoute, ListenerSet, GatewayClass, ReferenceGrant, Service, LoadBalancerConfiguration, TargetGroupConfiguration and ListenerRuleConfiguration now return early when the event is part of the informer's initial list, since existing Gateways receive their own initial events and reconcile against the synced cache anyway. This reduces redundant reconcile enqueues at controller start-up, improving start-up time on clusters with many Gateway child resources. No behavioral change after start-up. (
+#4935
+,
+@zac-nixon
+)
+Misc
+Formatting fix in the Ingress group reconciler and trailing-newline fixes across the Gateway e2e suites (
+#4935
+)
+What's Changed
+perf(gw api): improve start up time by not enqueuing child resources by
+@zac-nixon
+in
+#4935
+cut v3.6.2 release by
+@shraddhabang
+in
+#4937
+Full Changelog
+:
+v3.6.1...v3.6.2
+Contributors
+zac-nixon and shraddhabang
+Assets
+4
+Loading
+Uh oh!
+There was an error while loading.
+Please reload this page
+.
+All reactions

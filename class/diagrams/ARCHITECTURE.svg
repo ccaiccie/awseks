@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="930" viewBox="0 0 1920 930">
+<rect width="1920" height="930" fill="#081524"/>
+<style>text{font-family:Arial,sans-serif;fill:#e5edf7} .panel{fill:#10283c;stroke:#5b8eb4;stroke-width:2}.node{fill:#17334d;stroke:#64c9ee;stroke-width:2}.link{fill:none;stroke:#60d4b5;stroke-width:3}.control{fill:none;stroke:#e4ad6c;stroke-width:3;stroke-dasharray:8 5}</style>
+<text x="48" y="65" font-size="34">EKS: managed control plane, private workers, four identities</text>
+<text x="48" y="110" font-size="24">Standard EC2 IPv4 teaching stack · illustrative addresses · not Auto Mode or Fargate</text>
+<rect class="panel" x="48" y="170" width="530" height="450" rx="16"/>
+<text x="72" y="207" font-size="27">AWS-managed control plane</text>
+<text x="72" y="246" font-size="23">At least 2 API servers, 3 etcd instances</text>
+<text x="72" y="280" font-size="23">across 3 AZs, isolated per cluster</text>
+<rect class="node" x="112" y="330" width="400" height="90" rx="12"/>
+<text x="312" y="367" text-anchor="middle" font-size="26">Kubernetes API endpoint</text>
+<text x="312" y="400" text-anchor="middle" font-size="22">IAM authentication + authorization</text>
+<text x="72" y="482" font-size="23">Public: actual operator /32 only</text>
+<text x="72" y="518" font-size="23">Private: VPC DNS + routing + SG443</text>
+<text x="72" y="570" font-size="23">API/control traffic ≠ app request traffic</text>
+<rect class="panel" x="650" y="170" width="1222" height="450" rx="16"/>
+<text x="674" y="207" font-size="27">Customer VPC 10.42.0.0/16 · EKS cluster ENIs in private subnets</text>
+<rect class="node" x="684" y="238" width="550" height="108" rx="10"/>
+<text x="710" y="272" font-size="23">Public AZ-A 10.42.0.0/24</text>
+<text x="710" y="309" font-size="23">NAT-A / EIP · LB nodes · /0 → IGW</text>
+<rect class="node" x="1280" y="238" width="550" height="108" rx="10"/>
+<text x="1306" y="272" font-size="23">Public AZ-B 10.42.1.0/24</text>
+<text x="1306" y="309" font-size="23">NAT-B / EIP · LB nodes · /0 → IGW</text>
+<rect class="node" x="684" y="440" width="550" height="150" rx="10"/>
+<text x="710" y="474" font-size="23">Private AZ-A 10.42.16.0/20</text>
+<text x="710" y="511" font-size="23">Managed node A · Pod IPs from VPC</text>
+<text x="710" y="548" font-size="23">VPC /16 → local; /0 → NAT-A</text>
+<rect class="node" x="1280" y="440" width="550" height="150" rx="10"/>
+<text x="1306" y="474" font-size="23">Private AZ-B 10.42.32.0/20</text>
+<text x="1306" y="511" font-size="23">Managed node B · Pod IPs from VPC</text>
+<text x="1306" y="548" font-size="23">VPC /16 → local; /0 → NAT-B</text>
+<polyline class="link" points="959,440 959,346"/>
+<polyline class="link" points="1555,440 1555,346"/>
+<polyline class="control" points="512,375 620,375 620,400 710,400 710,440"/>
+<polyline class="control" points="620,400 1306,400 1306,440"/>
+<text x="800" y="385" font-size="22">Private API / kubelet / webhook control connectivity</text>
+<rect class="panel" x="48" y="660" width="1824" height="224" rx="16"/>
+<text x="72" y="703" font-size="26">Keep four identities separate — none is a routing gateway</text>
+<text x="72" y="748" font-size="23">Human: IAM access entry + RBAC     Node: EC2 worker / ECR pull     Workload: Pod Identity or IRSA</text>
+<text x="72" y="791" font-size="23">Controller: separate LBC / CSI IAM roles. Application traffic bypasses Kubernetes API and controller Pods.</text>
+<text x="72" y="837" font-size="23">Service CIDR 172.20.0.0/16 is virtual kube-proxy state: NO VPC route to this CIDR. Two NATs are billable.</text>
+</svg>

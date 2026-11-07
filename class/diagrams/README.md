@@ -1,0 +1,9 @@
+# Actual class source diagrams
+
+ARCHITECTURE.svg: editable overall architecture with distinct AWS-managed control plane and two-AZ customer VPC; bottom identity/service context outside topology.
+
+F01.svg–F29.svg (plus 8 separately numbered subordinate-connection pages): actual authored flow schematics, not screenshots from AWS. Matching data in ../FLOW-SCENARIOS.json; each includes forward/return geometry, workflow kind, bottom-only context and stop reason for failure. Green=forward, amber=return. Corresponding 37 flow pages in eks-scenarios.drawio are editable conceptual boxes with explicit ports/waypoints. They intentionally do not mislabel generic boxes as genuine AWS artwork. Use actual diagrams.net AWS stencils with verified provenance in the final presentation stage.
+
+Some control/identity scenarios contain **separate subflows** (e.g. image bytes vs deployment API ACK, temporary credential response vs signed AWS API request). JSON supplies these explicit subflow visits and geometry. Static F03/F13/F14/F15/F18 primary page depicts the initial exchange; explicit Fxx-1/Fxx-2/Fxx-3 pages depict subordinate exchanges. The final class must include each subflow scene rather than animate a fake single packet through unrelated stages. Do not infer undisplayed routes from an abstract control-workflow chain. State-changing nodes consume the token while highlighted; inter-device geometry never crosses the icon face.
+
+Geometry is authored at 1920×930 and fits within 1920×1080 with bottom expansion; not yet a final interactive/animated HTML artifact. Draw.io editor GUI import and final browser/audio testing have not been performed. Local XML/waypoint/layout tests are in VALIDATION-LABS.md. Final builder still needs genuine artwork, separate fully detailed route/service/policy bottom cards and narrated progressive builds, not these source schematics repeated as every lecture slide.
