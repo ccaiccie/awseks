@@ -1,0 +1,10 @@
+flowchart LR
+  laptop[Operator laptop]
+  publicEp[Public API endpoint]
+  privateEp[Private API endpoint]
+  eni[Control plane ENIs]
+  bastion[In-VPC client]
+  laptop -->|"only if CIDR is listed"| publicEp
+  bastion --> privateEp
+  publicEp --> eni
+  privateEp --> eni

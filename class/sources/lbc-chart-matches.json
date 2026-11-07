@@ -1,0 +1,39 @@
+[
+  {
+    "apiVersion": "v2",
+    "appVersion": "v3.6.2",
+    "created": "2026-11-03T21:45:53.070583298Z",
+    "description": "AWS Load Balancer Controller Helm chart for Kubernetes",
+    "digest": "9255bf39873b6cb31106dbe61dc87c3617bff4197783b5b94381811a13f99c3c",
+    "home": "https://github.com/aws/eks-charts",
+    "icon": "https://raw.githubusercontent.com/aws/eks-charts/master/docs/logo/aws.png",
+    "keywords": [
+      "eks",
+      "alb",
+      "load balancer",
+      "ingress",
+      "nlb",
+      "gateway api"
+    ],
+    "maintainers": [
+      {
+        "email": "zac-nixon@users.noreply.github.com",
+        "name": "zac-nixon",
+        "url": "https://github.com/zac-nixon"
+      },
+      {
+        "email": "shraddhabang@users.noreply.github.com",
+        "name": "shraddhabang",
+        "url": "https://github.com/shraddhabang"
+      }
+    ],
+    "name": "aws-load-balancer-controller",
+    "sources": [
+      "https://github.com/aws/eks-charts"
+    ],
+    "urls": [
+      "https://aws.github.io/eks-charts/aws-load-balancer-controller-3.6.2.tgz"
+    ],
+    "version": "3.6.2"
+  }
+]

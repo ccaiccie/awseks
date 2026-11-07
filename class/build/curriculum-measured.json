@@ -1,0 +1,260 @@
+{
+  "title": "AWS EKS Masterclass \u2014 Novice to Expert",
+  "version": "v5.1",
+  "sourcePackage": "eks-masterclass-source-2026-11-07-v2",
+  "chapters": [
+    {
+      "num": 0,
+      "name": "Orientation and safety",
+      "short": "Orientation",
+      "start": 0,
+      "end": 9,
+      "audioSeconds": 205.92000000000002,
+      "scheduledSeconds": 220.52
+    },
+    {
+      "num": 1,
+      "name": "Linux and networks foundations",
+      "short": "Linux nets",
+      "start": 9,
+      "end": 25,
+      "audioSeconds": 405.456,
+      "scheduledSeconds": 424.656
+    },
+    {
+      "num": 2,
+      "name": "Images to containers",
+      "short": "Images",
+      "start": 25,
+      "end": 37,
+      "audioSeconds": 205.968,
+      "scheduledSeconds": 214.668
+    },
+    {
+      "num": 3,
+      "name": "Kubernetes object model",
+      "short": "K8s objects",
+      "start": 37,
+      "end": 51,
+      "audioSeconds": 214.05599999999998,
+      "scheduledSeconds": 231.756
+    },
+    {
+      "num": 4,
+      "name": "Config and lifecycle",
+      "short": "Config",
+      "start": 51,
+      "end": 57,
+      "audioSeconds": 186.552,
+      "scheduledSeconds": 191.352
+    },
+    {
+      "num": 5,
+      "name": "EKS architecture",
+      "short": "EKS arch",
+      "start": 57,
+      "end": 61,
+      "audioSeconds": 137.4,
+      "scheduledSeconds": 140.6
+    },
+    {
+      "num": 6,
+      "name": "Compute choice",
+      "short": "Compute",
+      "start": 61,
+      "end": 64,
+      "audioSeconds": 40.992,
+      "scheduledSeconds": 43.392
+    },
+    {
+      "num": 7,
+      "name": "Plan VPC and IP budgets",
+      "short": "VPC plan",
+      "start": 64,
+      "end": 84,
+      "audioSeconds": 522.6,
+      "scheduledSeconds": 537.0
+    },
+    {
+      "num": 8,
+      "name": "Build Standard cluster",
+      "short": "Build cluster",
+      "start": 84,
+      "end": 100,
+      "audioSeconds": 318.984,
+      "scheduledSeconds": 330.484
+    },
+    {
+      "num": 9,
+      "name": "Human access",
+      "short": "Access",
+      "start": 100,
+      "end": 117,
+      "audioSeconds": 372.48,
+      "scheduledSeconds": 392.28
+    },
+    {
+      "num": 10,
+      "name": "VPC CNI deep mechanics",
+      "short": "VPC CNI",
+      "start": 117,
+      "end": 124,
+      "audioSeconds": 92.80799999999999,
+      "scheduledSeconds": 98.008
+    },
+    {
+      "num": 11,
+      "name": "Service discovery and proxying",
+      "short": "Services",
+      "start": 124,
+      "end": 142,
+      "audioSeconds": 430.512,
+      "scheduledSeconds": 443.412
+    },
+    {
+      "num": 12,
+      "name": "Four identity boundaries",
+      "short": "Identity",
+      "start": 142,
+      "end": 159,
+      "audioSeconds": 322.512,
+      "scheduledSeconds": 334.912
+    },
+    {
+      "num": 13,
+      "name": "Pod egress and private AWS",
+      "short": "Egress",
+      "start": 159,
+      "end": 184,
+      "audioSeconds": 735.528,
+      "scheduledSeconds": 753.328
+    },
+    {
+      "num": 14,
+      "name": "Expose applications",
+      "short": "Expose",
+      "start": 184,
+      "end": 202,
+      "audioSeconds": 471.84,
+      "scheduledSeconds": 484.84000000000003
+    },
+    {
+      "num": 15,
+      "name": "NLB and Gateway API",
+      "short": "NLB/Gateway",
+      "start": 202,
+      "end": 224,
+      "audioSeconds": 447.384,
+      "scheduledSeconds": 463.084
+    },
+    {
+      "num": 16,
+      "name": "DNS and TLS operations",
+      "short": "DNS/TLS",
+      "start": 224,
+      "end": 229,
+      "audioSeconds": 154.44,
+      "scheduledSeconds": 158.44
+    },
+    {
+      "num": 17,
+      "name": "East-west security",
+      "short": "Policy",
+      "start": 229,
+      "end": 246,
+      "audioSeconds": 545.088,
+      "scheduledSeconds": 557.588
+    },
+    {
+      "num": 18,
+      "name": "Persistent storage",
+      "short": "Storage",
+      "start": 246,
+      "end": 257,
+      "audioSeconds": 182.856,
+      "scheduledSeconds": 190.856
+    },
+    {
+      "num": 19,
+      "name": "Scaling and availability",
+      "short": "Scale",
+      "start": 257,
+      "end": 272,
+      "audioSeconds": 181.392,
+      "scheduledSeconds": 192.192
+    },
+    {
+      "num": 20,
+      "name": "Observability",
+      "short": "Observe",
+      "start": 272,
+      "end": 277,
+      "audioSeconds": 151.968,
+      "scheduledSeconds": 155.968
+    },
+    {
+      "num": 21,
+      "name": "Failure lab practicum",
+      "short": "Failures",
+      "start": 277,
+      "end": 293,
+      "audioSeconds": 335.448,
+      "scheduledSeconds": 346.948
+    },
+    {
+      "num": 22,
+      "name": "Upgrade and release engineering",
+      "short": "Upgrades",
+      "start": 293,
+      "end": 314,
+      "audioSeconds": 436.128,
+      "scheduledSeconds": 451.728
+    },
+    {
+      "num": 23,
+      "name": "Production security and cost",
+      "short": "Sec/cost",
+      "start": 314,
+      "end": 321,
+      "audioSeconds": 107.184,
+      "scheduledSeconds": 112.384
+    },
+    {
+      "num": 24,
+      "name": "Terraform progression",
+      "short": "Terraform",
+      "start": 321,
+      "end": 330,
+      "audioSeconds": 240.984,
+      "scheduledSeconds": 248.184
+    },
+    {
+      "num": 25,
+      "name": "Capstone and teardown",
+      "short": "Capstone",
+      "start": 330,
+      "end": 335,
+      "audioSeconds": 72.792,
+      "scheduledSeconds": 76.792
+    }
+  ],
+  "sceneCount": 335,
+  "audioSeconds": 7519.272,
+  "scheduledSeconds": 7795.372,
+  "scheduledDuration": "2:09:55",
+  "auditAlignment": [
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7"
+  ],
+  "ownership": {
+    "class_cli_stack": "eksclass-cli-*",
+    "repo_cli_path": "awseks-cli-* (practice repo path; PR branch not default)",
+    "repo_tf_path": "awseks-tf-*",
+    "note": "Class commands teach canonical eksclass-cli- scripts from source labs. Do not imply github.com/ccaiccie/awseks PR is merged to default branch. Runtime cloud test not done."
+  }
+}

@@ -1,0 +1,404 @@
+URL: https://docs.aws.amazon.com/eks/latest/userguide/auto-configure-gateway-api.html
+Fetched: 2026-11-07T10:57:51.586843-08:00
+
+Help improve this page
+To contribute to this user guide, choose the
+Edit this page on GitHub
+link that is located in the right pane of every page.
+Configure the Kubernetes Gateway API in EKS Auto Mode
+Amazon Elastic Kubernetes Service (Amazon EKS) Auto Mode supports the Kubernetes Gateway API for configuring load balancing. The Gateway API is the next-generation Kubernetes standard for managing traffic routing into and within your cluster. It provides a role-oriented, expressive, and portable model that addresses limitations of the older Ingress API. It natively supports L4 (TCP/UDP/TLS) and L7 (HTTP/gRPC) routing, cross-namespace routing, weighted traffic splitting, and header-based routing.
+When you use the Gateway API in EKS Auto Mode, you define your routing intent using standard Gateway API resources. EKS Auto Mode then provisions and manages the underlying AWS load balancers automatically, with no separate controller to install or operate. An Application Load Balancer (ALB) serves L7 routes, and a Network Load Balancer (NLB) serves L4 routes.
+EKS Auto Mode supports the standard Gateway API route types
+HTTPRoute
+,
+GRPCRoute
+,
+TCPRoute
+, and
+UDPRoute
+. Not every field in the Gateway API specification maps to an AWS load balancer capability. For more information about the specific fields and features supported by each load balancer type, see the
+Feature comparison: ALB Gateways vs. standard Gateway API
+on the Kubernetes SIGs GitHub website.
+How the Gateway API works in EKS Auto Mode
+The Gateway API uses a role-oriented resource model with three core resource types:
+GatewayClass
+defines a template for creating Gateways, including which controller manages them and what type of load balancer to provision. Platform teams typically manage this.
+Gateway
+instantiates a load balancer and defines its listeners (protocol and port combinations), hostnames, and TLS settings. Cluster operators typically manage this.
+Routes
+(
+HTTPRoute
+,
+GRPCRoute
+,
+TCPRoute
+,
+UDPRoute
+) define the rules that map listeners to backend Kubernetes Services. Application developers typically manage these.
+To configure AWS specific load balancer behavior, EKS Auto Mode supports the same AWS extension resources used by the AWS Load Balancer Controller (
+gateway.k8s.aws/v1
+):
+TargetGroupConfiguration
+configures target group properties, including health checks, deregistration delays, and stickiness settings, at the Service level.
+LoadBalancerConfiguration
+defines listener and load balancer properties, such as subnet placement, security groups, and access logs, at the Gateway or GatewayClass level.
+ListenerRuleConfiguration
+extends
+HTTPRoute
+and
+GRPCRoute
+resources with AWS specific routing behaviors, including authentication through Amazon Cognito or OpenID Connect (OIDC) providers.
+In EKS Auto Mode:
+You do not install or operate a gateway controller. Before you can use the Gateway API, you enable it on your cluster and choose who manages the Gateway API CRDs. For more information, see
+Enable the Gateway API on your cluster
+.
+You select the EKS Auto Mode gateway controller in your
+GatewayClass
+. EKS Auto Mode provides controllers for both ALB and NLB:
+eks.amazonaws.com/gateway-alb
+for Application Load Balancers (L7 routing)
+eks.amazonaws.com/gateway-nlb
+for Network Load Balancers (L4 routing)
+When you create a
+Gateway
+that references an EKS Auto Mode gateway controller through its
+GatewayClass
+, EKS Auto Mode provisions the corresponding AWS load balancer and keeps it synchronized with your Gateway and Route definitions.
+Because the EKS Auto Mode controllers use their own controller names, they coexist with third-party gateway implementations (such as Envoy Gateway or Istio) running in the same cluster.
+Overview
+Create a
+GatewayClass
+that references the EKS Auto Mode gateway controller. Create this first, because there is a short delay before a new
+GatewayClass
+is ready to be referenced by other resources.
+Create a workload that you want to expose.
+Create a
+Gateway
+resource that defines the listeners for your load balancer.
+Create a route (for example, an
+HTTPRoute
+) that maps a listener to your workload’s Service.
+EKS Auto Mode provisions the load balancer and routes traffic to your workload. This might take a few minutes to complete.
+Enable the Gateway API on your cluster
+You enable the Gateway API on an EKS Auto Mode cluster through the
+gatewayApi.crds.managed
+field in your cluster’s
+elasticLoadBalancing
+network configuration. The presence of this configuration is what turns the Gateway API on. The value you set also determines who owns the lifecycle of the Gateway API custom resource definitions (CRDs), the resources that must exist on your cluster before you can create Gateways and routes: AWS, or you.
+You set this field with the AWS CLI, the Amazon EKS API, or the Amazon EKS console. There are two options:
+Managed
+(
+gatewayApi.crds.managed: true
+). AWS installs and manages the lifecycle of the Gateway API CRDs on your behalf, at Gateway API v1. Choose this when you want AWS to keep the CRDs up to date automatically. If your cluster already has Gateway API CRDs, they must be at v1. If they are at an earlier version, the operation is rejected and no change is made. This prevents AWS from altering CRDs that another component depends on. In that case, move your CRDs to v1 first, and then choose
+Managed
+.*
+Unmanaged
+(
+gatewayApi.crds.managed: false
+). You keep ownership of the Gateway API CRDs and install and upgrade them yourself. AWS coexists with any other Gateway API controllers on your cluster, so your existing setup is not disturbed. Choose this if you already run the Gateway API on your cluster, or if another controller manages the CRDs. It is also the path for moving to AWS management gradually, because you can migrate when you are ready.
+Gateway API CRDs are cluster-wide, so only one party owns them at a time. Choosing
+Managed
+hands that ownership to AWS. Choosing
+Unmanaged
+keeps it with you.
+The following JSON shows the full network configuration payload that enables the Gateway API with AWS-managed CRDs:
+{
+"kubernetesNetworkConfig":
+{
+"elasticLoadBalancing":
+{
+"enabled": true,
+            "gatewayApi":
+{
+"crds":
+{
+"managed": true
+                }
+            }
+        }
+    }
+}
+Set
+elasticLoadBalancing.enabled
+to
+true
+. Gateway API support builds on the EKS Auto Mode load balancing capability.
+gatewayApi.crds.managed
+specifies whether AWS manages the Gateway API CRD lifecycle. Set it to
+true
+for
+Managed
+(AWS owns the CRD lifecycle) or
+false
+for
+Unmanaged
+(you own the CRD lifecycle). If you omit the
+gatewayApi
+block, the setting remains unchanged.
+Enable on a new cluster
+When you create a cluster with the AWS CLI, include the
+gatewayApi.crds.managed
+field in
+--kubernetes-network-config
+:
+aws eks create-cluster \
+ --name $CLUSTER_NAME \
+ --role-arn $CLUSTER_ROLE_ARN \
+ --resources-vpc-config subnetIds=$SUBNET_IDS \
+ --compute-config enabled=true \
+ --kubernetes-network-config '
+{
+"elasticLoadBalancing":
+{
+"enabled":true,"gatewayApi":
+{
+"crds":
+{
+"managed":true}}}}' \
+ --storage-config '
+{
+"blockStorage":
+{
+"enabled":true}}'
+Change the setting on an existing cluster
+To change the setting on an existing EKS Auto Mode cluster, use
+update-cluster-config
+:
+aws eks update-cluster-config \
+ --name $CLUSTER_NAME \
+ --kubernetes-network-config '
+{
+"elasticLoadBalancing":
+{
+"enabled":true,"gatewayApi":
+{
+"crds":
+{
+"managed":true}}}}'
+To hand ownership of the CRDs back to yourself, set
+managed
+to
+false
+:
+aws eks update-cluster-config \
+ --name $CLUSTER_NAME \
+ --kubernetes-network-config '
+{
+"elasticLoadBalancing":
+{
+"enabled":true,"gatewayApi":
+{
+"crds":
+{
+"managed":false}}}}'
+In the Amazon EKS console, choose
+Managed
+or
+Unmanaged
+to set
+managed
+to
+true
+or
+false
+respectively.
+Prerequisites
+EKS Auto Mode enabled on an Amazon EKS cluster.
+The Gateway API enabled on your cluster. For more information, see
+Enable the Gateway API on your cluster
+.
+Kubectl configured to connect to your cluster.
+You can use
+kubectl apply -f <filename>
+to apply the following sample configuration YAML files to your cluster.
+Subnet tagging requirement
+EKS Auto Mode requires subnet tags to identify public and private subnets.
+If you created your cluster with
+eksctl
+, you already have these tags.
+For information about tagging subnets, see
+Tag subnets for EKS Auto Mode
+.
+Step 1: Create a GatewayClass
+Create a
+GatewayClass
+that references the EKS Auto Mode gateway controller. This tells EKS Auto Mode to manage Gateways created from this class and to provision the corresponding load balancer type. Create the
+GatewayClass
+first, because there is a short delay before a new
+GatewayClass
+is ready to be referenced by a
+Gateway
+.
+This example creates a
+GatewayClass
+named
+eks-auto-alb
+that uses the ALB controller, in a file named
+gatewayclass.yaml
+:
+apiVersion: gateway.networking.k8s.io/v1
+kind: GatewayClass
+metadata:
+  name: eks-auto-alb
+spec:
+  controllerName: eks.amazonaws.com/gateway-alb
+Apply the configuration to your cluster:
+kubectl apply -f gatewayclass.yaml
+Step 2: Create a workload
+Create a workload that you want to expose. This can be any Kubernetes resource that serves traffic, such as a Deployment and a Service.
+This example uses a simple HTTP service called
+service-2048
+that listens on port
+80
+. Create this service and its deployment by applying the following manifest,
+2048-deployment-service.yaml
+:
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-2048
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: app-2048
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: app-2048
+    spec:
+      containers:
+        - image: public.ecr.aws/l6m2t8p7/docker-2048:latest
+          imagePullPolicy: Always
+          name: app-2048
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-2048
+spec:
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: app-2048
+Apply the configuration to your cluster:
+kubectl apply -f 2048-deployment-service.yaml
+Step 3: Create a Gateway
+Create a
+Gateway
+that references the
+GatewayClass
+and defines your listeners, in a file named
+gateway.yaml
+. This example defines an HTTP listener on port
+80
+.
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: my-gateway
+  namespace: default
+spec:
+  gatewayClassName: eks-auto-alb
+  listeners:
+    - name: http
+      protocol: HTTP
+      port: 80
+Apply the configuration to your cluster:
+kubectl apply -f gateway.yaml
+Step 4: Create an HTTPRoute
+Create an
+HTTPRoute
+that maps the Gateway’s listener to your workload’s Service, in a file named
+httproute.yaml
+. This example routes all traffic on the
+http
+listener to
+service-2048
+on port
+80
+.
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: my-route
+  namespace: default
+spec:
+  parentRefs:
+    - name: my-gateway
+      sectionName: http
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: service-2048
+          port: 80
+Apply the configuration to your cluster:
+kubectl apply -f httproute.yaml
+Step 5: Verify
+It can take a few minutes for the load balancer to become available. Wait for the
+Gateway
+to be programmed, retrieve the load balancer address, and test it.
+kubectl wait --for=condition=Programmed gateway/my-gateway
+
+ADDRESS=$(kubectl get gateway my-gateway -o jsonpath='
+{
+.status.addresses[0].value}')
+curl http://$ADDRESS
+Step 6: Cleanup
+To clean up the resources created in this topic, use the following commands:
+kubectl delete -f httproute.yaml
+kubectl delete -f gateway.yaml
+kubectl delete -f gatewayclass.yaml
+kubectl delete -f 2048-deployment-service.yaml
+EKS Auto Mode will automatically delete the associated load balancer in your AWS account.
+Considerations
+EKS Auto Mode supports the standard Gateway API route types
+HTTPRoute
+,
+GRPCRoute
+,
+TCPRoute
+, and
+UDPRoute
+. L7 routes are served by an ALB; L4 routes are served by an NLB. Not every field in the Gateway API specification maps to an AWS load balancer capability. See the
+Gateway API feature comparison
+in the AWS Load Balancer Controller documentation for supported fields.
+The EKS Auto Mode gateway controllers coexist with third-party gateway implementations running in the same cluster.
+Existing
+Ingress
+and
+Service
+(type
+LoadBalancer
+) resources continue to work alongside Gateway API resources. You can adopt the Gateway API incrementally.
+To configure AWS specific load balancer behavior, use the AWS extension resources (
+gateway.k8s.aws/v1
+):
+TargetGroupConfiguration
+,
+LoadBalancerConfiguration
+, and
+ListenerRuleConfiguration
+. These are the same resources used by the AWS Load Balancer Controller.
+Related topics
+Learn about VPC Networking and Load Balancing in EKS Auto Mode
+Create an IngressClass to configure an Application Load Balancer
+Use Service Annotations to configure Network Load Balancers
+AWS Load Balancer Controller L7 (ALB) Gateway API guide
+in the AWS Load Balancer Controller documentation, which includes examples for advanced use cases.
+AWS Load Balancer Controller L4 (NLB) Gateway API guide
+in the AWS Load Balancer Controller documentation, which includes examples for advanced use cases.
+Javascript is disabled or is unavailable in your browser.
+To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.
+Document Conventions
+Create service
+Multi-cluster target groups

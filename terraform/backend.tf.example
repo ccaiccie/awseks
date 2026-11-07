@@ -1,0 +1,14 @@
+# Optional remote state. Do not commit a filled-in backend, a state file, or a lock table secret.
+# Local state is the lab default and is gitignored. Use a backend when more than one person
+# can apply this directory. This block is NOT active until you copy it into a file Terraform loads
+# (for example backend.tf) and run terraform init -migrate-state yourself.
+#
+# terraform {
+#   backend "s3" {
+#     bucket         = "REPLACE-with-your-state-bucket"
+#     key            = "awseks-tf-lab/terraform.tfstate"
+#     region         = "us-west-2"
+#     dynamodb_table = "REPLACE-with-your-lock-table"
+#     encrypt        = true
+#   }
+# }

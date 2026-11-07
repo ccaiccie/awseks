@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="380" viewBox="0 0 720 380" role="img">
+<title>VPC CNI same-node and cross-node</title>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<style>text{font-family:Helvetica,Arial,sans-serif;font-size:14px;fill:#1d2430} .title{font-size:18px;font-weight:700}</style>
+<text class='title' x='24' y='28'>VPC CNI same-node and cross-node</text>
+<rect x='40' y='76' width='280' height='200' rx='10' fill='#FFF4E0' stroke='#31415a' stroke-width='1.4'/>
+<text x='180.0' y='158.0' text-anchor='middle'>Node A</text>
+<text x='180.0' y='176.0' text-anchor='middle'>primary ENI</text>
+<text x='180.0' y='194.0' text-anchor='middle'>secondary IPs for pods</text>
+<rect x='80' y='136' width='90' height='50' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='125.0' y='161.0' text-anchor='middle'>Pod A</text>
+<rect x='190' y='136' width='90' height='50' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='235.0' y='161.0' text-anchor='middle'>Pod B</text>
+<rect x='400' y='76' width='280' height='200' rx='10' fill='#FFF4E0' stroke='#31415a' stroke-width='1.4'/>
+<text x='540.0' y='167.0' text-anchor='middle'>Node B</text>
+<text x='540.0' y='185.0' text-anchor='middle'>another subnet or same VPC</text>
+<rect x='470' y='136' width='90' height='50' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='515.0' y='161.0' text-anchor='middle'>Pod C</text>
+<rect x='40' y='306' width='640' height='70' rx='10' fill='#F7F7F5' stroke='#31415a' stroke-width='1.4'/>
+<text x='360.0' y='341.0' text-anchor='middle'>Same-node pods bridge on the node. Cross-node packets are VPC routed between ENIs. They are not ClusterIP DNAT.</text>
+</svg>

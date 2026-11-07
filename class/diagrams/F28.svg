@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="930" viewBox="0 0 1920 930"><rect width="1920" height="930" fill="#081524"/><style>text{font-family:Arial,sans-serif;fill:#e5edf7} .n{fill:#17334d;stroke:#64c9ee;stroke-width:2} .f{fill:none;stroke:#60d4b5;stroke-width:3} .r{fill:none;stroke:#e4ad6c;stroke-width:3;stroke-dasharray:8 5}</style><text x="48" y="70" font-size="32">F28 · Conditional EKS seven-day previous-minor rollback</text><text x="48" y="110" font-size="22">Illustrative schematic · green forward, amber return · native VPC unless marked control workflow</text>
+<polyline class="f" points="160.0,270 160.0,210 693.3,210 693.3,270"/>
+<polyline class="f" points="693.3,270 693.3,200 1226.7,200 1226.7,270"/>
+<polyline class="f" points="1226.7,270 1226.7,190 1760.0,190 1760.0,270"/>
+<polyline class="r" points="1760.0,360 1760.0,425 160.0,425 160.0,360"/>
+<rect class="n" x="70.0" y="270" width="180" height="90" rx="12"/>
+<text x="160.0" y="296" text-anchor="middle" font-size="21">Eligibility +</text>
+<text x="160.0" y="320" text-anchor="middle" font-size="21">insights</text>
+<rect class="n" x="603.3" y="270" width="180" height="90" rx="12"/>
+<text x="693.3" y="296" text-anchor="middle" font-size="21">Nodes + addon</text>
+<text x="693.3" y="320" text-anchor="middle" font-size="21">downgrade first</text>
+<rect class="n" x="1136.7" y="270" width="180" height="90" rx="12"/>
+<text x="1226.7" y="296" text-anchor="middle" font-size="21">Previous-minor</text>
+<text x="1226.7" y="320" text-anchor="middle" font-size="21">EKS CP</text>
+<rect class="n" x="1670.0" y="270" width="180" height="90" rx="12"/>
+<text x="1760.0" y="296" text-anchor="middle" font-size="21">Validate apps /</text>
+<text x="1760.0" y="320" text-anchor="middle" font-size="21">addons</text>
+<rect x="48" y="660" width="1824" height="224" rx="16" fill="#10283c" stroke="#3d6079"/>
+<text x="72" y="704" font-size="22">Engine: rollback-control · Standard EC2 IPv4 primary track</text>
+<text x="72" y="735" font-size="22">BEFORE control-plane rollback: inspect readiness/apps/controllers/APIs; prepare compatible Standard workers; downgrade incompatible addons and</text>
+<text x="72" y="766" font-size="22">wait ACTIVE + healthy. Auto Mode manages node rollback; Fargate needs affected-Pod replacement. Final validation follows CP rollback.</text>
+<text x="72" y="797" font-size="22">Forward AND return stages are separately modeled; see JSON for packet tuples, NAT, policy and route rows.</text>
+<text x="72" y="828" font-size="22">Static source diagram, not a cloud observation or final narrated/animated class.</text>
+</svg>

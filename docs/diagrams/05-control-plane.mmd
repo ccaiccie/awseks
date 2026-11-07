@@ -1,0 +1,6 @@
+flowchart TB
+  user[kubectl] --> api[kube-apiserver]
+  api --> etcd[etcd managed by EKS]
+  api --> sched[scheduler]
+  sched --> kubelet[kubelet on a node]
+  kubelet --> pod[Pod]

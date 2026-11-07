@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="780" height="370" viewBox="0 0 780 370" role="img">
+<title>ALB and NLB target types</title>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<style>text{font-family:Helvetica,Arial,sans-serif;font-size:14px;fill:#1d2430} .title{font-size:18px;font-weight:700}</style>
+<text class='title' x='24' y='28'>ALB and NLB target types</text>
+<rect x='40' y='76' width='160' height='60' rx='10' fill='#EEF2FF' stroke='#31415a' stroke-width='1.4'/>
+<text x='120.0' y='106.0' text-anchor='middle'>Client</text>
+<rect x='250' y='66' width='220' height='70' rx='10' fill='#E5F6E8' stroke='#31415a' stroke-width='1.4'/>
+<text x='360.0' y='92.0' text-anchor='middle'>ALB</text>
+<text x='360.0' y='110.0' text-anchor='middle'>HTTP rules</text>
+<rect x='520' y='66' width='220' height='70' rx='10' fill='#E5F6E8' stroke='#31415a' stroke-width='1.4'/>
+<text x='630.0' y='92.0' text-anchor='middle'>NLB</text>
+<text x='630.0' y='110.0' text-anchor='middle'>TCP or UDP</text>
+<rect x='250' y='186' width='220' height='80' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='360.0' y='217.0' text-anchor='middle'>target-type ip</text>
+<text x='360.0' y='235.0' text-anchor='middle'>pod IP and port</text>
+<rect x='520' y='186' width='220' height='80' rx='10' fill='#FFF4E0' stroke='#31415a' stroke-width='1.4'/>
+<text x='630.0' y='217.0' text-anchor='middle'>target-type instance</text>
+<text x='630.0' y='235.0' text-anchor='middle'>node IP and NodePort</text>
+<rect x='40' y='306' width='700' height='60' rx='10' fill='#F7F7F5' stroke='#31415a' stroke-width='1.4'/>
+<text x='390.0' y='336.0' text-anchor='middle'>Both sample manifests are internal. Apply one at a time. Instance mode needs the NodePort path open in the security group.</text>
+</svg>

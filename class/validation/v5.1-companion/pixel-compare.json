@@ -1,0 +1,62 @@
+[
+  {
+    "key": "admin_laptop",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "ec2",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "ecr",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "eks",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "generic_aws_api",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "generic_process",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "k8s_deploy",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "k8s_pod",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "k8s_service",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  },
+  {
+    "key": "vpc",
+    "identical": true,
+    "diffBBox": null,
+    "sha1": true
+  }
+]

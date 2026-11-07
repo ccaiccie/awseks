@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo
+  namespace: lab
+  labels:
+    app: demo
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 101
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: nginx
+      image: nginx/nginx-unprivileged@sha256:847080049e23239e86144f01a4b79252db60494cebea58e827ae4e7d66c96c58
+      imagePullPolicy: IfNotPresent
+      ports:
+        - name: http
+          containerPort: 8080
+      securityContext:
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: ["ALL"]
+      volumeMounts:
+        - name: tmp
+          mountPath: /tmp
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 128Mi
+      readinessProbe:
+        httpGet:
+          path: /
+          port: http
+        initialDelaySeconds: 3
+        periodSeconds: 5
+      livenessProbe:
+        httpGet:
+          path: /
+          port: http
+        initialDelaySeconds: 10
+        periodSeconds: 10
+  volumes:
+    - name: tmp
+      emptyDir: {}

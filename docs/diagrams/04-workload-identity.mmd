@@ -1,0 +1,8 @@
+flowchart LR
+  pod[Pod]
+  agent[Pod Identity agent]
+  eksauth[EKS Auth API]
+  role[IAM role]
+  oidc[OIDC provider]
+  pod --> agent --> eksauth --> role
+  pod -.-> oidc

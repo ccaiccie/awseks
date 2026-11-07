@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="930" viewBox="0 0 1920 930"><rect width="1920" height="930" fill="#081524"/><style>text{font-family:Arial,sans-serif;fill:#e5edf7} .n{fill:#17334d;stroke:#64c9ee;stroke-width:2} .f{fill:none;stroke:#60d4b5;stroke-width:3} .r{fill:none;stroke:#e4ad6c;stroke-width:3;stroke-dasharray:8 5}</style><text x="48" y="70" font-size="32">F03-3 · Registry image bytes</text><text x="48" y="110" font-size="22">Illustrative schematic · green forward, amber return · native VPC unless marked control workflow</text>
+<polyline class="f" points="1360.0,270 1360.0,205 1760.0,205 1760.0,270"/>
+<polyline class="r" points="1760.0,360 1760.0,425 1360.0,425 1360.0,360"/>
+<rect class="n" x="1270.0" y="270" width="180" height="90" rx="12"/>
+<text x="1360.0" y="296" text-anchor="middle" font-size="21">Kubelet /</text>
+<text x="1360.0" y="320" text-anchor="middle" font-size="21">runtime</text>
+<rect class="n" x="1670.0" y="270" width="180" height="90" rx="12"/>
+<text x="1760.0" y="296" text-anchor="middle" font-size="21">Image registry</text>
+<rect x="48" y="660" width="1824" height="224" rx="16" fill="#10283c" stroke="#3d6079"/>
+<text x="72" y="704" font-size="22">Engine: separate-message-flow · Standard EC2 IPv4 primary track</text>
+<text x="72" y="735" font-size="22">Authenticated image manifests/layers; separate from API acknowledgement</text>
+<text x="72" y="766" font-size="22">Forward AND return stages are separately modeled; see JSON for packet tuples, NAT, policy and route rows.</text>
+<text x="72" y="797" font-size="22">Static source diagram, not a cloud observation or final narrated/animated class.</text>
+</svg>

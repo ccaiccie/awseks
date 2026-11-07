@@ -1,0 +1,147 @@
+# B2/V2: controller-owned Pods; equal-port Service separate from ordinary web80→8080 lecture.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: permitted-client
+  namespace: eksclass
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: permitted-client
+  template:
+    metadata:
+      labels:
+        role: permitted-client
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: client
+        image: BUSYBOX_DIGEST_PLACEHOLDER
+        command:
+        - sh
+        - -c
+        - sleep 3600
+        resources:
+          requests:
+            cpu: 20m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blocked-client
+  namespace: eksclass
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: blocked-client
+  template:
+    metadata:
+      labels:
+        role: blocked-client
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: client
+        image: BUSYBOX_DIGEST_PLACEHOLDER
+        command:
+        - sh
+        - -c
+        - sleep 3600
+        resources:
+          requests:
+            cpu: 20m
+            memory: 16Mi
+          limits:
+            cpu: 100m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+            - ALL
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: egress-sink
+  namespace: eksclass
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: egress-sink
+  template:
+    metadata:
+      labels:
+        app: egress-sink
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+      - name: sink
+        image: APP_DIGEST_PLACEHOLDER
+        args:
+        - netexec
+        - --http-port=8080
+        ports:
+        - name: http
+          containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: http
+          periodSeconds: 3
+        resources:
+          requests:
+            cpu: 50m
+            memory: 32Mi
+          limits:
+            cpu: 200m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-policy
+  namespace: eksclass
+spec:
+  type: ClusterIP
+  selector:
+    app: web
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+    protocol: TCP

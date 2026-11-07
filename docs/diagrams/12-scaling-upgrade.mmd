@@ -1,0 +1,5 @@
+flowchart TB
+  hpa[HPA] --> deploy[Deployment replicas]
+  ca[Cluster Autoscaler or Karpenter] --> nodes[Node count]
+  deploy --> pdb[PodDisruptionBudget]
+  upgrade[Node group upgrade] --> pdb

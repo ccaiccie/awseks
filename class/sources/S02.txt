@@ -1,0 +1,31 @@
+URL: https://docs.aws.amazon.com/eks/latest/userguide/clusters.html
+Fetched: 2026-11-07T10:57:47.638362-08:00
+
+Help improve this page
+To contribute to this user guide, choose the
+Edit this page on GitHub
+link that is located in the right pane of every page.
+Amazon EKS cluster lifecycle and configuration
+This section provides in-depth guidance on the full lifecycle management of Kubernetes clusters and different ways to configure them. It covers cluster creation, monitoring cluster health, updating Kubernetes versions, and deleting clusters. It also includes advanced topics on how to configure endpoint access, enable/disable Windows support, set up private clusters, implement autoscaling, and how to enhance resilience with zonal shift for traffic redirection in multi-AZ setups.
+Topics
+Create an Amazon EKS Auto Mode cluster
+Create an Amazon EKS cluster
+Amazon EKS Provisioned Control Plane
+Advanced Kubernetes control plane configuration
+Prepare for Kubernetes version upgrades and troubleshoot misconfigurations with cluster insights
+Update existing cluster to new Kubernetes version
+Roll back a cluster to a previous Kubernetes version
+Delete a cluster
+Cluster API server endpoint
+Deploy Windows nodes on EKS clusters
+Disable Windows support
+Deploy private clusters with limited internet access
+Configuring control plane egress routing
+Scale cluster compute with Karpenter and Cluster Autoscaler
+Learn about Amazon Application Recovery Controller (ARC) zonal shift in Amazon EKS
+Enable EKS zonal shift to avoid impaired Availability Zones
+Javascript is disabled or is unavailable in your browser.
+To use the Amazon Web Services Documentation, Javascript must be enabled. Please refer to your browser's Help pages for instructions.
+Document Conventions
+Release notes
+Create auto cluster

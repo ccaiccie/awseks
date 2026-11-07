@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="390" viewBox="0 0 920 390" role="img">
+<title>Private API and optional public allow list</title>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<style>text{font-family:Helvetica,Arial,sans-serif;font-size:14px;fill:#1d2430} .title{font-size:18px;font-weight:700}</style>
+<text class='title' x='24' y='28'>Private API and optional public allow list</text>
+<rect x='40' y='116' width='200' height='80' rx='10' fill='#EEF2FF' stroke='#31415a' stroke-width='1.4'/>
+<text x='140.0' y='156.0' text-anchor='middle'>Operator laptop</text>
+<rect x='320' y='76' width='240' height='80' rx='10' fill='#F3E8FF' stroke='#31415a' stroke-width='1.4'/>
+<text x='440.0' y='107.0' text-anchor='middle'>Public endpoint</text>
+<text x='440.0' y='125.0' text-anchor='middle'>off unless a CIDR is set</text>
+<rect x='320' y='196' width='240' height='80' rx='10' fill='#F3E8FF' stroke='#31415a' stroke-width='1.4'/>
+<text x='440.0' y='227.0' text-anchor='middle'>Private endpoint</text>
+<text x='440.0' y='245.0' text-anchor='middle'>always enabled</text>
+<rect x='640' y='136' width='240' height='90' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='760.0' y='163.0' text-anchor='middle'>Control plane ENIs</text>
+<text x='760.0' y='181.0' text-anchor='middle'>cluster security group</text>
+<text x='760.0' y='199.0' text-anchor='middle'>plus the VPC API group</text>
+<rect x='40' y='256' width='200' height='80' rx='10' fill='#FFF4E0' stroke='#31415a' stroke-width='1.4'/>
+<text x='140.0' y='296.0' text-anchor='middle'>Client inside the VPC</text>
+<rect x='320' y='316' width='560' height='70' rx='10' fill='#F7F7F5' stroke='#31415a' stroke-width='1.4'/>
+<text x='600.0' y='351.0' text-anchor='middle'>0.0.0.0/0 is rejected. A public endpoint without your /32 does not let you in.</text>
+</svg>

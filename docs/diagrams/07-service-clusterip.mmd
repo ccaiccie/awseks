@@ -1,0 +1,6 @@
+flowchart LR
+  pod[Pod] --> dns[CoreDNS ClusterIP]
+  dns --> svc[Service ClusterIP]
+  svc --> dnat[kube-proxy DNAT]
+  dnat --> target[Endpoint pod]
+  target --> conn[conntrack return]

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="350" viewBox="0 0 760 350" role="img">
+<title>EBS volumes and Availability Zones</title>
+<rect width='100%' height='100%' fill='#ffffff'/>
+<style>text{font-family:Helvetica,Arial,sans-serif;font-size:14px;fill:#1d2430} .title{font-size:18px;font-weight:700}</style>
+<text class='title' x='24' y='28'>EBS volumes and Availability Zones</text>
+<rect x='40' y='86' width='180' height='70' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='130.0' y='121.0' text-anchor='middle'>PVC</text>
+<rect x='260' y='76' width='200' height='80' rx='10' fill='#F3E8FF' stroke='#31415a' stroke-width='1.4'/>
+<text x='360.0' y='98.0' text-anchor='middle'>StorageClass gp3</text>
+<text x='360.0' y='116.0' text-anchor='middle'>WaitForFirstConsumer</text>
+<text x='360.0' y='134.0' text-anchor='middle'>provisioner ebs.csi.aws.com</text>
+<rect x='500' y='76' width='220' height='80' rx='10' fill='#FFF4E0' stroke='#31415a' stroke-width='1.4'/>
+<text x='610.0' y='107.0' text-anchor='middle'>EBS volume</text>
+<text x='610.0' y='125.0' text-anchor='middle'>one Availability Zone</text>
+<rect x='500' y='196' width='220' height='70' rx='10' fill='#E7F7F7' stroke='#31415a' stroke-width='1.4'/>
+<text x='610.0' y='222.0' text-anchor='middle'>Pod scheduled</text>
+<text x='610.0' y='240.0' text-anchor='middle'>in that same AZ</text>
+<rect x='40' y='286' width='680' height='60' rx='10' fill='#F7F7F5' stroke='#31415a' stroke-width='1.4'/>
+<text x='380.0' y='316.0' text-anchor='middle'>A volume cannot attach to a node in another AZ. Delete reclaim destroys the disk. Snapshot before cleanup if you care about the bytes.</text>
+</svg>

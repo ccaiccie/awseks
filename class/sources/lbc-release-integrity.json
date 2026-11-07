@@ -1,0 +1,13 @@
+{
+  "fetched": "2026-11-07 PST",
+  "policy": {
+    "url": "https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v3.6.2/docs/install/iam_policy.json",
+    "sha256": "16f232c9d9f79366fe949c4550ad517a202380058a9e48d45a4e215044a20a6a"
+  },
+  "chart": {
+    "url": "https://aws.github.io/eks-charts/aws-load-balancer-controller-3.6.2.tgz",
+    "sha256": "9255bf39873b6cb31106dbe61dc87c3617bff4197783b5b94381811a13f99c3c",
+    "chartVersion": "3.6.2",
+    "appVersion": "v3.6.2"
+  }
+}

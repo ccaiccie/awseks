@@ -1,0 +1,5 @@
+flowchart LR
+  podA[Pod A ENI IP] --> nodeA[Node A]
+  podB[Pod B secondary IP] --> nodeA
+  podC[Pod C on node B] --> nodeB[Node B]
+  nodeA --> nodeB

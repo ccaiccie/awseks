@@ -1,0 +1,16 @@
+# Detached archive checksums — EKS v5.1
+# Written AFTER archive creation. Not embedded inside the hashed ZIPs.
+# Pinned HTML a23d6854e93cd4fbb22acded84766b9ae67c6ec159417791f21901ec5d3b7058
+# Canonical drawio 6e73873cc031bf0d84202a45798a1aea6bf966fdc7ffe28f3e20624c46135b23
+
+2f0aa780cf35b7f13d4dd5b8c2544f2a199b971b36604785cc60ee176692fb90  EKS-Masterclass-v5.1-docs-diagrams-labs.zip
+eba9e08d818e798df7f67ab627594ec27fbb9e5403352dd2016bbe7a559d888e  eks-masterclass-final-repo-sync.zip
+f0c9ada21fdb09241b182b0648ca922a6bcfffaab2a946318bc3a03867b44c31  volumes/AWS-EKS-Masterclass-v5.1.part01.zip
+098df6825341d72418b79af4d7245bc41ba332334ce82c4cc24469d08d02cf84  volumes/AWS-EKS-Masterclass-v5.1.part02.zip
+2d5495bf3bd659ec9feb67aa40745e500bd9b977c33bd7399b33b11eb3f599c8  volumes/AWS-EKS-Masterclass-v5.1.part03.zip
+0c36cbc5b16c84d70a5e9aaf3a936190ea5d7c43f7dde6dece32bfd1a3bffc7c  volumes/AWS-EKS-Masterclass-v5.1.part04.zip
+3dc6768214de651595201d6e1239323d46a701172b469f18cd0ad2f638fa399f  AWS-EKS-Masterclass-v5.1-full.html.zip
+
+# Frozen control files (also hashed inside FILE-MANIFEST for repo-sync members)
+7c2777ae659eccf1e00915333e1d01e9dda73f35fbf03d411b1502b982a72f4b  AUTHORITATIVE-RELEASE-MANIFEST-v5.1.json
+c4c51acfd48633a2691183bcf2ec80fb9fa158dd05974402b0d0b7e59287ee2a  FILE-MANIFEST.json  # exists only inside repo-sync; hash of bytes written into archive

@@ -1,0 +1,99 @@
+{
+  "keyChips": {
+    "s0263": {
+      "kind": "control",
+      "mechanism": "Control / readiness / EndpointSlice membership (not Service DNAT)",
+      "on": [
+        "Control plane"
+      ],
+      "title": "F19: Readiness and EndpointSlice inclusion"
+    },
+    "s0146": {
+      "kind": "iam",
+      "mechanism": "IAM / identity / trust validation (not Service DNAT)",
+      "on": [
+        "IAM / RBAC"
+      ],
+      "title": "F14: Association + service role trust + tags"
+    },
+    "s0129": {
+      "kind": "service",
+      "mechanism": "Service VIP / kube-proxy DNAT",
+      "on": [
+        "Service DNAT"
+      ],
+      "title": "F07: Service/EndpointSlice backend selection + DNAT"
+    },
+    "s0125": {
+      "kind": "service",
+      "mechanism": "Service VIP / kube-proxy DNAT",
+      "on": [
+        "Service DNAT"
+      ],
+      "title": "F06: Kubernetes Service DNAT"
+    }
+  },
+  "audit": {
+    "failCount": 0,
+    "fails": [],
+    "samples": [
+      {
+        "id": "s0027",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      },
+      {
+        "id": "s0028",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      },
+      {
+        "id": "s0030",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      },
+      {
+        "id": "s0031",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      },
+      {
+        "id": "s0032",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      },
+      {
+        "id": "s0033",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      },
+      {
+        "id": "s0034",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      },
+      {
+        "id": "s0035",
+        "kind": "control",
+        "on": [
+          "Control plane"
+        ]
+      }
+    ],
+    "demoCount": 215
+  }
+}

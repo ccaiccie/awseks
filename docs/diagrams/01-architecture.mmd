@@ -1,0 +1,20 @@
+flowchart TB
+  subgraph vpc [VPC 10.0.0.0/16]
+    igw[Internet gateway]
+    subgraph public [Public subnets]
+      nat[NAT gateway]
+      lb[Public or internal load balancer]
+    end
+    subgraph private [Private subnets in at least two AZs]
+      cp[EKS control plane ENIs]
+      nodes[Managed nodes AL2023]
+      pods[Pods with VPC IPs]
+    end
+  end
+  api[Private API always on]
+  igw --> nat
+  nat --> nodes
+  nodes --> pods
+  cp --> nodes
+  lb --> nodes
+  api --> cp
