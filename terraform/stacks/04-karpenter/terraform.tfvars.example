@@ -1,0 +1,7 @@
+region       = "us-west-2"
+cluster_name = "eks-lab"
+
+# Leave both lines commented until lab 15.
+# enable_karpenter         = true
+# karpenter_confirmation   = "enable-karpenter"
+# karpenter_chart_version  = "1.15.1"

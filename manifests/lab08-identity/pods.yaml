@@ -1,0 +1,65 @@
+# Namespace lab-identity and its service accounts are created by stack 03.
+# Do not add a second ServiceAccount or PodIdentityAssociation here.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-identity
+  namespace: lab-identity
+  labels:
+    app.kubernetes.io/name: pod-identity
+spec:
+  serviceAccountName: lab-pod-identity
+  securityContext:
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: aws
+      # linux/amd64 digest of public.ecr.aws/aws-cli/aws-cli:latest
+      # recorded 2026-11-07. This image runs as root. It is an identity
+      # probe, not the example application. arm64 digest, if you use t4g:
+      # sha256:7a30a13515f7bfc6d85a98e0a5f1de9a403c61fc16a86b37fe68beb9def1f72a
+      image: public.ecr.aws/aws-cli/aws-cli@sha256:3a51e4b63c34883f1fff4a6f2f6a82b0b4bd16a2ea693e875d06a4f406a5f6c7
+      imagePullPolicy: IfNotPresent
+      command: ["sleep", "3600"]
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+      resources:
+        requests:
+          cpu: 20m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: irsa
+  namespace: lab-identity
+  labels:
+    app.kubernetes.io/name: irsa
+spec:
+  serviceAccountName: lab-irsa
+  securityContext:
+    runAsNonRoot: false
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: aws
+      image: public.ecr.aws/aws-cli/aws-cli@sha256:3a51e4b63c34883f1fff4a6f2f6a82b0b4bd16a2ea693e875d06a4f406a5f6c7
+      imagePullPolicy: IfNotPresent
+      command: ["sleep", "3600"]
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop: ["ALL"]
+      resources:
+        requests:
+          cpu: 20m
+          memory: 64Mi
+        limits:
+          cpu: 200m
+          memory: 256Mi

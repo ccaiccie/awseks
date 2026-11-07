@@ -1,0 +1,10 @@
+region       = "us-west-2"
+cluster_name = "eks-lab"
+
+enable_metrics_server               = true
+enable_aws_load_balancer_controller = true
+enable_identity_demo                = true
+
+# EFS is optional and billed. Leave this off until lab 13.
+# enable_efs        = true
+# efs_confirmation  = "enable-efs"

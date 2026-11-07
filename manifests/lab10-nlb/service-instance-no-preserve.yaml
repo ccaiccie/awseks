@@ -1,0 +1,26 @@
+# Replacement Service. Delete the IP Service and wait for the NLB to go away
+# before applying this file. preserve_client_ip is off so private-subnet nodes
+# reply to the NLB address instead of following the default route to NAT.
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+  namespace: lab-nlb
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: instance
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-path: /
+    service.beta.kubernetes.io/aws-load-balancer-healthcheck-protocol: HTTP
+    service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=false
+    service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: Project=awseks-practice,ManagedBy=aws-load-balancer-controller
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Cluster
+  selector:
+    app.kubernetes.io/name: web
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+      protocol: TCP

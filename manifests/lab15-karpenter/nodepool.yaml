@@ -1,0 +1,64 @@
+# Apply only after stack 04's Helm release is Ready and the CRDs exist.
+# This file is student-owned. Terraform does not create the NodePool, so an
+# apply here cannot fight the controller install.
+apiVersion: karpenter.sh/v1
+kind: NodePool
+metadata:
+  name: lab
+spec:
+  template:
+    metadata:
+      labels:
+        awseks.practice/nodegroup: karpenter
+    spec:
+      requirements:
+        - key: kubernetes.io/arch
+          operator: In
+          values: ["amd64"]
+        - key: karpenter.sh/capacity-type
+          operator: In
+          values: ["on-demand"]
+        - key: node.kubernetes.io/instance-type
+          operator: In
+          values: ["t3.medium"]
+      nodeClassRef:
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
+        name: lab
+      expireAfter: 720h
+  limits:
+    cpu: "2"
+  disruption:
+    consolidationPolicy: WhenEmpty
+    consolidateAfter: 5m
+---
+apiVersion: karpenter.k8s.aws/v1
+kind: EC2NodeClass
+metadata:
+  name: lab
+spec:
+  role: REPLACE_WITH_KARPENTER_NODE_ROLE_NAME
+  amiSelectorTerms:
+    - alias: al2023@latest
+  subnetSelectorTerms:
+    - tags:
+        awseks.practice/subnet-role: private-worker
+        Project: awseks-practice
+  securityGroupSelectorTerms:
+    - tags:
+        aws:eks:cluster-name: REPLACE_WITH_CLUSTER_NAME
+  metadataOptions:
+    httpEndpoint: enabled
+    httpTokens: required
+    httpPutResponseHopLimit: 1
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 20Gi
+        volumeType: gp3
+        encrypted: true
+        deleteOnTermination: true
+  tags:
+    Project: awseks-practice
+    ManagedBy: karpenter
+    NamePrefix: REPLACE_WITH_CLUSTER_NAME

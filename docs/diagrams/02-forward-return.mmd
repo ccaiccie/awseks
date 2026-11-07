@@ -1,0 +1,11 @@
+flowchart LR
+  client[Client]
+  igw[IGW]
+  lb[ALB or NLB in public subnet]
+  node[Node ENI in private subnet]
+  pod[Pod IP]
+
+  client --> igw
+  igw --> lb
+  lb --> node
+  node --> pod

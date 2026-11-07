@@ -1,0 +1,27 @@
+# Copy to terraform.tfvars. That file is gitignored.
+
+region             = "us-west-2"
+name               = "eks-lab"
+kubernetes_version = "1.35"
+
+# Private API by default. From a network that can reach the private endpoint
+# (VPN, SSM, or a client inside the VPC) you can leave public access off.
+#
+# From a laptop, opt in with YOUR address only. Find it, then use /32.
+# endpoint_public_access       = true
+# endpoint_public_access_cidrs = ["203.0.113.10/32"]
+
+# Copy Arn from: aws sts get-caller-identity
+# Use a role or user. Never the account root.
+admin_principal_arns = [
+  "arn:aws:iam::111122223333:role/eks-lab-operator",
+]
+
+# Two t3.medium nodes. t3.small is the practical floor and is tight.
+node_instance_types = ["t3.medium"]
+node_min_size       = 2
+node_desired_size   = 2
+node_max_size       = 3
+
+# Pin after scripts/check-addon-versions.sh. Null means most_recent at apply.
+# pod_identity_agent_addon_version = "v1.3.10-eksbuild.2"

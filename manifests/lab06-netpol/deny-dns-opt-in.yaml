@@ -1,0 +1,14 @@
+# OPT-IN failure injection. Apply only during lab 06, then delete this object.
+# It removes the DNS egress exception from a second policy that denies egress.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: opt-in-deny-dns
+  namespace: lab-netpol
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: web
+  policyTypes:
+    - Egress
+  egress: []

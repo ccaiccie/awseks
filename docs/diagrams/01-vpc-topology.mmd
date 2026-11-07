@@ -1,0 +1,16 @@
+flowchart TB
+  igw[IGW]
+  nat[NAT gateway]
+  pubA[Public subnet AZ a]
+  pubB[Public subnet AZ b]
+  privA[Private subnet AZ a]
+  privB[Private subnet AZ b]
+  s3[S3 gateway endpoint]
+
+  igw --- pubA
+  igw --- pubB
+  pubA --- nat
+  nat --- privA
+  nat --- privB
+  privA --- s3
+  privB --- s3
