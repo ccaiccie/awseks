@@ -1,0 +1,20 @@
+# Replace REPLACE values before plan. Example account number below is NOT yours.
+aws_profile         = "REPLACE_WITH_YOUR_PROFILE"
+aws_region          = "us-west-2"
+expected_account_id = "000000000000"
+instance_type       = "m6i.large"
+kubernetes_version  = null
+existing_subnet_ids  = []
+
+# OPTIONAL selected existing objects only; [] is valid before Unit 6B.
+existing_vpc_ids              = []
+existing_route_table_ids      = []
+existing_nat_gateway_ids      = []
+existing_internet_gateway_ids = []
+existing_cluster_names        = []
+
+# Optional existing ALB chain, selected from authorized readouts only.
+existing_load_balancer_arns = []
+existing_listener_arns = []
+existing_listener_rule_arns = []
+existing_target_group_arns = []

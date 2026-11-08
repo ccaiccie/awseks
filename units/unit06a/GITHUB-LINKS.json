@@ -1,0 +1,22 @@
+{
+  "repository_url": "https://github.com/ccaiccie/awseks",
+  "repository_label": "Course repository \u2014 public Unit6A PR #4, not merged",
+  "practice_url": "https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/FOLLOW-ALONG.md",
+  "practice_status": "PUBLIC_BRANCH_NOT_MERGED",
+  "publication_status": "branch-public-not-merged",
+  "publication_authorized": true,
+  "publication_scope": "practice source only; lessons/audio/videos remain private",
+  "published_path": "units/unit06a/",
+  "public_branch": "cursor/unit06a-practice-source-8b45",
+  "published_commit": "189a683034edae19820ced02d2f11915b1fa0d81",
+  "pull_request_url": "https://github.com/ccaiccie/awseks/pull/4",
+  "practice_baseline_url": "https://github.com/ccaiccie/awseks/tree/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a",
+  "readme_url": "https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/README.md",
+  "follow_along_url": "https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/FOLLOW-ALONG.md",
+  "lecture_practice_map_url": "https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/C4-LECTURE-PRACTICE-MAP.md",
+  "lecture_command_terraform_map_url": "https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/LECTURE-COMMAND-TERRAFORM-MAP.md",
+  "terraform_offline_url": "https://github.com/ccaiccie/awseks/tree/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/terraform/offline",
+  "terraform_read_only_url": "https://github.com/ccaiccie/awseks/tree/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/terraform/read-only",
+  "link_verification_source": "Parent supplied confirmed public commit/files; independent public URL audit running separately",
+  "local_amendment_status": "LINK_PROVENANCE_ONLY; local C7 metadata edits not yet published; targets deliberately retain the existing public baseline commit, no circular new hash"
+}

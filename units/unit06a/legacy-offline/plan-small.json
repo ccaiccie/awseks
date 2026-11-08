@@ -1,0 +1,181 @@
+{
+ "name": "What if: /24 private subnets with bigger, more numerous nodes",
+ "vpc_cidr": "10.42.0.0/16",
+ "service_cidr": "172.20.0.0/16",
+ "subnets": {
+  "public-a": {
+   "cidr": "10.42.0.0/24",
+   "az": "a",
+   "role": "public: NAT gateway, internet-facing load balancers",
+   "route_table": "public"
+  },
+  "public-b": {
+   "cidr": "10.42.1.0/24",
+   "az": "b",
+   "role": "public: NAT gateway, internet-facing load balancers",
+   "route_table": "public"
+  },
+  "private-a": {
+   "cidr": "10.42.16.0/24",
+   "az": "a",
+   "role": "private: nodes, Pods, cluster network interfaces, internal load balancers",
+   "route_table": "private-a"
+  },
+  "private-b": {
+   "cidr": "10.42.17.0/24",
+   "az": "b",
+   "role": "private: nodes, Pods, cluster network interfaces, internal load balancers",
+   "route_table": "private-b"
+  }
+ },
+ "route_tables": {
+  "public": [
+   [
+    "10.42.0.0/16",
+    "local (inside the VPC)"
+   ],
+   [
+    "0.0.0.0/0",
+    "igw: internet gateway"
+   ]
+  ],
+  "private-a": [
+   [
+    "10.42.0.0/16",
+    "local (inside the VPC)"
+   ],
+   [
+    "0.0.0.0/0",
+    "nat-a: NAT gateway in public-a"
+   ]
+  ],
+  "private-b": [
+   [
+    "10.42.0.0/16",
+    "local (inside the VPC)"
+   ],
+   [
+    "0.0.0.0/0",
+    "nat-b: NAT gateway in public-b"
+   ]
+  ]
+ },
+ "nodes": {
+  "instance_type": "m6i.xlarge",
+  "enis": 4,
+  "ipv4_per_eni": 15,
+  "max_nodes_per_az": 6,
+  "upgrade_surge_per_az": 2
+ },
+ "consumers_per_private_subnet": [
+  [
+   "EKS cluster network interfaces (2 to 4; worst case all in this subnet)",
+   4
+  ],
+  [
+   "replacement cluster network interfaces during a version upgrade",
+   4
+  ],
+  [
+   "internal Application Load Balancer (needs 8 free per subnet)",
+   8
+  ],
+  [
+   "internal Network Load Balancer",
+   1
+  ],
+  [
+   "interface VPC endpoints, one per service (Unit 11 adds 6)",
+   6
+  ]
+ ],
+ "consumers_per_public_subnet": [
+  [
+   "NAT gateway",
+   1
+  ],
+  [
+   "internet-facing Application Load Balancer (needs 8 free per subnet)",
+   8
+  ],
+  [
+   "internet-facing Network Load Balancer",
+   1
+  ]
+ ],
+ "max_planned_percent": 50,
+ "filter_demo": {
+  "node": {
+   "ip": "10.42.16.25",
+   "port": 40312
+  },
+  "server": {
+   "ip": "203.0.113.80",
+   "port": 443
+  },
+  "sg_outbound": [
+   {
+    "proto": "all",
+    "ports": [
+     0,
+     65535
+    ],
+    "cidr": "0.0.0.0/0"
+   }
+  ],
+  "nacls": {
+   "default": {
+    "outbound": [
+     {
+      "n": 100,
+      "action": "allow",
+      "proto": "all",
+      "ports": [
+       0,
+       65535
+      ],
+      "cidr": "0.0.0.0/0"
+     }
+    ],
+    "inbound": [
+     {
+      "n": 100,
+      "action": "allow",
+      "proto": "all",
+      "ports": [
+       0,
+       65535
+      ],
+      "cidr": "0.0.0.0/0"
+     }
+    ]
+   },
+   "custom-https-only": {
+    "outbound": [
+     {
+      "n": 100,
+      "action": "allow",
+      "proto": "tcp",
+      "ports": [
+       443,
+       443
+      ],
+      "cidr": "0.0.0.0/0"
+     }
+    ],
+    "inbound": [
+     {
+      "n": 100,
+      "action": "allow",
+      "proto": "tcp",
+      "ports": [
+       443,
+       443
+      ],
+      "cidr": "0.0.0.0/0"
+     }
+    ]
+   }
+  }
+ }
+}

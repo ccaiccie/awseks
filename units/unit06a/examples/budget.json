@@ -1,0 +1,8 @@
+{
+  "BudgetName": "unit06a-learning-alert",
+  "BudgetLimit": {"Amount": "10", "Unit": "USD"},
+  "TimeUnit": "MONTHLY",
+  "BudgetType": "COST",
+  "CostTypes": {"IncludeTax": true, "IncludeSubscription": true, "UseBlended": false},
+  "CostFilters": {}
+}
