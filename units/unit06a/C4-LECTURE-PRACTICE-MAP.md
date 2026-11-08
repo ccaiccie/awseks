@@ -1,5 +1,9 @@
 # Complete C5 revised lecture → practice → Terraform map
 
+Public baseline follow-along: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/FOLLOW-ALONG.md
+Public baseline map: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/C4-LECTURE-PRACTICE-MAP.md
+Public PR #4: https://github.com/ccaiccie/awseks/pull/4 (not merged; local amendment is links/provenance only).
+
 Legacy map filename retained for existing README links. All scene instructions below are regenerated from CURRENT C5 source. Commands run on YOUR computer in extracted unit06a/. Examples are NOT current-account output. Choose your OS alternative. A contiguous scene page is part of its full source block; never omit prerequisite lines.
 
 ## r4t0000 — Welcome

@@ -12,10 +12,19 @@ For network engineers with no assumed Linux, container or EKS experience. Start 
 7. Leave CostAck=NO. OPTIONAL-BUDGET.md is a separate, explicitly opt-in monitoring-budget/account-mutation path. It is NOT a spending cap. No cluster/VPC/NAT/node creation commands are included; Unit 6B owns that billable build.
 8. Finish with CLEANUP.md. Logging out does not stop cloud charges. Never delete discovered resources or run a blind terraform destroy.
 
-## Existing GitHub repository — not an updated Unit 6A download
-https://github.com/ccaiccie/awseks
+## Public matching practice baseline — PR #4, not merged
 
-The existing repository is a real course repository; the new Unit 6A r4 files have NOT been published there. Use this local package until approval/publication. Exact matching practice file URL: **TO_BE_FINALIZED**. Do not interpret the repository link as proof these files are already available. Proposed publication path is `units/unit06a/command-terraform-r4/`; branch/ref and file URLs must be verified after approved upload. Full URLs will then be placed here, in lesson notes and in the matching lesson link surface. No URL is narrated repeatedly.
+The practice-source baseline is public on branch `cursor/unit06a-practice-source-8b45` at immutable commit `189a683034edae19820ced02d2f11915b1fa0d81`. PR: https://github.com/ccaiccie/awseks/pull/4. This does NOT claim a merge into main. This local amendment updates links/provenance only; its metadata edits await parent publication/review. Lessons, audio and videos remain private.
+
+- Source folder: https://github.com/ccaiccie/awseks/tree/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a
+- README: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/README.md
+- Student follow-along: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/FOLLOW-ALONG.md
+- Lecture/practice map: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/C4-LECTURE-PRACTICE-MAP.md
+- Command/Terraform map: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/LECTURE-COMMAND-TERRAFORM-MAP.md
+- Offline Terraform: https://github.com/ccaiccie/awseks/tree/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/terraform/offline
+- Read-only Terraform: https://github.com/ccaiccie/awseks/tree/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/terraform/read-only
+
+Links intentionally target the already public 97-payload technical baseline, not a hypothetical future commit containing this link amendment.
 
 ## Files / confidentiality
 - FOLLOW-ALONG.md: per-lecture tutorial, all full HCL files, commands and explanations.
@@ -37,10 +46,10 @@ Use `INSTALL.md` for the COMPLETE selected OS path: actual CPU assignment, downl
 
 `C4-LECTURE-PRACTICE-MAP.md` maps every revised scene to the visible command/HCL source and its interpreted output/effect. Full Terraform files remain under terraform/offline and terraform/read-only; data-only apply writes private local state but creates no AWS infrastructure. Never commit state/plans/private input or subscriber records. Use ONE OS path and ONE infrastructure owner.
 
-Course repository: https://github.com/ccaiccie/awseks . This link identifies the existing repository; these particular revised files are supplied locally until the approved practice-only upload is completed and verified. The exact matching Unit6A file URL is intentionally unset, not a fake link. Lessons, audio and videos are private and not in this source package.
+Matching public follow-along baseline: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/FOLLOW-ALONG.md . Lecture/practice map: https://github.com/ccaiccie/awseks/blob/189a683034edae19820ced02d2f11915b1fa0d81/units/unit06a/C4-LECTURE-PRACTICE-MAP.md . Public PR #4 is not merged; this local metadata amendment is not yet uploaded. Lessons/audio/videos remain private.
 
 ## C5 query-specific follow-along correction
-C4-LECTURE-PRACTICE-MAP.md retains its legacy filename but is regenerated from C5 lecture source. Selected NAT/ENI/ALB/DNS/Kubernetes fields, captured-versus-printed values, local membership results, and the alternative SSO setup/login effects now match each actual page. Executable commands/HCL are unchanged from safety-reviewed C4. The existing repository link is not a claim these matching revised files have been uploaded.
+C4-LECTURE-PRACTICE-MAP.md retains its legacy filename but is regenerated from C5 lecture source. Selected NAT/ENI/ALB/DNS/Kubernetes fields, captured-versus-printed values, local membership results, and the alternative SSO setup/login effects now match each actual page. Executable commands/HCL are unchanged from safety-reviewed C4. The matching technical practice baseline is now public at commit 189a683034edae19820ced02d2f11915b1fa0d81 (PR #4, not merged); this local link/provenance amendment awaits review/publication.
 
 ## C6 card-only correction
 The selected-subnet placement pages now distinguish ID/AZ/CIDR observations from the earlier free-IP capacity query and troubleshoot DescribeSubnets/--filters. Code, current narration, all audio, diagrams, cue timing and player behavior are unchanged from C5. The legacy-named C4-LECTURE-PRACTICE-MAP.md contains the corrected current cards.
