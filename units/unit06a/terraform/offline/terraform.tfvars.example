@@ -1,0 +1,6 @@
+vpc_cidr       = "10.42.0.0/16"
+service_cidr   = "172.20.0.0/16"
+nodes_per_az   = 2
+surge_per_az   = 2
+enis_per_node = 3
+ipv4_per_eni  = 10

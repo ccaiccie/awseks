@@ -1,0 +1,19 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+terraform.tfvars
+config.local.*
+observations/
+*.log
+*.mp3
+*.mp4
+*.html
+
+*.local.json
+
+*observation-kubeconfig.yaml
+
+# C4: all private budget inputs, owner records/readback/errors remain local.
+examples/*.local.json
+examples/*.local.err
