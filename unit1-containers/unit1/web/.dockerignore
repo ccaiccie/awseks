@@ -1,0 +1,6 @@
+# Files that must never be copied into the build context or image.
+visits.log
+__pycache__/
+*.pyc
+.venv/
+.git/

@@ -1,0 +1,32 @@
+code blocks: bash=51 powershell=13 total=74
+bash heredoc creation: 5 blocks -> ['.dockerignore', 'Dockerfile', 'greeting.txt', 'requirements.txt', 'server.py']; byte-identical to web/: True
+PowerShell here-string blocks match files (text check, not executed): True; pwsh available: False
+shellcheck on 51 bash blocks (SC2164 cd-guard excluded: commands are typed interactively): exit 0
+all web/ files pure ASCII: True
+server.py compiles: True
+Dockerfile instructions: ['FROM', 'WORKDIR', 'COPY', 'RUN', 'COPY', 'ENV', 'EXPOSE', 'CMD']
+COPY sources exist; multi-source COPY destination ends with /: True
+.dockerignore excludes: ['visits.log', '__pycache__/', '*.pyc', '.venv/', '.git/']; none of the COPY sources ignored: True
+
+== native run test (box, 2026-11-07 17:22 PST, Python 3.13.5, Flask 3.1.3 / Werkzeug 3.1.9 in a throwaway venv)
+== default HOST (direct run)
+listening: 127.0.0.1:8080
+GET / -> Hello from web
+GET / -> Hello from web
+GET /visits -> visits recorded in this filesystem: 2
+after editing greeting.txt: Hello again from web
+== second process on same port (collision)
+exit=1: Address already in use
+SIGTERM -> exit 0
+visits.log lines: 3
+== HOST=0.0.0.0 (as set in the image)
+listening: 0.0.0.0:8080
+web process <pid> listening on 0.0.0.0:8080
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://172.30.0.2:8080
+SIGTERM -> exit 0
+== start without flask (main python)
+ModuleNotFoundError: No module named 'flask'
+
+NOT VERIFIED HERE: no Docker/Podman engine on this box, so docker build/run/exec/stop/update outputs in HANDS-ON-UNIT1.md are documented EXPECTED outputs, not captured results. PowerShell blocks were text-checked, not executed (no pwsh). Base image python:3.12-slim tag confirmed on Docker Hub (last updated 2026-11-05 UTC, multi-arch incl. amd64/arm64); PyPI flask 3.1.3 and werkzeug 3.1.9 confirmed.
